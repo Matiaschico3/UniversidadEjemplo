@@ -1,4 +1,4 @@
-package universidadejemplo.Entidades;
+package universidadejemplo.entidades;
 
 public class Inscripcion {
 
