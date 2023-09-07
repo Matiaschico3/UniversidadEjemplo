@@ -1,5 +1,9 @@
 package universidadejemplo.conexionBaseDatos;
 
+import java.sql.Connection;
+import java.util.List;
+import universidadejemplo.entidades.Alumno;
+
 public class alumnoData {
 
     private Connection con;
