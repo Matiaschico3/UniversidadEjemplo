@@ -81,6 +81,7 @@ public class inscripcionData {
             Logger.getLogger(inscripcionData.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        return insc;
     }
     
     
