@@ -29,7 +29,7 @@ public class inscripcionData {
     
     //funciones
 
-    public void guardarInscripcion(Inscripcion ins, Materia mat, Alumno alu) {
+    public void guardarInscripcion(Inscripcion ins, Materia mat, Alumno alu) { // nose si esto esta bien, preguntar profe
         
         String sql="INSERT INTO inscripcion(nota, idAlumno, idMateria) VALUES (?,?,?);";
         
@@ -71,7 +71,7 @@ public class inscripcionData {
             while(rs.next()){
                 Inscripcion inscripcion=new Inscripcion();
                 
-                inscripcion.setNota(rs.getDouble("nota"));  //materia.setIdMateria(rs.getInt("idMateria"));
+                inscripcion.setNota(rs.getDouble("nota"));  //nose como traer los idalumno e idmateria, consultar profe
                 
             }
             
