@@ -80,9 +80,10 @@ public class inscripcionData {
                 inscripcion.setNota(rs.getDouble("nota"));  //nose como traer los idalumno e idmateria, consultar profe
                 inscripcion.setAlumno(alu); // y la paso por aca a la tabla inscripcion
                 inscripcion.setMateria(mat);
+                insc.add(inscripcion);
             }
             
-            
+            ps.close();
             
         } catch (SQLException ex) {
             Logger.getLogger(inscripcionData.class.getName()).log(Level.SEVERE, null, ex);
