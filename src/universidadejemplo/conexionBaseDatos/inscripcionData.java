@@ -29,15 +29,15 @@ public class inscripcionData {
     
     //funciones
 
-    public void guardarInscripcion(Inscripcion ins, Materia mat, Alumno alu) { // nose si esto esta bien, preguntar profe
+    public void guardarInscripcion(Inscripcion ins) { // nose si esto esta bien, preguntar profe
         
         String sql="INSERT INTO inscripcion(nota, idAlumno, idMateria) VALUES (?,?,?);";
         
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setDouble(1, ins.getNota());
-            ps.setInt(2, alu.getIdAlumno());
-            ps.setInt(3, mat.getIdMateria() );
+            ps.setInt(2, ins.getAlumno().getIdAlumno());
+            ps.setInt(3, ins.getMateria().getIdMateria());
             
             ps.executeUpdate();
             
@@ -70,9 +70,16 @@ public class inscripcionData {
             
             while(rs.next()){
                 Inscripcion inscripcion=new Inscripcion();
+                Alumno alu=new Alumno();
+              alu.setIdAlumno(rs.getInt("idAlumno")); // paso el id de la tabla a la variable creada
+               Materia mat=new Materia();
+                mat.setIdMateria(rs.getInt("idMateria"));
                 
+                //-----------
+                inscripcion.setIdInscripcion(rs.getInt("idInscripcion"));
                 inscripcion.setNota(rs.getDouble("nota"));  //nose como traer los idalumno e idmateria, consultar profe
-                
+                inscripcion.setAlumno(alu); // y la paso por aca a la tabla inscripcion
+                inscripcion.setMateria(mat);
             }
             
             
