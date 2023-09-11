@@ -189,6 +189,14 @@ public class inscripcionData {
     public List<Alumno> obtenerAlumnosXMaterias(int idMaterias) {
         String sql="SELECT * FROM inscripcion JOIN alumno ON(inscripcion.idAlumno=alumno.idAlumno) WHERE idMateria=1;";
         ArrayList<Alumno> alu=new ArrayList();
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(inscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
       
        return alu; 
