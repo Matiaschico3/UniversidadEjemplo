@@ -131,11 +131,61 @@ public class inscripcionData {
     }
 
     public List<Materia> obtenerMateriasCursadas(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List <Materia>materias= new ArrayList<Materia>();
+        
+        String sql="SELECT m.idMateria,m.nombre,m.año FROM inscripcion i JOIN materia m ON(i.idMateria=m.idMateria) WHERE i.idAlumno=? AND m.activa=1;";
+        
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            Materia mat;
+            while(rs.next()){
+                mat=new Materia();
+                mat.setIdMateria(rs.getInt("idMateria"));
+                mat.setNombre(rs.getString("nombre"));
+                mat.setAnioMateria(rs.getInt("año"));
+                materias.add(mat);
+                
+            }
+            
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener inscripciones");
+        }
+        
+        
+      return materias;  
     }
 
     public List<Materia> obtenerMateriasNOCursadas(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+           List <Materia>materias= new ArrayList<Materia>();
+        
+        String sql="SELECT m.idMateria,m.nombre,m.año FROM inscripcion i JOIN materia m ON(i.idMateria=m.idMateria) WHERE i.idAlumno=? AND m.activa=0;";
+        
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            Materia mat;
+            while(rs.next()){
+                mat=new Materia();
+                mat.setIdMateria(rs.getInt("idMateria"));
+                mat.setNombre(rs.getString("nombre"));
+                mat.setAnioMateria(rs.getInt("año"));
+                materias.add(mat);
+                
+            }
+            
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener inscripciones");
+        }
+        
+        
+      return materias;
     }
 
     public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria) {
