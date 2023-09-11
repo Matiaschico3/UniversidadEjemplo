@@ -152,7 +152,7 @@ public class inscripcionData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al obtener inscripciones");
+            JOptionPane.showMessageDialog(null, "Error al obtener las materias");
         }
         
         
@@ -181,7 +181,7 @@ public class inscripcionData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al obtener inscripciones");
+            JOptionPane.showMessageDialog(null, "Error al obtener las materias");
         }
         
         
