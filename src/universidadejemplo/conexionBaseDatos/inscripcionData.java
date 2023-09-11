@@ -96,7 +96,37 @@ public class inscripcionData {
     
 
     public List<Inscripcion> obtenerInscripcionesPorAlumno(int idInscripcion) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String sql="SELECT inscripcion.idInscripto, inscripcion.nota, alumno.idalumno, alumno.dni, alumno.apellido, alumno.nombre, alumno.fechanacimiento,"
+                + " inscripcion.idmateria FROM inscripcion JOIN alumno ON(inscripcion.idalumno = alumno.idalumno) WHERE alumno.idalumno = 1";
+        
+        ArrayList<Inscripcion> insc2=new ArrayList();
+        
+        
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            
+            while(rs.next()){
+                Inscripcion inscripcion=new Inscripcion();
+                Alumno alu=new Alumno();
+              alu.setIdAlumno(rs.getInt("idAlumno")); // paso el id de la tabla a la variable creada
+               Materia mat=new Materia();
+                mat.setIdMateria(rs.getInt("idMateria"));
+                
+                //-----------
+                inscripcion.setIdInscripcion(rs.getInt("idInscripcion"));
+                inscripcion.setNota(rs.getDouble("nota"));  //nose como traer los idalumno e idmateria, consultar profe
+                inscripcion.setAlumno(alu); // y la paso por aca a la tabla inscripcion
+                inscripcion.setMateria(mat);
+                insc2.add(inscripcion);
+            }
+            
+              ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(inscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return insc2;
     }
 
     public List<Materia> obtenerMateriasCursadas(int id) {
@@ -108,6 +138,28 @@ public class inscripcionData {
     }
 
     public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria) {
+        
+        String sql="DELETE FROM inscripcion WHERE idAlumno=? AND idMateria=? ";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, idAlumno );
+            ps.setInt(2, idMateria);
+            
+            ps.executeUpdate();
+            
+             ResultSet rs=ps.getGeneratedKeys();
+            
+            //cartel para ver si fue hecho exitosamente la inscripcion
+            
+            if(rs.next()){
+                JOptionPane.showMessageDialog(null, "Inscripcion realizada exitosamente");
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(inscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     public void actualizarNota(int idAlumno, int idMateria, double nota) {
