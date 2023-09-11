@@ -188,28 +188,9 @@ public class inscripcionData {
 
     public List<Alumno> obtenerAlumnosXMaterias(int idMaterias) {
         String sql="SELECT * FROM inscripcion JOIN alumno ON(inscripcion.idAlumno=alumno.idAlumno) WHERE idMateria=1;";
-        try {
-            PreparedStatement ps=con.prepareStatement(sql);
-            ps.setInt(1, idMaterias);
-            
-            ps.executeQuery();
-            ResultSet rs=ps.getGeneratedKeys();
-            
-           while(rs.next()){
-                 System.out.println("ID "+ rs.getInt("idAlumno"));
-              System.out.println("DNI "+ rs.getInt("dni"));
-              System.out.println("APELLIDO "+rs.getString("apellido"));
-              System.out.println("NOMBRE "+rs.getString("nombre"));
-              System.out.println("F.NAC "+ rs.getDate("fechaNacimiento"));
-              System.out.println("ESTADO "+ rs.getBoolean("activo"));
-            }
-            
-            ps.close();
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(inscripcionData.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        ArrayList<Alumno> alu=new ArrayList();
         
-        
+      
+       return alu; 
     }
 }
