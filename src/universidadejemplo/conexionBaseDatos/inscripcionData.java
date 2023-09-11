@@ -157,15 +157,59 @@ public class inscripcionData {
             ps.close();
             
         } catch (SQLException ex) {
-            Logger.getLogger(inscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al conectarse a tabla Inscripcion");
         }
         
     }
 
     public void actualizarNota(int idAlumno, int idMateria, double nota) {
+        
+        String sql="UPDATE inscripcion SET nota=4 WHERE idAlumno=? AND idMateria=? ";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, idAlumno);
+            ps.setInt(2, idMateria);
+            
+            ps.executeUpdate();
+            ResultSet rs=ps.getGeneratedKeys();
+            
+            //cartel para ver si fue hecho exitosamente la inscripcion
+            
+            if(rs.next()){
+                JOptionPane.showMessageDialog(null, "Inscripcion realizada exitosamente");
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al conectarse a tabla Inscripcion");
+        }
+        
     }
 
     public List<Alumno> obtenerAlumnosXMaterias(int idMaterias) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String sql="SELECT * FROM inscripcion JOIN alumno ON(inscripcion.idAlumno=alumno.idAlumno) WHERE idMateria=1;";
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, idMaterias);
+            
+            ps.executeQuery();
+            ResultSet rs=ps.getGeneratedKeys();
+            
+           while(rs.next()){
+                 System.out.println("ID "+ rs.getInt("idAlumno"));
+              System.out.println("DNI "+ rs.getInt("dni"));
+              System.out.println("APELLIDO "+rs.getString("apellido"));
+              System.out.println("NOMBRE "+rs.getString("nombre"));
+              System.out.println("F.NAC "+ rs.getDate("fechaNacimiento"));
+              System.out.println("ESTADO "+ rs.getBoolean("activo"));
+            }
+            
+            ps.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(inscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }
 }
