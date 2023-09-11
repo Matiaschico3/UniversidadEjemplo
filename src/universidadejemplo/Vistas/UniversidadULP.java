@@ -1,5 +1,7 @@
 package universidadejemplo.Vistas;
 
+import javax.swing.JOptionPane;
+
 
 
 
@@ -43,6 +45,7 @@ public class UniversidadULP extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         porMateria = new javax.swing.JMenuItem();
         salir = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         jMenuItem3.setText("jMenuItem3");
 
@@ -123,6 +126,15 @@ public class UniversidadULP extends javax.swing.JFrame {
                 salirActionPerformed(evt);
             }
         });
+
+        jMenuItem1.setText("Salir");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        salir.add(jMenuItem1);
+
         jMenuBar1.add(salir);
 
         setJMenuBar(jMenuBar1);
@@ -188,8 +200,17 @@ public class UniversidadULP extends javax.swing.JFrame {
     }//GEN-LAST:event_porMateriaActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
-         System.exit(0);
+         
     }//GEN-LAST:event_salirActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        int respuesta= JOptionPane.showConfirmDialog(this, "Estás seguro que quieres salir?","Cerrar Ventana", JOptionPane.YES_NO_OPTION);
+        
+        if(respuesta==JOptionPane.YES_OPTION){
+            
+            this.dispose();//cierro la ventana
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     
     public static void main(String args[]) {
@@ -235,6 +256,7 @@ public class UniversidadULP extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem mn;
     private javax.swing.JMenuItem porMateria;
