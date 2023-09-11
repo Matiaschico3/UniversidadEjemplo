@@ -44,8 +44,8 @@ public class UniversidadULP extends javax.swing.JFrame {
         mn = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         porMateria = new javax.swing.JMenuItem();
-        salir = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        salirMenu1 = new javax.swing.JMenu();
+        jmiSalir = new javax.swing.JMenuItem();
 
         jMenuItem3.setText("jMenuItem3");
 
@@ -57,11 +57,11 @@ public class UniversidadULP extends javax.swing.JFrame {
         Escritorio.setLayout(EscritorioLayout);
         EscritorioLayout.setHorizontalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 711, Short.MAX_VALUE)
         );
         EscritorioLayout.setVerticalGroup(
             EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 464, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Alumnos");
@@ -120,22 +120,17 @@ public class UniversidadULP extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        salir.setText("Salir");
-        salir.addActionListener(new java.awt.event.ActionListener() {
+        salirMenu1.setText("Salir");
+
+        jmiSalir.setText("Salir");
+        jmiSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salirActionPerformed(evt);
+                jmiSalirActionPerformed(evt);
             }
         });
+        salirMenu1.add(jmiSalir);
 
-        jMenuItem1.setText("Salir");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        salir.add(jMenuItem1);
-
-        jMenuBar1.add(salir);
+        jMenuBar1.add(salirMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -143,11 +138,15 @@ public class UniversidadULP extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Escritorio)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Escritorio)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -199,18 +198,14 @@ public class UniversidadULP extends javax.swing.JFrame {
         Escritorio.moveToFront(pm);
     }//GEN-LAST:event_porMateriaActionPerformed
 
-    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
-         
-    }//GEN-LAST:event_salirActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jmiSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSalirActionPerformed
         int respuesta= JOptionPane.showConfirmDialog(this, "Estás seguro que quieres salir?","Cerrar Ventana", JOptionPane.YES_NO_OPTION);
         
         if(respuesta==JOptionPane.YES_OPTION){
             
             this.dispose();//cierro la ventana
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jmiSalirActionPerformed
 
     
     public static void main(String args[]) {
@@ -256,11 +251,11 @@ public class UniversidadULP extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jmiSalir;
     private javax.swing.JMenuItem mn;
     private javax.swing.JMenuItem porMateria;
-    private javax.swing.JMenu salir;
+    private javax.swing.JMenu salirMenu1;
     // End of variables declaration//GEN-END:variables
 
 
