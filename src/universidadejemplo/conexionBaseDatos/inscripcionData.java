@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -192,9 +193,19 @@ public class inscripcionData {
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();
+            Alumno i1;
+            while(rs.next()){
+                i1=new Alumno();
+                i1.setIdAlumno(rs.getInt("idAlumno"));
+                i1.setDni(rs.getInt("dni"));
+                i1.setApellido(rs.getString("apellido"));
+                i1.setNombre(rs.getString("nombre"));
+                alu.add(i1);
+            }
+            ps.close();
             
         } catch (SQLException ex) {
-            Logger.getLogger(inscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al cargar tabla alumno");
         }
         
         
