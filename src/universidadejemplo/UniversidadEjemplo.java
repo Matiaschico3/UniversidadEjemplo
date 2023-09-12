@@ -99,7 +99,7 @@ public class UniversidadEjemplo {
             
         }
       
-      
+        System.out.println(ID.obtenerInscripcionesPorAlumno(1));
  }
      
 }
