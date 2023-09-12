@@ -68,7 +68,7 @@ public class inscripcionData {
     }
 
     public List<Inscripcion> obtenerInscripciones() {
-        String sql="SELECT idInscripto,nota,idAlumno,idMateria FROM inscripcion JOIN alumno a ON(inscripcion.idAlumno=a.idAlumno) WHERE a.activo=1";
+        String sql="SELECT * FROM inscripcion JOIN alumno a ON(inscripcion.idAlumno=a.idAlumno) WHERE a.activo=1";
         
         ArrayList<Inscripcion> insc=new ArrayList();
         
