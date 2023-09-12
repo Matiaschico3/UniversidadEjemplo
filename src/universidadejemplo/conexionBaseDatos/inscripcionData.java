@@ -111,11 +111,13 @@ public class inscripcionData {
         
         try {
             PreparedStatement ps=con.prepareStatement(sql);
+             Alumno alu=new Alumno();
+            ps.setInt(1, alu.getIdAlumno());
             ResultSet rs=ps.executeQuery();
             
             while(rs.next()){
                 Inscripcion inscripcion=new Inscripcion();
-                Alumno alu=new Alumno();
+               
               alu.setIdAlumno(rs.getInt("idAlumno")); // paso el id de la tabla a la variable creada
                Materia mat=new Materia();
                 mat.setIdMateria(rs.getInt("idMateria"));
@@ -158,7 +160,7 @@ public class inscripcionData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al obtener las materias");
+            JOptionPane.showMessageDialog(null, "Error al obtener las materias"+ ex.getMessage());
         }
         
         
@@ -187,7 +189,7 @@ public class inscripcionData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al obtener las materias");
+            JOptionPane.showMessageDialog(null, "Error al obtener las materias"+ ex.getMessage());
         }
         
         
