@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,7 +29,7 @@ public class materiaData {
         
         String sql="INSERT INTO materia (nombre, año, activa) VALUES (?,?,?)";
         try {
-            PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps=con.prepareStatement(sql);
             ps.setString(1, materia.getNombre());
             ps.setInt(2,materia.getAnioMateria());
             ps.setBoolean(3, materia.isActivo());
@@ -41,13 +40,12 @@ public class materiaData {
             if(rs.next()){
                 
                 materia.setIdMateria(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Materia guardada exitosamente");
+                JOptionPane.showMessageDialog(null, "Alumno guardado exitosamente");
             }
             ps.close();
             
         } catch (SQLException ex) {
-           
-            JOptionPane.showMessageDialog(null,"Error al acceder a la tabla Materia"+ ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Error al acceder a la tabla Materia");
         }
         
         
@@ -71,7 +69,7 @@ public class materiaData {
                materia.setActivo(true);
                
             }else{
-               JOptionPane.showMessageDialog(null,"No se encuentra la materia en la base de datos");
+               JOptionPane.showMessageDialog(null,"No se encuentra ese alumno en la base de datos");
             }
             
             ps.close();
@@ -84,7 +82,7 @@ public class materiaData {
 
     public void modificarMateria(Materia materia) {
         
-        String sql="UPDATE materia SET nombre=?, año=?, activa=? WHERE idMateria=?";
+        String sql="UPDATE materia SET nombre=?, año=?, activa=? WHERE idAlumno=?";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setString(1, materia.getNombre());
@@ -94,7 +92,7 @@ public class materiaData {
            int exito= ps.executeUpdate();
            
            if(exito==1){//para avisar de que funciono correctamente.
-               JOptionPane.showMessageDialog(null, "Materia modificada exitosamente");
+               JOptionPane.showMessageDialog(null, "Alumno modificado exitosamente");
            }
             ps.close();
             
@@ -107,7 +105,7 @@ public class materiaData {
 
     public void eliminarMateria(int idMateria) {
         //borrado logico
-        String sql=" UPDATE materia SET activa=0 WHERE idMateria= ?";
+        String sql=" UPDATE materia SET activa=0 WHERE idAlumno= ?";
         
         try {
             PreparedStatement ps=con.prepareStatement(sql);
@@ -116,7 +114,7 @@ public class materiaData {
             int exito=ps.executeUpdate();
             
             if(exito==1){
-                JOptionPane.showMessageDialog(null, "Materia Eliminada exitosamente");
+                JOptionPane.showMessageDialog(null, "Alumno guardado exitosamente");
             }
             ps.close();
             
@@ -128,7 +126,7 @@ public class materiaData {
     }
 
     public List<Materia> listarMaterias() {
-         String sql="SELECT idMateria ,nombre, año FROM materia WHERE activa=1 ";
+         String sql="SELECT nombre, año FROM materia WHERE activa=1 ";
          
         ArrayList<Materia> materias=new ArrayList();
         
@@ -151,7 +149,7 @@ public class materiaData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error al acceder a la tabla Materia"+ ex.getMessage());
+            JOptionPane.showMessageDialog(null,"Error al acceder a la tabla Materia");
         }
        return materias;
     }
