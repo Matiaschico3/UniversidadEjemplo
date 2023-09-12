@@ -101,10 +101,10 @@ public class inscripcionData {
     }
     
     
-    
+    //corregir a partir de aca
 
     public List<Inscripcion> obtenerInscripcionesPorAlumno(int idInscripcion) {
-        String sql="SELECT * FROM inscripcion JOIN alumno ON(inscripcion.idalumno = alumno.idalumno) WHERE alumno.idAlumno= ?";
+        String sql="SELECT * FROM inscripcion JOIN alumno ON(inscripcion.idAlumno = alumno.idAlumno) WHERE alumno.idAlumno= ?";
         
         ArrayList<Inscripcion> insc2=new ArrayList();
         
