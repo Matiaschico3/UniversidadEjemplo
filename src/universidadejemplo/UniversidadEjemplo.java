@@ -21,7 +21,9 @@ public class UniversidadEjemplo {
       Alumno a3=new Alumno(4444444,"Gonzales","Fernando",LocalDate.of(1987, Month.FEBRUARY, 22),true);
       Alumno a4=new Alumno(5555555,"Irigoyen","Helena",LocalDate.of(1988, Month.SEPTEMBER, 12),true);
       
-      alumnoData alu=new alumnoData();
+      
+      
+     // alumnoData alu=new alumnoData();
       //alu.guardarAlumno(a1);
      // alu.guardarAlumno(a2);
      // alu.guardarAlumno(a3);
@@ -68,6 +70,8 @@ public class UniversidadEjemplo {
       
       
       //Chequeo InscripcionData
+      
+      
       
       Inscripcion i1=new Inscripcion(a1,m1,8);
       Inscripcion i5=new Inscripcion(a1,m4,5);
