@@ -68,7 +68,7 @@ public class inscripcionData {
     }
 
     public List<Inscripcion> obtenerInscripciones() {
-        String sql="SELECT idInscripto, nota, idAlumno, idMateria FROM `inscripcion` WHERE idInscripto";
+        String sql="SELECT idInscripto, nota, idAlumno, idMateria FROM inscripcion WHERE idInscripto=?";
         
         ArrayList<Inscripcion> insc=new ArrayList();
         
@@ -84,8 +84,8 @@ public class inscripcionData {
                 mat.setIdMateria(rs.getInt("idMateria"));
                 
                 //-----------
-                inscripcion.setIdInscripcion(rs.getInt("idInscripcion"));
-                inscripcion.setNota(rs.getDouble("nota"));  //nose como traer los idalumno e idmateria, consultar profe
+                inscripcion.setIdInscripcion(rs.getInt("idInscripto"));
+                inscripcion.setNota(rs.getDouble("nota"));  
                 inscripcion.setAlumno(alu); // y la paso por aca a la tabla inscripcion
                 inscripcion.setMateria(mat);
                 insc.add(inscripcion);
@@ -94,7 +94,7 @@ public class inscripcionData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al obtener las inscripciones");
+            JOptionPane.showMessageDialog(null, "Error al obtener las inscripciones "+ ex.getMessage());
         }
         
         return insc;

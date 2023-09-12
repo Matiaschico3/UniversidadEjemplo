@@ -92,6 +92,8 @@ public class UniversidadEjemplo {
      // ID.guardarInscripcion(i6);
      // ID.guardarInscripcion(i7);
     //  ID.guardarInscripcion(i8);
+    
+  
         for (Inscripcion ins:ID.obtenerInscripciones() ) {
             System.out.println(ins.toString());
             
