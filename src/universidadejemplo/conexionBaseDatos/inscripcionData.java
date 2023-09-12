@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -36,15 +37,8 @@ public class inscripcionData {
         String sql="INSERT INTO inscripcion(nota, idAlumno, idMateria) VALUES (?,?,?)";
        
         try {
-<<<<<<< HEAD
-            System.out.println("pruba 1");
             PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-          
-             ps.setDouble(1, ins.getNota());
-=======
-            PreparedStatement ps=con.prepareStatement(sql);
             ps.setDouble(1, ins.getNota());
->>>>>>> 49c4c41fc7688689714594c09cfd7281ac05ef55
             ps.setInt(2, ins.getAlumno().getIdAlumno());
             ps.setInt(3, ins.getMateria().getIdMateria());
             
@@ -68,7 +62,7 @@ public class inscripcionData {
             
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error al acceder a la tabla Inscripcion");
+            JOptionPane.showMessageDialog(null,"Error al acceder a la tabla Inscripcion"+ ex.getMessage());
         }
         
     }
