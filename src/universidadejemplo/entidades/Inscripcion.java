@@ -24,6 +24,7 @@ public class Inscripcion {
     }
 
     public Inscripcion() {
+        
     }
 
     public int getIdInscripcion() {

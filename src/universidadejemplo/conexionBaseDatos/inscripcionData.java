@@ -27,19 +27,24 @@ public class inscripcionData {
     //constructor
 
     public inscripcionData() {
+        con=Conexion.getConexion(); // no olvidar!!
     }
     
     //funciones
 
     public void guardarInscripcion(Inscripcion ins) { // nose si esto esta bien, preguntar profe
         
-        String sql="INSERT INTO inscripcion(nota, idAlumno, idMateria) VALUES (?,?,?);";
-        
+        String sql="INSERT INTO inscripcion(nota, idAlumno, idMateria) VALUES (?,?,?)";
+       
         try {
+            System.out.println("pruba 1");
             PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
-            ps.setDouble(1, ins.getNota());
+          
+             ps.setDouble(1, ins.getNota());
             ps.setInt(2, ins.getAlumno().getIdAlumno());
             ps.setInt(3, ins.getMateria().getIdMateria());
+            
+            
             
             ps.executeUpdate();
             
@@ -51,7 +56,10 @@ public class inscripcionData {
                 
                 ins.setIdInscripcion((rs.getInt(1)));
                 JOptionPane.showMessageDialog(null, "Inscripcion realizada exitosamente");
+            }else{
+                System.out.println("Error");
             }
+                
             ps.close();
             
             
