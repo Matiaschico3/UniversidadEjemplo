@@ -103,7 +103,7 @@ public class inscripcionData {
     
     
 
-    public List<Inscripcion> obtenerInscripcionesPorAlumno(int idInscripcion) {
+    public List<Inscripcion> obtenerInscripcionesPorAlumno(int idAlumno) {
         String sql="SELECT * FROM inscripcion JOIN alumno ON(inscripcion.idAlumno = alumno.idAlumno) WHERE alumno.idAlumno = ?";
         
         ArrayList<Inscripcion> insc2=new ArrayList();
@@ -111,19 +111,18 @@ public class inscripcionData {
         
         try {
             PreparedStatement ps=con.prepareStatement(sql);
-             Alumno alu=new Alumno();
-            ps.setInt(1, alu.getIdAlumno());
+            ps.setInt(1, idAlumno);
             ResultSet rs=ps.executeQuery();
             
             while(rs.next()){
                 Inscripcion inscripcion=new Inscripcion();
-               
+               Alumno alu = new Alumno();
               alu.setIdAlumno(rs.getInt("idAlumno")); // paso el id de la tabla a la variable creada
                Materia mat=new Materia();
                 mat.setIdMateria(rs.getInt("idMateria"));
                 
                 //-----------
-                inscripcion.setIdInscripcion(rs.getInt("idInscripcion"));
+                inscripcion.setIdInscripcion(rs.getInt("idInscripto"));
                 inscripcion.setNota(rs.getDouble("nota"));  //nose como traer los idalumno e idmateria, consultar profe
                 inscripcion.setAlumno(alu); // y la paso por aca a la tabla inscripcion
                 inscripcion.setMateria(mat);
@@ -132,7 +131,7 @@ public class inscripcionData {
             
               ps.close();
         } catch (SQLException ex) {
-             JOptionPane.showMessageDialog(null, "Error al obtener las inscripciones");
+             JOptionPane.showMessageDialog(null, "Error al obtener las inscripciones"+ ex.getMessage());
         }
         
         return insc2;
