@@ -82,6 +82,7 @@ public class inscripcionData {
                 
                 Alumno alu=new Alumno();
                 alu.setIdAlumno(rs.getInt("idAlumno")); // paso el id de la tabla a la variable creada
+               //Alumno alu=aluData.buscarAlumno(rs.getInt("idAlumno)); otra forma de hacerla
                 Materia mat=new Materia();
                 mat.setIdMateria(rs.getInt("idMateria"));
                
@@ -107,7 +108,7 @@ public class inscripcionData {
     
 
     public List<Inscripcion> obtenerInscripcionesPorAlumno(int idAlumno) {
-        String sql="SELECT * FROM inscripcion JOIN alumno ON(inscripcion.idAlumno = alumno.idAlumno) WHERE alumno.idAlumno = ?";
+        String sql="SELECT * FROM inscripcion  WHERE idAlumno = ?";
         
         ArrayList<Inscripcion> insc2=new ArrayList();
         
@@ -143,7 +144,7 @@ public class inscripcionData {
     public List<Materia> obtenerMateriasCursadas(int idAlumno) {
         List <Materia>materias= new ArrayList<Materia>();
         
-        String sql="SELECT m.idMateria,m.nombre,m.año FROM inscripcion i JOIN materia m ON(i.idMateria=m.idMateria) WHERE i.idAlumno=? AND m.activa=1;";
+        String sql="SELECT m.idMateria,m.nombre,m.año FROM inscripcion i JOIN materia m ON(i.idMateria=m.idMateria) WHERE i.idAlumno=? AND m.activa=1";
         
         try {
             PreparedStatement ps=con.prepareStatement(sql);
@@ -250,19 +251,22 @@ public class inscripcionData {
     }
 
     public List<Alumno> obtenerAlumnosXMaterias(int idMaterias) {
-        String sql="SELECT * FROM inscripcion JOIN alumno ON(inscripcion.idAlumno=alumno.idAlumno) WHERE idMateria=1;";
+        String sql="SELECT * FROM inscripcion i JOIN alumno a ON(i.idAlumno=a.idAlumno) WHERE  i.idAlumno=i.idAlumno AND idMateria=?";
         ArrayList<Alumno> alu=new ArrayList();
         try {
             PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, idMaterias);
             ResultSet rs=ps.executeQuery();
-            Alumno i1;
+            Alumno a1;
             while(rs.next()){
-                i1=new Alumno();
-                i1.setIdAlumno(rs.getInt("idAlumno"));
-                i1.setDni(rs.getInt("dni"));
-                i1.setApellido(rs.getString("apellido"));
-                i1.setNombre(rs.getString("nombre"));
-                alu.add(i1);
+                a1=new Alumno();
+                a1.setIdAlumno(rs.getInt("idAlumno"));
+                a1.setDni(rs.getInt("dni"));
+                a1.setApellido(rs.getString("apellido"));
+                a1.setNombre(rs.getString("nombre"));
+                a1.setFechaN(rs.getDate("FechaNacimiento").toLocalDate());
+                a1.setEstado(rs.getBoolean("activo"));
+                alu.add(a1);
             }
             ps.close();
             
@@ -272,6 +276,8 @@ public class inscripcionData {
         
         
       
-       return alu; 
-    }
+       return alu; }
+    
+    
+    
 }
