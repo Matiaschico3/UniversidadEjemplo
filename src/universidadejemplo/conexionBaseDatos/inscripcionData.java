@@ -265,7 +265,7 @@ public class inscripcionData {
                 a1.setApellido(rs.getString("apellido"));
                 a1.setNombre(rs.getString("nombre"));
                 a1.setFechaN(rs.getDate("FechaNacimiento").toLocalDate());
-                a1.setEstado(rs.getBoolean("activo"));
+                a1.setActivo(rs.getBoolean("activo"));
                 alu.add(a1);
             }
             ps.close();
