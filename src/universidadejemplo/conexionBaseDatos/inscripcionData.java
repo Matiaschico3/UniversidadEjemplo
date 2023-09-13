@@ -70,7 +70,7 @@ public class inscripcionData {
     public List<Inscripcion> obtenerInscripciones() {
         String sql="SELECT * FROM inscripcion";
         
-        ArrayList<Inscripcion> insc=new ArrayList();
+        ArrayList<Inscripcion> cursadas=new ArrayList();
         
         try {
             PreparedStatement ps=con.prepareStatement(sql);
@@ -78,26 +78,29 @@ public class inscripcionData {
             
             while(rs.next()){
                 Inscripcion inscripcion=new Inscripcion();
+                inscripcion.setIdInscripcion(rs.getInt("idInscripto"));
+                
                 Alumno alu=new Alumno();
-              alu.setIdAlumno(rs.getInt("idAlumno")); // paso el id de la tabla a la variable creada
-               Materia mat=new Materia();
+                alu.setIdAlumno(rs.getInt("idAlumno")); // paso el id de la tabla a la variable creada
+                Materia mat=new Materia();
                 mat.setIdMateria(rs.getInt("idMateria"));
+               
                 
                 //-----------
                 inscripcion.setIdInscripcion(rs.getInt("idInscripto"));
                 inscripcion.setNota(rs.getDouble("nota"));  
                 inscripcion.setAlumno(alu); // y la paso por aca a la tabla inscripcion
                 inscripcion.setMateria(mat);
-                insc.add(inscripcion);
+                cursadas.add(inscripcion);
             }
             
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al obtener las inscripciones "+ ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de inscripcion "+ ex.getMessage());
         }
         
-        return insc;
+        return cursadas;
     }
     
     
