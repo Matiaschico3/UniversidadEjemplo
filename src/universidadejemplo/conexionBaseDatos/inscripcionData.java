@@ -196,6 +196,7 @@ public class inscripcionData {
     }
 
     public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria) {
+        //borrado fisico
         
         String sql="DELETE FROM inscripcion WHERE idAlumno=? AND idMateria=? ";
         try {
@@ -203,14 +204,14 @@ public class inscripcionData {
             ps.setInt(1, idAlumno );
             ps.setInt(2, idMateria);
             
-            ps.executeUpdate();
+            int filas= ps.executeUpdate();
             
-             ResultSet rs=ps.getGeneratedKeys();
+             
             
             //cartel para ver si fue hecho exitosamente la inscripcion
             
-            if(rs.next()){
-                JOptionPane.showMessageDialog(null, "Inscripcion realizada exitosamente");
+            if(filas>0){
+                JOptionPane.showMessageDialog(null, "Inscripcion borrada exitosamente");
             }
             ps.close();
             
