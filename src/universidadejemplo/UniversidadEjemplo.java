@@ -16,33 +16,34 @@ public class UniversidadEjemplo {
 
     public static void main(String[] args) {
         
-      Alumno a1=new Alumno(2,2222222,"Perez","Maria",LocalDate.of(1990, Month.MARCH, 05),true);
-      Alumno a2=new Alumno(3,333333,"Lopez","Matias",LocalDate.of(1995, Month.AUGUST, 30),true);
+      Alumno a1=new Alumno(2222222,"Perez","Maria",LocalDate.of(1990, Month.MARCH, 05),true);
+      Alumno a2=new Alumno(333333,"Lopez","Matias",LocalDate.of(1995, Month.AUGUST, 30),true);
       Alumno a3=new Alumno(4444444,"Gonzales","Fernando",LocalDate.of(1987, Month.FEBRUARY, 22),true);
       Alumno a4=new Alumno(5555555,"Irigoyen","Helena",LocalDate.of(1988, Month.SEPTEMBER, 12),true);
       
       
       
-     // alumnoData alu=new alumnoData();
+      alumnoData alu=new alumnoData();
+     
       //alu.guardarAlumno(a1);
      // alu.guardarAlumno(a2);
      // alu.guardarAlumno(a3);
      // alu.guardarAlumno(a4);
      //alu.modificarAlumno(a1);
      //alu.eliminarAlumno(2);
-     /*Alumno AE=alu.buscarAlumno(4);
-        System.out.println("Dni "+AE.getDni());*/
-     /*Alumno AED=alu.buscarAlumnoPorDni(333333);
-        System.out.println("Apellido "+ AED.getApellido());
-        System.out.println("Nombre "+AED.getNombre());
-        System.out.println("Fecha de Nacimiento "+ AED.getFechaN());*/
+//     Alumno AE=alu.buscarAlumno(1);
+//        System.out.println("Dni "+AE.getDni());
+//     Alumno AED=alu.buscarAlumnoPorDni(333333);
+//        System.out.println("Apellido "+ AED.getApellido());
+//        System.out.println("Nombre "+AED.getNombre());
+//        System.out.println("Fecha de Nacimiento "+ AED.getFechaN());
      
-     /*   for (Alumno alumno : alu.listarAlumnos()) {
-            System.out.println(alumno.getDni());
-            System.out.println(alumno.getApellido());
-            System.out.println(alumno.getNombre());
-            System.out.println(alumno.getFechaN());
-            System.out.println("------------------------");*/
+//        for (Alumno alumno : alu.listarAlumnos()) {
+//            System.out.println(alumno.getDni());
+//            System.out.println(alumno.getApellido());
+//            System.out.println(alumno.getNombre());
+//            System.out.println(alumno.getFechaN());
+//            System.out.println("------------------------");
      
      
      //chequeo de MateriaData
@@ -93,7 +94,7 @@ public class UniversidadEjemplo {
      // ID.guardarInscripcion(i7);
     //  ID.guardarInscripcion(i8);
     
-  
+//  
 //        for (Inscripcion ins:ID.obtenerInscripciones() ) {
 //            System.out.println(ins.toString());
 //            
@@ -108,9 +109,9 @@ public class UniversidadEjemplo {
         }*/
       
       
-      for (Materia mat : ID.obtenerMateriasNOCursadas(1)) {
-            System.out.println(mat.toString());
-        }
+     // for (Materia mat : ID.obtenerMateriasNOCursadas(1)) {
+//       //     System.out.println(mat.toString());
+//        }
        
        
      

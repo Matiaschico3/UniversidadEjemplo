@@ -12,26 +12,26 @@ public class Alumno {
     private String apellido;
     private String nombre;
     private LocalDate fechaN;
-    private boolean estado;
+    private boolean activo;
 
-    public Alumno(int idAlumno, int dni, String apellido, String nombre, LocalDate fechaN, boolean estado) {
+    public Alumno(int idAlumno, int dni, String apellido, String nombre, LocalDate fechaN, boolean activo) {
         this.idAlumno = idAlumno;
         this.dni = dni;
         this.apellido = apellido;
         this.nombre = nombre;
         this.fechaN = fechaN;
-        this.estado = estado;
+        this.activo = activo;
     }
 
     public Alumno() {
     }
 
-    public Alumno(int dni, String apellido, String nombre, LocalDate fechaN, boolean estado) {
+    public Alumno(int dni, String apellido, String nombre, LocalDate fechaN, boolean activo) {
         this.dni = dni;
         this.apellido = apellido;
         this.nombre = nombre;
         this.fechaN = fechaN;
-        this.estado = estado;
+        this.activo = activo;
     }
 
     public int getIdAlumno() {
@@ -74,17 +74,17 @@ public class Alumno {
         this.fechaN = fechaN;
     }
 
-    public boolean isEstado() {
-        return estado;
+    public boolean isActivo() {
+        return activo;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     @Override
     public String toString() {
-        return "Alumno{" + "idAlumno=" + idAlumno + ", dni=" + dni + ", apellido=" + apellido + ", nombre=" + nombre + ", fechaN=" + fechaN + ", estado=" + estado + '}';
+        return "Alumno{" + "idAlumno=" + idAlumno + ", dni=" + dni + ", apellido=" + apellido + ", nombre=" + nombre + ", fechaN=" + fechaN + ", activo=" + activo + '}';
     }
         
 }
