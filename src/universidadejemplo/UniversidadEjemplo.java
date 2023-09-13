@@ -52,7 +52,7 @@ public class UniversidadEjemplo {
      Materia m3=new Materia("Matematica 1", 1, true);
      Materia m4=new Materia("Ingles Tecnico", 1, true);
      
-   //  materiaData MD=new materiaData();
+     materiaData MD=new materiaData();
      
      //MD.guardarMateria(m1);
      //MD.guardarMateria(m2);
@@ -99,10 +99,22 @@ public class UniversidadEjemplo {
 //            
 //        }
       
-        for (Inscripcion ins:ID.obtenerInscripcionesPorAlumno(1) ) {
-           System.out.println(ins.toString());
+        /*for (Inscripcion ins:ID.obtenerInscripcionesPorAlumno(1) ) {
+           System.out.println(ins.toString());}*/
+        
+        
+      /* for (Materia mat : ID.obtenerMateriasCursadas(1)) {
+            System.out.println(mat.toString());
+        }*/
+      
+      
+      for (Materia mat : ID.obtenerMateriasNOCursadas(1)) {
+            System.out.println(mat.toString());
+        }
+       
+       
      
-}
+
    
     }
 }

@@ -17,7 +17,7 @@ import universidadejemplo.entidades.Materia;
 
 public class inscripcionData {
 
-    private Connection con;
+    private Connection con=null;
 
     private materiaData matData;
 
@@ -32,7 +32,7 @@ public class inscripcionData {
     
     //funciones
 
-    public void guardarInscripcion(Inscripcion ins) { // nose si esto esta bien, preguntar profe
+    public void guardarInscripcion(Inscripcion ins) { 
         
         String sql="INSERT INTO inscripcion(nota, idAlumno, idMateria) VALUES (?,?,?)";
        
@@ -137,14 +137,14 @@ public class inscripcionData {
         return insc2;
     }
 
-    public List<Materia> obtenerMateriasCursadas(int id) {
+    public List<Materia> obtenerMateriasCursadas(int idAlumno) {
         List <Materia>materias= new ArrayList<Materia>();
         
         String sql="SELECT m.idMateria,m.nombre,m.año FROM inscripcion i JOIN materia m ON(i.idMateria=m.idMateria) WHERE i.idAlumno=? AND m.activa=1;";
         
         try {
             PreparedStatement ps=con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, idAlumno);
             ResultSet rs=ps.executeQuery();
             Materia mat;
             while(rs.next()){
@@ -166,14 +166,14 @@ public class inscripcionData {
       return materias;  
     }
 
-    public List<Materia> obtenerMateriasNOCursadas(int id) {
+    public List<Materia> obtenerMateriasNOCursadas(int idAlumno) {
            List <Materia>materias= new ArrayList<Materia>();
         
-        String sql="SELECT m.idMateria,m.nombre,m.año FROM inscripcion i JOIN materia m ON(i.idMateria=m.idMateria) WHERE i.idAlumno=? AND m.activa=0;";
+        String sql="SELECT * FROM materia m WHERE m.activa=1 AND idMateria NOT IN (SELECT idMateria FROM inscripcion WHERE idAlumno=1 )";
         
         try {
             PreparedStatement ps=con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, idAlumno);
             ResultSet rs=ps.executeQuery();
             Materia mat;
             while(rs.next()){
@@ -222,19 +222,20 @@ public class inscripcionData {
 
     public void actualizarNota(int idAlumno, int idMateria, double nota) {
         
-        String sql="UPDATE inscripcion SET nota=4 WHERE idAlumno=? AND idMateria=? ";
+        String sql="UPDATE inscripcion SET nota=? WHERE idAlumno=? AND idMateria=? ";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
-            ps.setInt(1, idAlumno);
-            ps.setInt(2, idMateria);
+            ps.setDouble(1, nota);
+            ps.setInt(2, idAlumno);
+            ps.setInt(3, idMateria);
             
-            ps.executeUpdate();
+           int filas= ps.executeUpdate();
             ResultSet rs=ps.getGeneratedKeys();
             
             //cartel para ver si fue hecho exitosamente la inscripcion
             
-            if(rs.next()){
-                JOptionPane.showMessageDialog(null, "Inscripcion realizada exitosamente");
+            if(filas >0){
+                JOptionPane.showMessageDialog(null, "Nota Actualizada");
             }
             ps.close();
             
