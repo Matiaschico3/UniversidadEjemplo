@@ -1,8 +1,6 @@
 package universidadejemplo.Vistas;
 
-import java.sql.Date;
 import java.time.LocalDate;
-import java.time.Month;
 import java.time.ZoneId;
 import javax.swing.JOptionPane;
 import universidadejemplo.conexionBaseDatos.alumnoData;
