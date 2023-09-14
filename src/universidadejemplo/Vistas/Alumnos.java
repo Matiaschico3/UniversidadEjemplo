@@ -1,10 +1,16 @@
 package universidadejemplo.Vistas;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.ZoneId;
 import javax.swing.JOptionPane;
 import universidadejemplo.conexionBaseDatos.alumnoData;
 import universidadejemplo.entidades.Alumno;
 
 public class Alumnos extends javax.swing.JInternalFrame {
+
+    alumnoData ad = new alumnoData();
 
     public Alumnos() {
         initComponents();
@@ -89,6 +95,11 @@ public class Alumnos extends javax.swing.JInternalFrame {
         });
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
 
@@ -202,19 +213,15 @@ public class Alumnos extends javax.swing.JInternalFrame {
         try {
 
             boolean encontrado = false;
-            alumnoData ad = new alumnoData();
-            Alumno ae= ad.buscarAlumnoPorDni(dni);
-            if( ae != null){
-            jtApellido.setText(ae.getApellido());
-            jtNombre.setText(ae.getNombre());
-            jdFecha.setDate(java.sql.Date.valueOf(ae.getFechaN()));
-            jrbEstado.setSelected(ae.isActivo());
+            Alumno ae = ad.buscarAlumnoPorDni(dni);
+            if (ae != null) {
+                jtApellido.setText(ae.getApellido());
+                jtNombre.setText(ae.getNombre());
+                jdFecha.setDate(java.sql.Date.valueOf(ae.getFechaN()));
+                jrbEstado.setSelected(ae.isActivo());
             }
-            
-           
 
-            
-        }catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Solo se admiten numeros");
 
         }
@@ -223,12 +230,31 @@ public class Alumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-    jtDocumento.setText("");
-    jtApellido.setText("");
-    jtNombre.setText("");
-    jdFecha.setDate(null);
-    jrbEstado.setSelected(false);
+        jtDocumento.setText("");
+        jtApellido.setText("");
+        jtNombre.setText("");
+        jdFecha.setDate(null);
+        jrbEstado.setSelected(false);
     }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+
+        try {
+            if (!jtDocumento.getText().isEmpty() && !jtApellido.getText().isEmpty() && !jtNombre.getText().isEmpty() && jdFecha.getDate() != null) { //preguntar : jdFecha.getDate().compareTo(null)
+                int dni = Integer.parseInt(jtDocumento.getText());
+                String ap = jtApellido.getText();
+                String nom = jtNombre.getText();
+                LocalDate fechaNacimiento = jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                boolean est = jrbEstado.isSelected();
+                Alumno nuevo = new Alumno(dni, ap, nom, fechaNacimiento, est);
+                ad.guardarAlumno(nuevo);
+            }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "No debe dejar campos vacios");
+        }
+
+
+    }//GEN-LAST:event_jbGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
