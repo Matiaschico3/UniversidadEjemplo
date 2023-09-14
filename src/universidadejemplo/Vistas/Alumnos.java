@@ -102,6 +102,11 @@ public class Alumnos extends javax.swing.JInternalFrame {
         });
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -204,7 +209,9 @@ public class Alumnos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        // TODO add your handling code here:
+
+        int dni = Integer.parseInt(jtDocumento.getText());
+        ad.eliminarAlumno(dni);
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
@@ -212,7 +219,6 @@ public class Alumnos extends javax.swing.JInternalFrame {
         int dni = Integer.parseInt(jtDocumento.getText());
         try {
 
-            boolean encontrado = false;
             Alumno ae = ad.buscarAlumnoPorDni(dni);
             if (ae != null) {
                 jtApellido.setText(ae.getApellido());
@@ -256,6 +262,14 @@ public class Alumnos extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        int respuesta = JOptionPane.showConfirmDialog(this, "Estás seguro que quieres salir?", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+
+            this.dispose();//cierro la ventana
+    }//GEN-LAST:event_jbSalirActionPerformed
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;

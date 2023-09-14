@@ -69,11 +69,11 @@ public class alumnoData {
           JOptionPane.showMessageDialog(null, "Error al modificar la tabla alumno");
         }
     }
-    public void eliminarAlumno(int idAlumno) {
-         String sql = "UPDATE alumno SET activo = 0 WHERE idAlumno = ?";
+    public void eliminarAlumno(int dni) {
+         String sql = "UPDATE alumno SET activo = 0 WHERE dni = ?";
           try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idAlumno);
+            ps.setInt(1, dni);
              int exito = ps.executeUpdate();
              if(exito == 1){
                  JOptionPane.showMessageDialog(null, "Alumno eliminado");
