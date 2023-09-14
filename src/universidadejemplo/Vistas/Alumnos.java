@@ -223,7 +223,11 @@ public class Alumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-    
+    jtDocumento.setText("");
+    jtApellido.setText("");
+    jtNombre.setText("");
+    jdFecha.setDate(null);
+    jrbEstado.setSelected(false);
     }//GEN-LAST:event_jbNuevoActionPerformed
 
 
