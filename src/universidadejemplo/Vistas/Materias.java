@@ -1,18 +1,16 @@
-
 package universidadejemplo.Vistas;
 
 import javax.swing.JOptionPane;
 import universidadejemplo.conexionBaseDatos.materiaData;
 import universidadejemplo.entidades.Materia;
 
-
 public class Materias extends javax.swing.JInternalFrame {
 
     materiaData md = new materiaData();
+
     public Materias() {
         initComponents();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -69,6 +67,8 @@ public class Materias extends javax.swing.JInternalFrame {
             }
         });
 
+        jrbEstado.setSelected(true);
+
         jbNuevo.setText("Nuevo");
         jbNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,11 +77,6 @@ public class Materias extends javax.swing.JInternalFrame {
         });
 
         jbEliminar.setText("Eliminar");
-        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbEliminarActionPerformed(evt);
-            }
-        });
 
         jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -187,63 +182,59 @@ public class Materias extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-    
-  try {
-            int dni = Integer.parseInt(jtDocumento.getText());
 
-            Alumno ae = ad.buscarAlumnoPorDni(dni);
-            if (ae != null) {
-                jtApellido.setText(ae.getApellido());
-                jtNombre.setText(ae.getNombre());
-                jdFecha.setDate(java.sql.Date.valueOf(ae.getFechaN()));
-                jrbEstado.setSelected(ae.isActivo());
-            
+        try {
+            int idMateria = Integer.parseInt(jtCodigo.getText());
+            Materia m = md.buscarMateria(idMateria);
+            if (m != null) {
+                jtNombre.setText(m.getNombre());
+                jtAnio.setText(Integer.toString(m.getAnioMateria()));
+                jrbEstado.setSelected(m.isActivo());
+
             }
         } catch (NumberFormatException e) {
 
             JOptionPane.showMessageDialog(this, "Solo se admiten numeros y no debe estar vacio");
         }
-       
+
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-            int idMateria = Integer.parseInt(jtCodigo.getText());
-            md.eliminarMateria(idMateria);
+        int idMateria = Integer.parseInt(jtCodigo.getText());
+        md.eliminarMateria(idMateria);
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-      try {
-            if (!jtNombre.getText().isEmpty() && !jtAnio.getText().isEmpty() && jrbEstado.isSelected()==true) { 
-                
+        try {
+            if (!jtNombre.getText().isEmpty() && !jtAnio.getText().isEmpty() && jrbEstado.isSelected() == true) {
+
                 String nom = jtNombre.getText();
                 boolean est = jrbEstado.isSelected();
-                int anio= Integer.parseInt(jtAnio.getText());
+                int anio = Integer.parseInt(jtAnio.getText());
                 Materia nuevo = new Materia(nom, anio, est);
                 md.guardarMateria(nuevo);
 //            }else if (jtCodigo.getText().isEmpty()){  //|| jtApellido.getText().isEmpty() || jtNombre.getText().isEmpty() || jdFecha.getDate() == null 
 //                JOptionPane.showMessageDialog(this, "No debe dejar el código vacio");
-            }else if (jtNombre.getText().isEmpty()){
+            } else if (jtNombre.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No debe dejar el campo nombre vacio");
-            }else if (jtAnio.getText().isEmpty()){
+            } else if (jtAnio.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No debe dejar el campo año vacio");
-            }else if (jrbEstado.isSelected() == false){
-               JOptionPane.showMessageDialog(this, "Debe dejar activado el campo estado"); 
+            } else if (jrbEstado.isSelected() == false) {
+                JOptionPane.showMessageDialog(this, "Debe dejar activado el campo estado");
             }
-            
+
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "No debe dejar campos vacios");
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-            int respuesta = JOptionPane.showConfirmDialog(this, "Estás seguro que quieres salir?", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
-
+        int respuesta = JOptionPane.showConfirmDialog(this, "Estás seguro que quieres salir?", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
         if (respuesta == JOptionPane.YES_OPTION) {
-
             this.dispose();//cierro la ventana
     }//GEN-LAST:event_jbSalirActionPerformed
     }
-    
+
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         jtCodigo.setText("");
         jtNombre.setText("");
@@ -251,7 +242,7 @@ public class Materias extends javax.swing.JInternalFrame {
         jrbEstado.setSelected(true);
     }//GEN-LAST:event_jbNuevoActionPerformed
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbBuscar;
@@ -269,6 +260,5 @@ public class Materias extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtCodigo;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
-
 
 }

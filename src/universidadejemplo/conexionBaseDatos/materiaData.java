@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -27,18 +28,17 @@ public class materiaData {
         
         String sql="INSERT INTO materia (nombre, año, activa) VALUES (?,?,?)";
         try {
-            PreparedStatement ps=con.prepareStatement(sql);
+            PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, materia.getNombre());
             ps.setInt(2,materia.getAnioMateria());
             ps.setBoolean(3, materia.isActivo());
-            ps.executeUpdate();
+            int exito = ps.executeUpdate();
             
             ResultSet rs=ps.getGeneratedKeys();
             
-            if(rs.next()){
-                
+            if(rs.next()){   
                 materia.setIdMateria(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Alumno guardado exitosamente");
+                JOptionPane.showMessageDialog(null, "Materia guardada exitosamente");
             }
             ps.close();
             
@@ -67,7 +67,7 @@ public class materiaData {
                materia.setActivo(true);
                
             }else{
-               JOptionPane.showMessageDialog(null,"No se encuentra ese alumno en la base de datos");
+               JOptionPane.showMessageDialog(null,"No se encuentra esa materia en la base de datos o se encuentra inactiva");
             }
             
             ps.close();
