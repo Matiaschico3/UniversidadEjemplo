@@ -199,7 +199,7 @@ public class Materias extends javax.swing.JInternalFrame {
                 jtNombre.setText(m.getNombre());
                 jtAnio.setText(Integer.toString(m.getAnioMateria()));
                 jrbEstado.setSelected(m.isActivo());
-
+                habilitarBotones();
             }
         } catch (NumberFormatException e) {
 
