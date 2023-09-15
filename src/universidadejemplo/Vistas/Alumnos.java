@@ -230,14 +230,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
         } catch (NumberFormatException e) {
 
             JOptionPane.showMessageDialog(this, "Solo se admiten numeros y no debe estar vacio");
-
-
-         
-                
-
         }
-
-
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
