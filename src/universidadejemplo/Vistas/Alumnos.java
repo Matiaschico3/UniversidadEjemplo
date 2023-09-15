@@ -216,14 +216,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
 
-
-       
-       
-           
-
-
-        
-        try {
+  try {
             int dni = Integer.parseInt(jtDocumento.getText());
 
             Alumno ae = ad.buscarAlumnoPorDni(dni);
