@@ -163,7 +163,10 @@ public class Materias extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        // TODO add your handling code here:
+        jtCodigo.setText("");
+        jtNombre.setText("");
+        jtAnio.setText("");
+        jrbEstado.setSelected(true);
     }//GEN-LAST:event_jbBuscarActionPerformed
 
 
