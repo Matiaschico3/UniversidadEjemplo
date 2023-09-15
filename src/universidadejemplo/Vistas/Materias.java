@@ -1,10 +1,12 @@
 
 package universidadejemplo.Vistas;
 
+import universidadejemplo.conexionBaseDatos.materiaData;
+
 
 public class Materias extends javax.swing.JInternalFrame {
 
-  
+    materiaData md = new materiaData();
     public Materias() {
         initComponents();
     }
@@ -68,6 +70,11 @@ public class Materias extends javax.swing.JInternalFrame {
         jbNuevo.setText("Nuevo");
 
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setText("Guardar");
 
@@ -168,6 +175,11 @@ public class Materias extends javax.swing.JInternalFrame {
         jtAnio.setText("");
         jrbEstado.setSelected(true);
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+            int idMateria = Integer.parseInt(jtCodigo.getText());
+            md.eliminarMateria(idMateria);
+    }//GEN-LAST:event_jbEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
