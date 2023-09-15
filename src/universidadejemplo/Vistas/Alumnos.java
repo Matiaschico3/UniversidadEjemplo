@@ -214,20 +214,20 @@ public class Alumnos extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
 
-        int dni = Integer.parseInt(jtDocumento.getText());
+        
         try {
-
+            int dni = Integer.parseInt(jtDocumento.getText());
             Alumno ae = ad.buscarAlumnoPorDni(dni);
             if (ae != null) {
                 jtApellido.setText(ae.getApellido());
                 jtNombre.setText(ae.getNombre());
                 jdFecha.setDate(java.sql.Date.valueOf(ae.getFechaN()));
                 jrbEstado.setSelected(ae.isActivo());
+            
             }
-
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Solo se admiten numeros");
-
+                
         }
 
 
