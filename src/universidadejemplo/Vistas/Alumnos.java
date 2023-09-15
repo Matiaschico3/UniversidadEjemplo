@@ -216,21 +216,32 @@ public class Alumnos extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
 
+<<<<<<< HEAD
        
         try {
             int dni = Integer.parseInt(jtDocumento.getText());
 
+=======
+        
+        try {
+            int dni = Integer.parseInt(jtDocumento.getText());
+>>>>>>> 7a33a85cf795cd9b960cdb08810dad4734850210
             Alumno ae = ad.buscarAlumnoPorDni(dni);
             if (ae != null) {
                 jtApellido.setText(ae.getApellido());
                 jtNombre.setText(ae.getNombre());
                 jdFecha.setDate(java.sql.Date.valueOf(ae.getFechaN()));
                 jrbEstado.setSelected(ae.isActivo());
+            
             }
-
         } catch (NumberFormatException e) {
+<<<<<<< HEAD
             JOptionPane.showMessageDialog(this, "Solo se admiten numeros y no debe estar vacio");
 
+=======
+            JOptionPane.showMessageDialog(this, "Solo se admiten numeros");
+                
+>>>>>>> 7a33a85cf795cd9b960cdb08810dad4734850210
         }
 
 
