@@ -10,6 +10,8 @@ public class Materias extends javax.swing.JInternalFrame {
 
     public Materias() {
         initComponents();
+        jbEliminar.setEnabled(false);
+        jbNuevo.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -38,25 +40,20 @@ public class Materias extends javax.swing.JInternalFrame {
         jPanel1.setName(""); // NOI18N
 
         jlTitulo.setFont(new java.awt.Font("Garamond", 1, 24)); // NOI18N
-        jlTitulo.setForeground(new java.awt.Color(0, 0, 0));
         jlTitulo.setText("Materia");
 
         jlCod.setBackground(new java.awt.Color(255, 255, 255));
         jlCod.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
-        jlCod.setForeground(new java.awt.Color(0, 0, 0));
         jlCod.setText("Código :");
 
         jlAp.setBackground(new java.awt.Color(255, 255, 255));
         jlAp.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
-        jlAp.setForeground(new java.awt.Color(0, 0, 0));
         jlAp.setText("Nombre :");
 
         jlNom.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
-        jlNom.setForeground(new java.awt.Color(0, 0, 0));
         jlNom.setText("Año :");
 
         jlEst.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
-        jlEst.setForeground(new java.awt.Color(0, 0, 0));
         jlEst.setText("Estado");
 
         jbBuscar.setForeground(new java.awt.Color(255, 255, 255));
@@ -68,6 +65,18 @@ public class Materias extends javax.swing.JInternalFrame {
         });
 
         jrbEstado.setSelected(true);
+
+        jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtNombreKeyReleased(evt);
+            }
+        });
+
+        jtAnio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtAnioKeyReleased(evt);
+            }
+        });
 
         jbNuevo.setText("Nuevo");
         jbNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -242,6 +251,14 @@ public class Materias extends javax.swing.JInternalFrame {
         jrbEstado.setSelected(true);
     }//GEN-LAST:event_jbNuevoActionPerformed
 
+    private void jtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyReleased
+        habilitarBotones();
+    }//GEN-LAST:event_jtNombreKeyReleased
+
+    private void jtAnioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAnioKeyReleased
+       habilitarBotones();
+    }//GEN-LAST:event_jtAnioKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
@@ -261,4 +278,13 @@ public class Materias extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
 
+     public void habilitarBotones(){
+        if(!jtAnio.getText().isEmpty() || !jtNombre.getText().isEmpty()){
+            jbEliminar.setEnabled(true);
+            jbNuevo.setEnabled(true);
+        }else{
+            jbEliminar.setEnabled(false);
+            jbNuevo.setEnabled(false);
+        }
+    }
 }
