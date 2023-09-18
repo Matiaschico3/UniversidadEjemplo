@@ -187,11 +187,11 @@ public class Inscripciones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrbInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInscriptasActionPerformed
-    
+     cargarTabla();
     }//GEN-LAST:event_jrbInscriptasActionPerformed
 
     private void jrbInscriptasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbInscriptasMouseClicked
- 
+
     }//GEN-LAST:event_jrbInscriptasMouseClicked
 
 
@@ -242,19 +242,16 @@ public class Inscripciones extends javax.swing.JInternalFrame {
     
     public void cargarTabla (){
         borrarFilas();
-        inscripcionData m=new inscripcionData();
-        ArrayList<Inscripcion> materia = new ArrayList<>();
-
-        for(Materia mat : m.obtenerMateriasCursadas(jComboBox1.getSelectedIndex())){
+        inscripcionData a1 = new inscripcionData();
+        if(jrbInscriptas.isSelected() == true)
+            for(Materia m : a1.obtenerMateriasCursadas(jComboBox1.getSelectedIndex()))
+       model.addRow(new Object[]{
+           m.getIdMateria(),
+           m.getNombre(),
+           m.getAnioMateria()
+       });
         
-        if (jrbInscriptas.isSelected()==true){
-            model.addRow(new Object[]{
-            mat.getIdMateria(),
-            mat.getNombre(),
-            mat.getAnioMateria()
-            });
-    }
-        }
-
+     
 }
+
 }
