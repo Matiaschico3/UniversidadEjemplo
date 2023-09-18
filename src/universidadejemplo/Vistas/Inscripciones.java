@@ -51,31 +51,21 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         jPanel1.setName(""); // NOI18N
 
         jlTitulo.setFont(new java.awt.Font("Garamond", 1, 24)); // NOI18N
-        jlTitulo.setForeground(new java.awt.Color(0, 0, 0));
         jlTitulo.setText("Formulario de Inscripción");
 
         jlDoc.setBackground(new java.awt.Color(255, 255, 255));
         jlDoc.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
-        jlDoc.setForeground(new java.awt.Color(0, 0, 0));
         jlDoc.setText("Seleccione un alumno");
 
         jlNom.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
-        jlNom.setForeground(new java.awt.Color(0, 0, 0));
         jlNom.setText("Listado de Materias");
 
         jlFecha.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
-        jlFecha.setForeground(new java.awt.Color(0, 0, 0));
         jlFecha.setText("Materias no inscriptas");
 
         jlEst.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
-        jlEst.setForeground(new java.awt.Color(0, 0, 0));
         jlEst.setText("Materia inscriptas");
 
-        jrbInscriptas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jrbInscriptasMouseClicked(evt);
-            }
-        });
         jrbInscriptas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbInscriptasActionPerformed(evt);
@@ -87,6 +77,12 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         jbAnularInsc.setText("Anular inscripción");
 
         jbSalir.setText("Salir");
+
+        jrbNOinscriptas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbNOinscriptasActionPerformed(evt);
+            }
+        });
 
         jTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -187,12 +183,30 @@ public class Inscripciones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrbInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInscriptasActionPerformed
-     cargarTabla();
+        jrbNOinscriptas.setSelected(false);
+        borrarFilas();
+        inscripcionData a1 = new inscripcionData();
+        if(jrbInscriptas.isSelected() == true)
+            for(Materia m : a1.obtenerMateriasCursadas(jComboBox1.getSelectedIndex()))
+       model.addRow(new Object[]{
+           m.getIdMateria(),
+           m.getNombre(),
+           m.getAnioMateria()
+       });
     }//GEN-LAST:event_jrbInscriptasActionPerformed
 
-    private void jrbInscriptasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbInscriptasMouseClicked
-
-    }//GEN-LAST:event_jrbInscriptasMouseClicked
+    private void jrbNOinscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbNOinscriptasActionPerformed
+        jrbInscriptas.setSelected(false);
+        borrarFilas();
+        inscripcionData a1 = new inscripcionData();
+        if(jrbInscriptas.isSelected() == true)
+            for(Materia m : a1.obtenerMateriasNOCursadas(jComboBox1.getSelectedIndex()))
+       model.addRow(new Object[]{
+           m.getIdMateria(),
+           m.getNombre(),
+           m.getAnioMateria()
+       });
+    }//GEN-LAST:event_jrbNOinscriptasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

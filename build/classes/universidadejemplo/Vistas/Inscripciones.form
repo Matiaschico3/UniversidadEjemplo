@@ -173,7 +173,6 @@
         </Component>
         <Component class="javax.swing.JRadioButton" name="jrbInscriptas">
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jrbInscriptasMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbInscriptasActionPerformed"/>
           </Events>
         </Component>
@@ -193,6 +192,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="jrbNOinscriptas">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbNOinscriptasActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
