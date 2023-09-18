@@ -262,9 +262,6 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         ArrayList<Alumno> alumnos= new ArrayList<>();
         
         for (Alumno alu :ad.listarAlumnos()) {
-            if(jComboBox1.getItemCount() == 0){
-                jComboBox1.addItem(alu); 
-            }
             alumnos.add(alu);
             jComboBox1.addItem(alu);
         }
