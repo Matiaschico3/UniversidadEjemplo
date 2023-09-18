@@ -104,6 +104,11 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTabla);
 
         jComboBox1.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -223,6 +228,12 @@ public class Inscripciones extends javax.swing.JInternalFrame {
             this.dispose();//cierro la ventana
     }    
     }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+     borrarFilas();
+     jrbInscriptas.setSelected(false);
+     jrbNOinscriptas.setSelected(false);
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
