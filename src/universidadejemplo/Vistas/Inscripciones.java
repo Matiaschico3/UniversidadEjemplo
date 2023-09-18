@@ -4,7 +4,11 @@ package universidadejemplo.Vistas;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import universidadejemplo.conexionBaseDatos.alumnoData;
+import universidadejemplo.conexionBaseDatos.inscripcionData;
+import universidadejemplo.conexionBaseDatos.materiaData;
 import universidadejemplo.entidades.Alumno;
+import universidadejemplo.entidades.Inscripcion;
+import universidadejemplo.entidades.Materia;
 
 
 public class Inscripciones extends javax.swing.JInternalFrame {
@@ -187,9 +191,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrbInscriptasActionPerformed
 
     private void jrbInscriptasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbInscriptasMouseClicked
-    if (jrbInscriptas.isSelected()==true){
-        cargarTabla()
-    }
+ 
     }//GEN-LAST:event_jrbInscriptasMouseClicked
 
 
@@ -239,8 +241,20 @@ public class Inscripciones extends javax.swing.JInternalFrame {
     }
     
     public void cargarTabla (){
-        
-    }
-    
+        borrarFilas();
+        inscripcionData m=new inscripcionData();
+        ArrayList<Inscripcion> materia = new ArrayList<>();
 
+        for(Materia mat : m.obtenerMateriasCursadas(jComboBox1.getSelectedIndex())){
+        
+        if (jrbInscriptas.isSelected()==true){
+            model.addRow(new Object[]{
+            mat.getIdMateria(),
+            mat.getNombre(),
+            mat.getAnioMateria()
+            });
+    }
+        }
+
+}
 }
