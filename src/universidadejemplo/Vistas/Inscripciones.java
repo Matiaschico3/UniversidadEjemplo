@@ -1,11 +1,24 @@
 
 package universidadejemplo.Vistas;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import universidadejemplo.conexionBaseDatos.alumnoData;
+import universidadejemplo.entidades.Alumno;
+
 
 public class Inscripciones extends javax.swing.JInternalFrame {
+    
+    DefaultTableModel model = new DefaultTableModel(){
+        public boolean isCellEditable (int f, int c){
+            return false;
+        }
+    };
 
     public Inscripciones() {
         initComponents();
+        armarCabecera();
+        cargarCombo();
     }
 
 
@@ -19,13 +32,13 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         jlNom = new javax.swing.JLabel();
         jlFecha = new javax.swing.JLabel();
         jlEst = new javax.swing.JLabel();
-        jrbEstado = new javax.swing.JRadioButton();
-        jbNuevo = new javax.swing.JButton();
-        jbEliminar = new javax.swing.JButton();
+        jrbInscriptas = new javax.swing.JRadioButton();
+        jbInscribir = new javax.swing.JButton();
+        jbAnularInsc = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
-        jrbEstado1 = new javax.swing.JRadioButton();
+        jrbNOinscriptas = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTabla = new javax.swing.JTable();
         jComboBox1 = new javax.swing.JComboBox<>();
 
         setClosable(true);
@@ -54,19 +67,24 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         jlEst.setForeground(new java.awt.Color(0, 0, 0));
         jlEst.setText("Materia inscriptas");
 
-        jrbEstado.addActionListener(new java.awt.event.ActionListener() {
+        jrbInscriptas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jrbInscriptasMouseClicked(evt);
+            }
+        });
+        jrbInscriptas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrbEstadoActionPerformed(evt);
+                jrbInscriptasActionPerformed(evt);
             }
         });
 
-        jbNuevo.setText("Nuevo");
+        jbInscribir.setText("Inscribir");
 
-        jbEliminar.setText("Anular inscripción");
+        jbAnularInsc.setText("Anular inscripción");
 
         jbSalir.setText("Salir");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -77,9 +95,9 @@ public class Inscripciones extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTabla);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,29 +105,26 @@ public class Inscripciones extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jrbEstado)
+                .addComponent(jrbInscriptas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jlEst)
-                        .addGap(57, 57, 57)
-                        .addComponent(jrbEstado1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlFecha)
-                        .addGap(16, 16, 16))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jlDoc)
-                        .addGap(45, 45, 45)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(40, 40, 40))))
+                .addComponent(jlEst)
+                .addGap(57, 57, 57)
+                .addComponent(jrbNOinscriptas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlFecha)
+                .addGap(16, 16, 16))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addComponent(jbNuevo)
+                .addComponent(jbInscribir)
                 .addGap(18, 18, 18)
-                .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jbAnularInsc, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,10 +134,12 @@ public class Inscripciones extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jlNom)
                         .addGap(147, 147, 147))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jlDoc)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(14, 14, 14))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,15 +156,15 @@ public class Inscripciones extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlEst)
                     .addComponent(jlFecha)
-                    .addComponent(jrbEstado1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jrbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jrbNOinscriptas, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jrbInscriptas, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbNuevo)
+                    .addComponent(jbInscribir)
                     .addComponent(jbSalir)
-                    .addComponent(jbEliminar))
+                    .addComponent(jbAnularInsc))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -165,28 +182,65 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jrbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jrbEstadoActionPerformed
+    private void jrbInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbInscriptasActionPerformed
+    
+    }//GEN-LAST:event_jrbInscriptasActionPerformed
+
+    private void jrbInscriptasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jrbInscriptasMouseClicked
+    if (jrbInscriptas.isSelected()==true){
+        cargarTabla()
+    }
+    }//GEN-LAST:event_jrbInscriptasMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Alumno> jComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JButton jbEliminar;
-    private javax.swing.JButton jbNuevo;
+    private javax.swing.JTable jTabla;
+    private javax.swing.JButton jbAnularInsc;
+    private javax.swing.JButton jbInscribir;
     private javax.swing.JButton jbSalir;
     private javax.swing.JLabel jlDoc;
     private javax.swing.JLabel jlEst;
     private javax.swing.JLabel jlFecha;
     private javax.swing.JLabel jlNom;
     private javax.swing.JLabel jlTitulo;
-    private javax.swing.JRadioButton jrbEstado;
-    private javax.swing.JRadioButton jrbEstado1;
+    private javax.swing.JRadioButton jrbInscriptas;
+    private javax.swing.JRadioButton jrbNOinscriptas;
     // End of variables declaration//GEN-END:variables
 
-
+    public void armarCabecera(){
+     model.addColumn("ID");
+     model.addColumn("Nombre");   
+     model.addColumn("Año"); 
+     jTabla.setModel(model);
+    }
+    
+    public void borrarFilas(){
+     int f = model.getRowCount()-1;
+     for(;f>=0;f--){
+         model.removeRow(f);
+     }
+    }
+    
+    public void cargarCombo(){
+    jComboBox1.removeAllItems();
+    alumnoData ad= new alumnoData();
+        ArrayList<Alumno> alumnos= new ArrayList<>();
+        
+        for (Alumno alu :ad.listarAlumnos()) {
+            if(jComboBox1.getItemCount() == 0){
+                jComboBox1.addItem(alu); 
+            }
+            alumnos.add(alu);
+            jComboBox1.addItem(alu);
+        }
+    }
+    
+    public void cargarTabla (){
+        
+    }
+    
 
 }
