@@ -199,7 +199,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         jrbInscriptas.setSelected(false);
         borrarFilas();
         inscripcionData a1 = new inscripcionData();
-        if(jrbInscriptas.isSelected() == true)
+        if(jrbNOinscriptas.isSelected() == true)
             for(Materia m : a1.obtenerMateriasNOCursadas(jComboBox1.getSelectedIndex()))
        model.addRow(new Object[]{
            m.getIdMateria(),
