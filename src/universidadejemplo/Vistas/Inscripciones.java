@@ -2,6 +2,7 @@
 package universidadejemplo.Vistas;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import universidadejemplo.conexionBaseDatos.alumnoData;
 import universidadejemplo.conexionBaseDatos.inscripcionData;
@@ -77,6 +78,11 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         jbAnularInsc.setText("Anular inscripción");
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         jrbNOinscriptas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,6 +213,16 @@ public class Inscripciones extends javax.swing.JInternalFrame {
            m.getAnioMateria()
        });
     }//GEN-LAST:event_jrbNOinscriptasActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+                                         
+        int respuesta = JOptionPane.showConfirmDialog(this, "Estás seguro que quieres salir?", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+
+            this.dispose();//cierro la ventana
+    }    
+    }//GEN-LAST:event_jbSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
