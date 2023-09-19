@@ -153,19 +153,9 @@ public class Notas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+      cargarTabla();
 
-//           borrarFilas();
-//
-//        inscripcionData a1 = new inscripcionData();
-//
-//        for (Materia m : a1.obtenerMateriasCursadas2(jComboBox1.getSelectedIndex() + 1)) {
-//            model.addRow(new Object[]{
-//                m.getIdMateria(),
-//                m.getNombre(),
-//                m.getAnioMateria()
-//            });
-//        }
-    
+   
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
 
