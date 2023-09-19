@@ -29,7 +29,7 @@ public class inscripcionData {
     
     //funciones
 
-    public void guardarInscripcion(Inscripcion ins) { 
+    public void guardarInscripcion(Inscripcion ins) {  // recibe constructor de inscripcion
         
         String sql="INSERT INTO inscripcion(nota, idAlumno, idMateria) VALUES (?,?,?)";
        
@@ -170,7 +170,7 @@ public class inscripcionData {
     public List<Materia> obtenerMateriasNOCursadas(int idAlumno) {
            List <Materia>materias= new ArrayList<Materia>();
         
-        String sql="SELECT * FROM materia m WHERE m.activa=1 AND idMateria NOT IN (SELECT idMateria FROM inscripcion WHERE idAlumno=1 )";
+        String sql="SELECT * FROM materia m WHERE m.activa=1 AND idMateria NOT IN (SELECT idMateria FROM inscripcion WHERE idAlumno=?)";
         
         try {
             PreparedStatement ps=con.prepareStatement(sql);

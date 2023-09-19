@@ -74,6 +74,11 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         });
 
         jbInscribir.setText("Inscribir");
+        jbInscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbInscribirActionPerformed(evt);
+            }
+        });
 
         jbAnularInsc.setText("Anular inscripción");
 
@@ -198,7 +203,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         borrarFilas();
         inscripcionData a1 = new inscripcionData();
         if(jrbInscriptas.isSelected() == true)
-            for(Materia m : a1.obtenerMateriasCursadas(jComboBox1.getSelectedIndex()))
+            for(Materia m : a1.obtenerMateriasCursadas(jComboBox1.getSelectedIndex()+1))
        model.addRow(new Object[]{
            m.getIdMateria(),
            m.getNombre(),
@@ -210,13 +215,16 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         jrbInscriptas.setSelected(false);
         borrarFilas();
         inscripcionData a1 = new inscripcionData();
+        Alumno alu= (Alumno)jComboBox1.getSelectedItem();
+        ArrayList <Materia> mat=(ArrayList)a1.obtenerMateriasNOCursadas(alu.getIdAlumno());
         if(jrbNOinscriptas.isSelected() == true)
-            for(Materia m : a1.obtenerMateriasNOCursadas(jComboBox1.getSelectedIndex()))
+            for(Materia m : mat){
        model.addRow(new Object[]{
            m.getIdMateria(),
            m.getNombre(),
            m.getAnioMateria()
        });
+            }
     }//GEN-LAST:event_jrbNOinscriptasActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -234,6 +242,26 @@ public class Inscripciones extends javax.swing.JInternalFrame {
      jrbInscriptas.setSelected(false);
      jrbNOinscriptas.setSelected(false);
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
+       
+        
+        inscripcionData insd=new inscripcionData();
+        
+        
+        try {
+//            int fs= jTabla.getSelectedRow();
+//            Inscripcion ins=new Inscripcion(model.getValueAt(fs, 0), model.getValueAt(fs, 1),model.getValueAt(fs, 2));
+//            
+//       //model.getValueAt(fs, fs);
+//        System.out.println(model.getValueAt(fs, 1));
+//        insd.guardarInscripcion();
+            
+            
+        }catch (ArrayIndexOutOfBoundsException e){
+             JOptionPane.showMessageDialog(this, "no hay nada seleccionado");
+        }
+    }//GEN-LAST:event_jbInscribirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
