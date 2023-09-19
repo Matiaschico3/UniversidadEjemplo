@@ -245,17 +245,26 @@ public class Inscripciones extends javax.swing.JInternalFrame {
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
        
-        
-        inscripcionData insd=new inscripcionData();
-        
-        
-        try {
-//            int fs= jTabla.getSelectedRow();
+        //int fs= jTabla.getSelectedRow();
 //            Inscripcion ins=new Inscripcion(model.getValueAt(fs, 0), model.getValueAt(fs, 1),model.getValueAt(fs, 2));
 //            
 //       //model.getValueAt(fs, fs);
 //        System.out.println(model.getValueAt(fs, 1));
 //        insd.guardarInscripcion();
+        
+        
+        
+        try {
+            int fs= jTabla.getSelectedRow();
+            inscripcionData insd=new inscripcionData();
+            
+            Materia mat=new Materia((int)model.getValueAt(fs, 0), (String)model.getValueAt(fs, 1),(int)model.getValueAt(fs, 2),true);
+            //Alumno idAlumno=alu.getIdAlumno();
+           // Materia idMateria=(int)model.getValueAt(fs, 0);
+            double nota=0;
+            Inscripcion ins=new Inscripcion((Alumno)jComboBox1.getSelectedItem(),mat,nota);
+            insd.guardarInscripcion(ins);
+          
             
             
         }catch (ArrayIndexOutOfBoundsException e){
