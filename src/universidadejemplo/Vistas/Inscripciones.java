@@ -81,6 +81,11 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         });
 
         jbAnularInsc.setText("Anular inscripción");
+        jbAnularInsc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAnularInscActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -262,6 +267,27 @@ public class Inscripciones extends javax.swing.JInternalFrame {
              JOptionPane.showMessageDialog(this, "no hay nada seleccionado");
         }
     }//GEN-LAST:event_jbInscribirActionPerformed
+
+    private void jbAnularInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularInscActionPerformed
+       
+         try {
+            int fs= jTabla.getSelectedRow();
+            inscripcionData insd=new inscripcionData();
+            Alumno alu= (Alumno)jComboBox1.getSelectedItem();
+            
+            
+            Materia mat=new Materia((int)model.getValueAt(fs, 0), (String)model.getValueAt(fs, 1),(int)model.getValueAt(fs, 2),true);
+             
+            
+            insd.borrarInscripcionMateriaAlumno(alu.getIdAlumno(), mat.getIdMateria());
+          
+            
+            
+        }catch (ArrayIndexOutOfBoundsException e){
+             JOptionPane.showMessageDialog(this, "no hay nada seleccionado");
+        }
+        
+    }//GEN-LAST:event_jbAnularInscActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
