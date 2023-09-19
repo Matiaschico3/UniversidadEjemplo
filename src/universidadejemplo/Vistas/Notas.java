@@ -2,7 +2,6 @@ package universidadejemplo.Vistas;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import universidadejemplo.conexionBaseDatos.alumnoData;
 import universidadejemplo.conexionBaseDatos.inscripcionData;
@@ -14,6 +13,9 @@ public class Notas extends javax.swing.JInternalFrame {
 
     DefaultTableModel model = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
+            if(c == 2){
+                return true;
+            }
             return false;
         }
     };
@@ -204,7 +206,7 @@ public class Notas extends javax.swing.JInternalFrame {
         List<Inscripcion> inscripciones = a1.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno()); // Suponiendo que existe un método para obtener inscripciones de un alumno
         
         for (Inscripcion inscripcion : inscripciones) {
-            Materia materia = inscripcion.getMateria();
+            Materia materia = inscripcion.getMateria(); 
             model.addRow(new Object[]{
                 materia.getIdMateria(),
                 materia.getNombre(),
