@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import universidadejemplo.conexionBaseDatos.alumnoData;
 import universidadejemplo.conexionBaseDatos.inscripcionData;
 import universidadejemplo.entidades.Alumno;
+import universidadejemplo.entidades.Inscripcion;
 import universidadejemplo.entidades.Materia;
 
 public class Notas extends javax.swing.JInternalFrame {
@@ -204,18 +205,24 @@ public class Notas extends javax.swing.JInternalFrame {
         }
     }
 
-    public void cargarTabla() {
-        borrarFilas();
-        inscripcionData a1 = new inscripcionData();
-
-        for (Materia m : a1.obtenerMateriasCursadas(jComboBox1.getSelectedIndex())) {
+    public void cargarTabla (){
+    borrarFilas();
+    inscripcionData a1 = new inscripcionData();
+    Alumno alumnoSeleccionado = (Alumno) jComboBox1.getSelectedItem(); // Obtener el alumno seleccionado
+    
+    if (alumnoSeleccionado != null) {
+        List<Inscripcion> inscripciones = a1.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno()); // Suponiendo que existe un método para obtener inscripciones de un alumno
+        
+        for (Inscripcion inscripcion : inscripciones) {
+            Materia materia = inscripcion.getMateria();
             model.addRow(new Object[]{
-                m.getIdMateria(),
-                m.getNombre(),
-                m.getAnioMateria()
+                materia.getIdMateria(),
+                materia.getNombre(),
+                inscripcion.getNota() // Obtener la nota de la inscripción
             });
         }
     }
-
+     
+}
    
 }
