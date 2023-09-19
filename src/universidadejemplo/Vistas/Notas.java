@@ -1,6 +1,7 @@
 package universidadejemplo.Vistas;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import universidadejemplo.conexionBaseDatos.alumnoData;
@@ -146,24 +147,24 @@ public class Notas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-     
 
 
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
 
-           borrarFilas();
-
-        inscripcionData a1 = new inscripcionData();
-
-        for (Materia m : a1.obtenerMateriasCursadas2(jComboBox1.getSelectedIndex() + 1)) {
-            model.addRow(new Object[]{
-                m.getIdMateria(),
-                m.getNombre(),
-                m.getAnioMateria()
-            });
-        }
+//           borrarFilas();
+//
+//        inscripcionData a1 = new inscripcionData();
+//
+//        for (Materia m : a1.obtenerMateriasCursadas2(jComboBox1.getSelectedIndex() + 1)) {
+//            model.addRow(new Object[]{
+//                m.getIdMateria(),
+//                m.getNombre(),
+//                m.getAnioMateria()
+//            });
+//        }
+    
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
 
@@ -216,4 +217,5 @@ public class Notas extends javax.swing.JInternalFrame {
         }
     }
 
+   
 }
