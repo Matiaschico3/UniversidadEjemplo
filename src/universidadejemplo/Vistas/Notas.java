@@ -1,13 +1,26 @@
-
 package universidadejemplo.Vistas;
+
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import universidadejemplo.conexionBaseDatos.alumnoData;
+import universidadejemplo.conexionBaseDatos.inscripcionData;
+import universidadejemplo.entidades.Alumno;
+import universidadejemplo.entidades.Materia;
 
 public class Notas extends javax.swing.JInternalFrame {
 
+    DefaultTableModel model = new DefaultTableModel() {
+        public boolean isCellEditable(int f, int c) {
+            return false;
+        }
+    };
 
     public Notas() {
         initComponents();
+        cargarCombo();
+        armarCabecera();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -27,6 +40,11 @@ public class Notas extends javax.swing.JInternalFrame {
         jPanel3.setForeground(new java.awt.Color(204, 204, 204));
 
         jbNuevo.setText("Guardar");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
 
@@ -34,7 +52,11 @@ public class Notas extends javax.swing.JInternalFrame {
         jlTitulo.setForeground(new java.awt.Color(0, 0, 0));
         jlTitulo.setText("Carga de Notas");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
 
         jlDoc.setBackground(new java.awt.Color(255, 255, 255));
         jlDoc.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
@@ -123,9 +145,30 @@ public class Notas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+     
+
+
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+
+           borrarFilas();
+
+        inscripcionData a1 = new inscripcionData();
+
+        for (Materia m : a1.obtenerMateriasCursadas2(jComboBox1.getSelectedIndex() + 1)) {
+            model.addRow(new Object[]{
+                m.getIdMateria(),
+                m.getNombre(),
+                m.getAnioMateria()
+            });
+        }
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Alumno> jComboBox1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
@@ -134,4 +177,43 @@ public class Notas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlDoc;
     private javax.swing.JLabel jlTitulo;
     // End of variables declaration//GEN-END:variables
+
+    public void armarCabecera() {
+        model.addColumn("ID");
+        model.addColumn("Nombre");
+        model.addColumn("notas");
+        jTable1.setModel(model);
+    }
+
+    public void borrarFilas() {
+        int f = model.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            model.removeRow(f);
+        }
+    }
+
+    public void cargarCombo() {
+        jComboBox1.removeAllItems();
+        alumnoData ad = new alumnoData();
+        ArrayList<Alumno> alumnos = new ArrayList<>();
+
+        for (Alumno alu : ad.listarAlumnos()) {
+            alumnos.add(alu);
+            jComboBox1.addItem(alu);
+        }
+    }
+
+    public void cargarTabla() {
+        borrarFilas();
+        inscripcionData a1 = new inscripcionData();
+
+        for (Materia m : a1.obtenerMateriasCursadas(jComboBox1.getSelectedIndex())) {
+            model.addRow(new Object[]{
+                m.getIdMateria(),
+                m.getNombre(),
+                m.getAnioMateria()
+            });
+        }
+    }
+
 }

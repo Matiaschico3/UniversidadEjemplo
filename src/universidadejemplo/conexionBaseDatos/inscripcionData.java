@@ -275,6 +275,38 @@ public class inscripcionData {
       
        return alu; }
     
+   public List<Materia> obtenerMateriasCursadas2(int idAlumno) {
+        List <Materia>materias= new ArrayList<Materia>();
+        
+        String sql="SELECT m.idMateria,m.nombre,i.nota FROM inscripcion i JOIN materia m ON(i.idMateria=m.idMateria) WHERE i.idAlumno=? AND m.activa=1";
+        
+        try {
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setInt(1, idAlumno);
+            ResultSet rs=ps.executeQuery();
+            Materia mat;
+            Inscripcion ins;
+            while(rs.next()){
+                mat=new Materia();
+                ins=new Inscripcion();
+                mat.setIdMateria(rs.getInt("idMateria"));
+                mat.setNombre(rs.getString("nombre"));
+                ins.setNota(rs.getInt("nota"));
+                materias.add(mat);
+                //materias.add(ins);
+                
+            }
+            
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al obtener las materias"+ ex.getMessage());
+        }
+        
+        
+      return materias;  
+    }
+    
     
     
 }

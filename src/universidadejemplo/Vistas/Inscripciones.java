@@ -274,12 +274,8 @@ public class Inscripciones extends javax.swing.JInternalFrame {
             int fs= jTabla.getSelectedRow();
             inscripcionData insd=new inscripcionData();
             Alumno alu= (Alumno)jComboBox1.getSelectedItem();
-            
-            
-            Materia mat=new Materia((int)model.getValueAt(fs, 0), (String)model.getValueAt(fs, 1),(int)model.getValueAt(fs, 2),true);
-             
-            
-            insd.borrarInscripcionMateriaAlumno(alu.getIdAlumno(), mat.getIdMateria());
+             Materia mat=new Materia((int)model.getValueAt(fs, 0), (String)model.getValueAt(fs, 1),(int)model.getValueAt(fs, 2),true);
+             insd.borrarInscripcionMateriaAlumno(alu.getIdAlumno(), mat.getIdMateria());
           
             
             
