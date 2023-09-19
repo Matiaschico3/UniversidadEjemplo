@@ -22,8 +22,9 @@ public class Notas extends javax.swing.JInternalFrame {
 
     public Notas() {
         initComponents();
-        cargarCombo();
         armarCabecera();
+        cargarCombo();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -195,6 +196,7 @@ public class Notas extends javax.swing.JInternalFrame {
             alumnos.add(alu);
             jComboBox1.addItem(alu);
         }
+      
     }
 
     public void cargarTabla (){

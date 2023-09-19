@@ -105,7 +105,8 @@ public class inscripcionData {
     
 
     public List<Inscripcion> obtenerInscripcionesPorAlumno(int idAlumno) {
-        String sql="SELECT * FROM inscripcion  WHERE idAlumno = ?";
+      //  String sql="SELECT * FROM inscripcion i JOIN materia m ON(i.idAlumno=m.idAlumno) WHERE idAlumno = ?";
+          String sql="SELECT i.idAlumno, i.idMateria, m.nombre, i.nota FROM inscripcion i JOIN materia m ON(i.idMateria=m.idMateria) WHERE idAlumno = ?";
         
         ArrayList<Inscripcion> insc2=new ArrayList();
         
@@ -121,13 +122,13 @@ public class inscripcionData {
               alu.setIdAlumno(rs.getInt("idAlumno")); // paso el id de la tabla a la variable creada
                Materia mat=new Materia();
                 mat.setIdMateria(rs.getInt("idMateria"));
-                
+                mat.setNombre(rs.getString("nombre")); //cintia : recupero el valor desde la base de datos  de materia
                 //-----------
-                inscripcion.setIdInscripcion(rs.getInt("idInscripto"));
-                inscripcion.setNota(rs.getDouble("nota"));  //nose como traer los idalumno e idmateria, consultar profe
+                //inscripcion.setIdInscripcion(rs.getInt("idInscripto"));
+                inscripcion.setNota(rs.getDouble("nota"));  
                 inscripcion.setAlumno(alu); // y la paso por aca a la tabla inscripcion
                 inscripcion.setMateria(mat);
-                insc2.add(inscripcion);
+                 insc2.add(inscripcion);
             }
             
               ps.close();
