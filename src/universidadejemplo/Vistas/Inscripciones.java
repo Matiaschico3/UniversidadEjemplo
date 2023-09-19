@@ -244,16 +244,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
-       
-        //int fs= jTabla.getSelectedRow();
-//            Inscripcion ins=new Inscripcion(model.getValueAt(fs, 0), model.getValueAt(fs, 1),model.getValueAt(fs, 2));
-//            
-//       //model.getValueAt(fs, fs);
-//        System.out.println(model.getValueAt(fs, 1));
-//        insd.guardarInscripcion();
-        
-        
-        
+      
         try {
             int fs= jTabla.getSelectedRow();
             inscripcionData insd=new inscripcionData();
