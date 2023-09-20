@@ -2,6 +2,7 @@ package universidadejemplo.Vistas;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import universidadejemplo.conexionBaseDatos.alumnoData;
 import universidadejemplo.conexionBaseDatos.inscripcionData;
@@ -32,7 +33,7 @@ public class Notas extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
-        jbNuevo = new javax.swing.JButton();
+        jbGuardar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jlTitulo = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -44,14 +45,19 @@ public class Notas extends javax.swing.JInternalFrame {
 
         jPanel3.setForeground(new java.awt.Color(204, 204, 204));
 
-        jbNuevo.setText("Guardar");
-        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+        jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbNuevoActionPerformed(evt);
+                jbGuardarActionPerformed(evt);
             }
         });
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         jlTitulo.setFont(new java.awt.Font("Garamond", 1, 24)); // NOI18N
         jlTitulo.setForeground(new java.awt.Color(0, 0, 0));
@@ -110,7 +116,7 @@ public class Notas extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jbNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jbSalir)
                         .addGap(22, 22, 22))
@@ -131,7 +137,7 @@ public class Notas extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbNuevo)
+                    .addComponent(jbGuardar)
                     .addComponent(jbSalir))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
@@ -150,10 +156,11 @@ public class Notas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
 
+        
 
-    }//GEN-LAST:event_jbNuevoActionPerformed
+    }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
       cargarTabla();
@@ -161,13 +168,22 @@ public class Notas extends javax.swing.JInternalFrame {
    
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+           int respuesta = JOptionPane.showConfirmDialog(this, "Estás seguro que quieres salir?", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
+
+        if (respuesta == JOptionPane.YES_OPTION) {
+
+            this.dispose();//cierro la ventana
+    }
+    }//GEN-LAST:event_jbSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Alumno> jComboBox1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JButton jbNuevo;
+    private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JLabel jlDoc;
     private javax.swing.JLabel jlTitulo;
