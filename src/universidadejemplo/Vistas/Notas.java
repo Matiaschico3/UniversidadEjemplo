@@ -13,7 +13,7 @@ import universidadejemplo.entidades.Materia;
 public class Notas extends javax.swing.JInternalFrame {
 
     DefaultTableModel model = new DefaultTableModel() {
-        
+
         public boolean isCellEditable(int f, int c) {
             if (c == 2) {
                 return true;
@@ -161,23 +161,44 @@ public class Notas extends javax.swing.JInternalFrame {
         //recorremos la lista
         inscripcionData a1 = new inscripcionData();
         Alumno alumnoSeleccionado = (Alumno) jComboBox1.getSelectedItem(); // Obtener el alumno seleccionado
-        //jTable1.getValueAt(f, c);
         if (alumnoSeleccionado != null) {
             List<Inscripcion> inscripciones = a1.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno()); // Suponiendo que existe un método para obtener inscripciones de un alumno
-            ArrayList<String> not = new ArrayList<>();
+            List<Inscripcion> inscripcionesModificadas = new List<Inscripcion>();
             int contador = 0;
+
+            ArrayList<String> not = new ArrayList<>();
+
             for (Inscripcion inscripcion : inscripciones) {
-                System.out.println("la nota de la tabla es : " + jTable1.getValueAt(contador, 2));
-                System.out.println("la nota de la lista es :" + inscripcion.getNota());
+
                 if (jTable1.getValueAt(contador, 2).equals(inscripcion.getNota())) {
-                    System.out.println("Son iguales " + contador);
+
                 } else {
-                    System.out.println(inscripcion.getMateria().getNombre() + "modifica nota: " + jTable1.getValueAt(contador, 2));
+
+//                    not.add(inscripcion.getMateria().getNombre() + " = " + jTable1.getValueAt(contador, 2));
+                    double nota = (double) jTable1.getValueAt(contador, 2);
+                    Inscripcion modificar = new Inscripcion(alumnoSeleccionado, inscripcion.getMateria(), nota);
+                    inscripcionesModificadas.add(modificar);
                 }
                 contador++;
             }
-        }
+            int respuesta = JOptionPane.showConfirmDialog(this, not, "Modificaciones", JOptionPane.YES_NO_OPTION);
 
+            if (respuesta == JOptionPane.YES_OPTION) {
+//                for (Inscripcion inscripcion : inscripciones) {
+//
+//                    if (jTable1.getValueAt(contador, 2).equals(inscripcion.getNota())) {
+//
+//                    } else {
+//
+//                        not.add(inscripcion.getMateria().getNombre() + " = " + jTable1.getValueAt(contador, 2));
+//                         a1.actualizarNota(alumnoSeleccionado.getIdAlumno(), inscripcion.getMateria().getIdMateria(),nota);
+//                    }
+//                    contador++;
+//                }
+//
+//            }
+
+            }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
