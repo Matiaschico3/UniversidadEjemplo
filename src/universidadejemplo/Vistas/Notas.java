@@ -13,6 +13,7 @@ import universidadejemplo.entidades.Materia;
 public class Notas extends javax.swing.JInternalFrame {
 
     DefaultTableModel model = new DefaultTableModel() {
+        
         public boolean isCellEditable(int f, int c) {
             if (c == 2) {
                 return true;
@@ -164,18 +165,18 @@ public class Notas extends javax.swing.JInternalFrame {
         if (alumnoSeleccionado != null) {
             List<Inscripcion> inscripciones = a1.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno()); // Suponiendo que existe un método para obtener inscripciones de un alumno
             ArrayList<String> not = new ArrayList<>();
-            int contador=0;
-                for (Inscripcion inscripcion : inscripciones) {   
-                    System.out.println("la nota de la tabla es : " + jTable1.getValueAt(contador, 2));
-                    System.out.println("la nota de la lista es :" + inscripcion.getNota());
-                    if (jTable1.getValueAt(contador, 2).equals(inscripcion.getNota()) ) {
-                        System.out.println("Son iguales " + contador);
-                    }else{
-                        System.out.println(inscripcion.getMateria().getNombre()+"modifica nota: "+jTable1.getValueAt(contador,2));
-                    }
-                    contador++;
+            int contador = 0;
+            for (Inscripcion inscripcion : inscripciones) {
+                System.out.println("la nota de la tabla es : " + jTable1.getValueAt(contador, 2));
+                System.out.println("la nota de la lista es :" + inscripcion.getNota());
+                if (jTable1.getValueAt(contador, 2).equals(inscripcion.getNota())) {
+                    System.out.println("Son iguales " + contador);
+                } else {
+                    System.out.println(inscripcion.getMateria().getNombre() + "modifica nota: " + jTable1.getValueAt(contador, 2));
                 }
+                contador++;
             }
+        }
 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -211,6 +212,7 @@ public class Notas extends javax.swing.JInternalFrame {
         model.addColumn("Nombre");
         model.addColumn("notas");
         jTable1.setModel(model);
+        jTable1.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
     }
 
     public void borrarFilas() {
