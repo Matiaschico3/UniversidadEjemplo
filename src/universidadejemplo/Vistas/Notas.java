@@ -157,7 +157,6 @@ public class Notas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-
         //recorremos la lista
         inscripcionData a1 = new inscripcionData();
         Alumno alumnoSeleccionado = (Alumno) jComboBox1.getSelectedItem(); // Obtener el alumno seleccionado
@@ -166,15 +165,16 @@ public class Notas extends javax.swing.JInternalFrame {
             List<Inscripcion> inscripciones = a1.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno()); // Suponiendo que existe un método para obtener inscripciones de un alumno
             ArrayList<String> not = new ArrayList<>();
 
-            for (int f = 0; f < jTable1.getRowCount(); f++) {
-                System.out.println(f + " vuelta");
+            for (int f = 0; f < inscripciones.size(); f++) {
+                System.out.println(f + " vuelta del primer for");
                 for (Inscripcion inscripcion : inscripciones) {
-                   // jTable1.getValueAt(inscripcion, 2);
-                    System.out.println("la nota es : "+jTable1.getValueAt(f, 2));
-                    if (jTable1.getValueAt(f, 2).equals(inscripcion.getNota()) ) {
-                        System.out.println("Son iguales " + f);
-
-                    }
+                    // jTable1.getValueAt(inscripcion, 2);
+                    System.out.println("la nota de la tabla es : " + jTable1.getValueAt(f, 2));
+                    System.out.println("la nota de la lista es :" + inscripcion.getNota());
+//                    if (jTable1.getValueAt(f, 2).equals(inscripcion.getNota()) ) {
+//                        System.out.println("Son iguales " + f);
+//
+//                    }
 
                 }
             }
