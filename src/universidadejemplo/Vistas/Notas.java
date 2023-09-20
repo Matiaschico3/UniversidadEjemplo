@@ -159,45 +159,45 @@ inscripcionData ID = new inscripcionData();
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // Obtener la fila seleccionada en la tabla
-    int filaSeleccionada = jTable1.getSelectedRow();
-
-    if (filaSeleccionada >= 0) {
-        Object valorCelda = jTable1.getValueAt(filaSeleccionada, 2);
-        double nuevaNota;
-
-        if (valorCelda instanceof Double) {
-            nuevaNota = (double) valorCelda;
-        } else if (valorCelda instanceof String) {
-            // Intentar convertir la cadena en un valor decimal
-            try {
-                nuevaNota = Double.parseDouble((String) valorCelda);
-            } catch (NumberFormatException ex) {
-                // Manejar el caso en que la conversión falle
-                JOptionPane.showMessageDialog(this, "La nota ingresada no es válida.", "Error", JOptionPane.ERROR_MESSAGE);
-                return; // Salir del método sin realizar la actualización
-            }
-        } else {
-            // Manejar otros tipos de datos si es necesario
-            JOptionPane.showMessageDialog(this, "La nota ingresada no es válida.", "Error", JOptionPane.ERROR_MESSAGE);
-            return; // Salir del método sin realizar la actualización
-        }
-
-        // Obtener el alumno seleccionado del combo box
-        Alumno alumnoSeleccionado = (Alumno) jComboBox1.getSelectedItem();
-
-        if (alumnoSeleccionado != null) {
-            // Actualizar la nota en el modelo de la tabla
-            model.setValueAt(nuevaNota, filaSeleccionada, 2);
-
-            // Obtener la inscripción correspondiente a la fila seleccionada
-            Inscripcion inscripcion = obtenerInscripcionPorFila(filaSeleccionada);
-
-            if (inscripcion != null) {
-                // Actualizar la nota en la base de datos utilizando el método de inscripcionData
-                ID.actualizarNota(alumnoSeleccionado.getIdAlumno(), inscripcion.getMateria().getIdMateria(), nuevaNota);
-            }
-        }
-    }
+//    int filaSeleccionada = jTable1.getSelectedRow();
+//
+//    if (filaSeleccionada >= 0) {
+//        Object valorCelda = jTable1.getValueAt(filaSeleccionada, 2);
+//        double nuevaNota;
+//
+//        if (valorCelda instanceof Double) {
+//            nuevaNota = (double) valorCelda;
+//        } else if (valorCelda instanceof String) {
+//            // Intentar convertir la cadena en un valor decimal
+//            try {
+//                nuevaNota = Double.parseDouble((String) valorCelda);
+//            } catch (NumberFormatException ex) {
+//                // Manejar el caso en que la conversión falle
+//                JOptionPane.showMessageDialog(this, "La nota ingresada no es válida.", "Error", JOptionPane.ERROR_MESSAGE);
+//                return; // Salir del método sin realizar la actualización
+//            }
+//        } else {
+//            // Manejar otros tipos de datos si es necesario
+//            JOptionPane.showMessageDialog(this, "La nota ingresada no es válida.", "Error", JOptionPane.ERROR_MESSAGE);
+//            return; // Salir del método sin realizar la actualización
+//        }
+//
+//        // Obtener el alumno seleccionado del combo box
+//        Alumno alumnoSeleccionado = (Alumno) jComboBox1.getSelectedItem();
+//
+//        if (alumnoSeleccionado != null) {
+//            // Actualizar la nota en el modelo de la tabla
+//            model.setValueAt(nuevaNota, filaSeleccionada, 2);
+//
+//            // Obtener la inscripción correspondiente a la fila seleccionada
+//            Inscripcion inscripcion = obtenerInscripcionPorFila(filaSeleccionada);
+//
+//            if (inscripcion != null) {
+//                // Actualizar la nota en la base de datos utilizando el método de inscripcionData
+//                ID.actualizarNota(alumnoSeleccionado.getIdAlumno(), inscripcion.getMateria().getIdMateria(), nuevaNota);
+//            }
+//        }
+//    }
 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -275,54 +275,54 @@ inscripcionData ID = new inscripcionData();
 
     }
     
- private Inscripcion obtenerInscripcionPorFila(int fila) {
-    if (fila >= 0) {
-        // Obtener los valores de la fila seleccionada en la tabla
-        int idMateria = (int) jTable1.getValueAt(fila, 0); // Suponiendo que la columna 0 contiene el idMateria
-        String nombreMateria = (String) jTable1.getValueAt(fila, 1); // Suponiendo que la columna 1 contiene el nombre de la materia
-        double nota = (double) jTable1.getValueAt(fila, 2); // Suponiendo que la columna 2 contiene la nota
-
-        // Obtener el alumno seleccionado del combo box
-        Alumno alumnoSeleccionado = (Alumno) jComboBox1.getSelectedItem();
-
-        if (alumnoSeleccionado != null) {
-            // Obtener la lista de materias cursadas por el alumno
-            List <Materia> materiasCursadas = ID.obtenerMateriasCursadas(alumnoSeleccionado.getIdAlumno());
-
-            // Buscar la materia correspondiente en la lista de materias cursadas
-            for (Materia materia : materiasCursadas) {
-                if (materia.getIdMateria() == idMateria && materia.getNombre().equals(nombreMateria)) {
-                    // Aquí puedes crear la inscripción utilizando los datos de la materia y la nota
-                    Inscripcion inscripcion = new Inscripcion();
-                    inscripcion.setAlumno(alumnoSeleccionado);
-                    inscripcion.setMateria(materia);
-                    inscripcion.setNota(nota);
-                    return inscripcion;
-                }
-            }
-        }
-    }
-
-    return null; // Si no se encuentra la inscripción, retornar null
-}
-    
-    
-   public void actualizarNota(Alumno alumno, double nuevaNota) {
-    // Obtener la fila seleccionada en la tabla
-    int filaSeleccionada = jTable1.getSelectedRow();
-    
-    if (filaSeleccionada >= 0) {
-        // Actualizar la nota en el modelo de la tabla
-        model.setValueAt(nuevaNota, filaSeleccionada, 2);
-        
-        // Obtener la inscripción correspondiente a la fila seleccionada
-        Inscripcion inscripcion = obtenerInscripcionPorFila(filaSeleccionada);
-        
-        if (inscripcion != null) {
-            // Actualizar la nota en la base de datos utilizando el método de inscripcionData
-            ID.actualizarNota(alumno.getIdAlumno(), inscripcion.getMateria().getIdMateria(), nuevaNota);
-        }
-    }
-}
+// private Inscripcion obtenerInscripcionPorFila(int fila) {
+//    if (fila >= 0) {
+//        // Obtener los valores de la fila seleccionada en la tabla
+//        int idMateria = (int) jTable1.getValueAt(fila, 0); // Suponiendo que la columna 0 contiene el idMateria
+//        String nombreMateria = (String) jTable1.getValueAt(fila, 1); // Suponiendo que la columna 1 contiene el nombre de la materia
+//        double nota = (double) jTable1.getValueAt(fila, 2); // Suponiendo que la columna 2 contiene la nota
+//
+//        // Obtener el alumno seleccionado del combo box
+//        Alumno alumnoSeleccionado = (Alumno) jComboBox1.getSelectedItem();
+//
+//        if (alumnoSeleccionado != null) {
+//            // Obtener la lista de materias cursadas por el alumno
+//            List <Materia> materiasCursadas = ID.obtenerMateriasCursadas(alumnoSeleccionado.getIdAlumno());
+//
+//            // Buscar la materia correspondiente en la lista de materias cursadas
+//            for (Materia materia : materiasCursadas) {
+//                if (materia.getIdMateria() == idMateria && materia.getNombre().equals(nombreMateria)) {
+//                    // Aquí puedes crear la inscripción utilizando los datos de la materia y la nota
+//                    Inscripcion inscripcion = new Inscripcion();
+//                    inscripcion.setAlumno(alumnoSeleccionado);
+//                    inscripcion.setMateria(materia);
+//                    inscripcion.setNota(nota);
+//                    return inscripcion;
+//                }
+//            }
+//        }
+//    }
+//
+//    return null; // Si no se encuentra la inscripción, retornar null
+//}
+//    
+//    
+//   public void actualizarNota(Alumno alumno, double nuevaNota) {
+//    // Obtener la fila seleccionada en la tabla
+//    int filaSeleccionada = jTable1.getSelectedRow();
+//    
+//    if (filaSeleccionada >= 0) {
+//        // Actualizar la nota en el modelo de la tabla
+//        model.setValueAt(nuevaNota, filaSeleccionada, 2);
+//        
+//        // Obtener la inscripción correspondiente a la fila seleccionada
+//        Inscripcion inscripcion = obtenerInscripcionPorFila(filaSeleccionada);
+//        
+//        if (inscripcion != null) {
+//            // Actualizar la nota en la base de datos utilizando el método de inscripcionData
+//            ID.actualizarNota(alumno.getIdAlumno(), inscripcion.getMateria().getIdMateria(), nuevaNota);
+//        }
+//    }
+//}
 
 }
