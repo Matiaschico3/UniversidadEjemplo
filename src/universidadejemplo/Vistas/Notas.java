@@ -164,22 +164,18 @@ public class Notas extends javax.swing.JInternalFrame {
         if (alumnoSeleccionado != null) {
             List<Inscripcion> inscripciones = a1.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno()); // Suponiendo que existe un método para obtener inscripciones de un alumno
             ArrayList<String> not = new ArrayList<>();
-
-            for (int f = 0; f < inscripciones.size(); f++) {
-                System.out.println(f + " vuelta del primer for");
-                for (Inscripcion inscripcion : inscripciones) {
-                    // jTable1.getValueAt(inscripcion, 2);
-                    System.out.println("la nota de la tabla es : " + jTable1.getValueAt(f, 2));
+            int contador=0;
+                for (Inscripcion inscripcion : inscripciones) {   
+                    System.out.println("la nota de la tabla es : " + jTable1.getValueAt(contador, 2));
                     System.out.println("la nota de la lista es :" + inscripcion.getNota());
-//                    if (jTable1.getValueAt(f, 2).equals(inscripcion.getNota()) ) {
-//                        System.out.println("Son iguales " + f);
-//
-//                    }
-
+                    if (jTable1.getValueAt(contador, 2).equals(inscripcion.getNota()) ) {
+                        System.out.println("Son iguales " + contador);
+                    }else{
+                        System.out.println(inscripcion.getMateria().getNombre()+"modifica nota: "+jTable1.getValueAt(contador,2));
+                    }
+                    contador++;
                 }
             }
-
-        }
 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
