@@ -167,9 +167,22 @@ inscripcionData ID = new inscripcionData();
            
             int contador = 0;
             for (Inscripcion inscripcion : inscripciones) {
-                if (!model.getValueAt(contador, 2).equals(inscripcion.getNota())){
-                    ID.actualizarNota(aS.getIdAlumno(), inscripcion.getMateria().getIdMateria(), Double.parseDouble(model.getValueAt(contador, 2).toString()));
-                } 
+                String notaStr = model.getValueAt(contador, 2).toString(); //cintia:ingreso la nota a string desde la tabla
+                double nota = Double.parseDouble(notaStr); // cintia: parseo la nota a double
+                
+                if(nota>=0 && nota <= 10){ //cintia: controlo q la nota se actualice si esta en el rango
+                 if (nota != inscripcion.getNota()) {
+                     System.out.println("entra al cambio");
+                     ID.actualizarNota(aS.getIdAlumno(), inscripcion.getMateria().getIdMateria(), nota);
+                     
+                 }
+                }else {
+                    
+                    JOptionPane.showMessageDialog(this, "Error: La nota debe estar en el rango de 0 a 10");
+                    model.setValueAt(inscripcion.getNota(), contador, 2); //cintia : restablezco la nota anterior.
+                }
+                
+                
                 contador++;
             }
         }
