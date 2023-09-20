@@ -207,8 +207,9 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         jrbNOinscriptas.setSelected(false);
         borrarFilas();
         inscripcionData a1 = new inscripcionData();
+        Alumno as = (Alumno) jComboBox1.getSelectedItem();
         if(jrbInscriptas.isSelected() == true)
-            for(Materia m : a1.obtenerMateriasCursadas(jComboBox1.getSelectedIndex()+1))
+            for(Materia m : a1.obtenerMateriasCursadas(as.getIdAlumno())) 
        model.addRow(new Object[]{
            m.getIdMateria(),
            m.getNombre(),
