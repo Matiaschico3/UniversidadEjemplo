@@ -314,8 +314,8 @@ if (idAlumnoSeleccionado != -1) { // Verifica que se haya seleccionado un alumno
                 String nom = jtNombre.getText();
                 LocalDate fechaNacimiento = jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 boolean est = jrbEstado.isSelected();
-                            Alumno nuevom = new Alumno(idAlumnoSeleccionado, dni, ap, nom, fechaNacimiento, est);
-                             ad.modificarAlumno(nuevom);
+                            Alumno nuevo = new Alumno(idAlumnoSeleccionado, dni, ap, nom, fechaNacimiento, est);
+                             ad.modificarAlumno(nuevo);
              
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Error al modificar"+e.getMessage());
