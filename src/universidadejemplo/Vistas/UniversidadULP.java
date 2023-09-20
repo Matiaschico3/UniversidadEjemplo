@@ -32,7 +32,6 @@ public class UniversidadULP extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         porMateria = new javax.swing.JMenuItem();
         salirMenu1 = new javax.swing.JMenu();
-        jmiSalir = new javax.swing.JMenuItem();
 
         jMenuItem3.setText("jMenuItem3");
 
@@ -109,15 +108,11 @@ public class UniversidadULP extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         salirMenu1.setText("Salir");
-
-        jmiSalir.setText("Salir");
-        jmiSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiSalirActionPerformed(evt);
+        salirMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salirMenu1MouseClicked(evt);
             }
         });
-        salirMenu1.add(jmiSalir);
-
         jMenuBar1.add(salirMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -185,14 +180,14 @@ public class UniversidadULP extends javax.swing.JFrame {
       JPanel.setComponentZOrder(pm,0);
     }//GEN-LAST:event_porMateriaActionPerformed
 
-    private void jmiSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSalirActionPerformed
-        int respuesta = JOptionPane.showConfirmDialog(this, "Estás seguro que quieres salir?", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
+    private void salirMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salirMenu1MouseClicked
+             int respuesta = JOptionPane.showConfirmDialog(this, "Estás seguro que quieres salir?", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
 
         if (respuesta == JOptionPane.YES_OPTION) {
 
             this.dispose();//cierro la ventana
-        }
-    }//GEN-LAST:event_jmiSalirActionPerformed
+        }   // TODO add your handling code here:
+    }//GEN-LAST:event_salirMenu1MouseClicked
 
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
@@ -238,7 +233,6 @@ public class UniversidadULP extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jmiSalir;
     private javax.swing.JMenuItem mn;
     private javax.swing.JMenuItem porMateria;
     private javax.swing.JMenu salirMenu1;
