@@ -14,7 +14,7 @@ public class Notas extends javax.swing.JInternalFrame {
 
     DefaultTableModel model = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
-            if(c == 2){
+            if (c == 2) {
                 return true;
             }
             return false;
@@ -25,7 +25,7 @@ public class Notas extends javax.swing.JInternalFrame {
         initComponents();
         armarCabecera();
         cargarCombo();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -158,23 +158,44 @@ public class Notas extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
 
-        
+        //recorremos la lista
+        inscripcionData a1 = new inscripcionData();
+        Alumno alumnoSeleccionado = (Alumno) jComboBox1.getSelectedItem(); // Obtener el alumno seleccionado
+        //jTable1.getValueAt(f, c);
+        if (alumnoSeleccionado != null) {
+            List<Inscripcion> inscripciones = a1.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno()); // Suponiendo que existe un método para obtener inscripciones de un alumno
+            ArrayList<String> not = new ArrayList<>();
+
+            for (int f = 0; f < jTable1.getRowCount(); f++) {
+                System.out.println(f + " vuelta");
+                for (Inscripcion inscripcion : inscripciones) {
+                   // jTable1.getValueAt(inscripcion, 2);
+                    System.out.println("la nota es : "+jTable1.getValueAt(f, 2));
+                    if (jTable1.getValueAt(f, 2).equals(inscripcion.getNota()) ) {
+                        System.out.println("Son iguales " + f);
+
+                    }
+
+                }
+            }
+
+        }
 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-      cargarTabla();
+        cargarTabla();
 
-   
+
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-           int respuesta = JOptionPane.showConfirmDialog(this, "Estás seguro que quieres salir?", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
+        int respuesta = JOptionPane.showConfirmDialog(this, "Estás seguro que quieres salir?", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
 
         if (respuesta == JOptionPane.YES_OPTION) {
 
             this.dispose();//cierro la ventana
-    }
+        }
     }//GEN-LAST:event_jbSalirActionPerformed
 
 
@@ -212,27 +233,27 @@ public class Notas extends javax.swing.JInternalFrame {
             alumnos.add(alu);
             jComboBox1.addItem(alu);
         }
-      
+
     }
 
-    public void cargarTabla (){
-    borrarFilas();
-    inscripcionData a1 = new inscripcionData();
-    Alumno alumnoSeleccionado = (Alumno) jComboBox1.getSelectedItem(); // Obtener el alumno seleccionado
-    
-    if (alumnoSeleccionado != null) {
-        List<Inscripcion> inscripciones = a1.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno()); // Suponiendo que existe un método para obtener inscripciones de un alumno
-        
-        for (Inscripcion inscripcion : inscripciones) {
-            Materia materia = inscripcion.getMateria(); 
-            model.addRow(new Object[]{
-                materia.getIdMateria(),
-                materia.getNombre(),
-                inscripcion.getNota() // Obtener la nota de la inscripción
-            });
+    public void cargarTabla() {
+        borrarFilas();
+        inscripcionData a1 = new inscripcionData();
+        Alumno alumnoSeleccionado = (Alumno) jComboBox1.getSelectedItem(); // Obtener el alumno seleccionado
+
+        if (alumnoSeleccionado != null) {
+            List<Inscripcion> inscripciones = a1.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno()); // Suponiendo que existe un método para obtener inscripciones de un alumno
+
+            for (Inscripcion inscripcion : inscripciones) {
+                Materia materia = inscripcion.getMateria();
+                model.addRow(new Object[]{
+                    materia.getIdMateria(),
+                    materia.getNombre(),
+                    inscripcion.getNota() // Obtener la nota de la inscripción
+                });
+            }
         }
+
     }
-     
-}
-   
+
 }
