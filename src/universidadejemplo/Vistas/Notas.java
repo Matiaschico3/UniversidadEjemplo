@@ -11,7 +11,8 @@ import universidadejemplo.entidades.Inscripcion;
 import universidadejemplo.entidades.Materia;
 
 public class Notas extends javax.swing.JInternalFrame {
-inscripcionData ID = new inscripcionData();
+
+    inscripcionData ID = new inscripcionData();
     DefaultTableModel model = new DefaultTableModel() {
 
         public boolean isCellEditable(int f, int c) {
@@ -159,36 +160,31 @@ inscripcionData ID = new inscripcionData();
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
 
- //recorremos la lista
+        //recorremos la lista
         Alumno aS = (Alumno) jComboBox1.getSelectedItem(); // Obtener el alumno seleccionado
-       try{
+        try {
             if (aS != null) {
-            List<Inscripcion> inscripciones = ID.obtenerInscripcionesPorAlumno(aS.getIdAlumno());
-           
-            int contador = 0;
-            for (Inscripcion inscripcion : inscripciones) {
-                String notaStr = model.getValueAt(contador, 2).toString(); //cintia:ingreso la nota a string desde la tabla
-                double nota = Double.parseDouble(notaStr); // cintia: parseo la nota a double
-                
-                if(nota>=0 && nota <= 10){ //cintia: controlo q la nota se actualice si esta en el rango
-                 if (nota != inscripcion.getNota()) {
-                     System.out.println("entra al cambio");
-                     ID.actualizarNota(aS.getIdAlumno(), inscripcion.getMateria().getIdMateria(), nota);
-                     
-                 }
-                }else {
-                    
-                    JOptionPane.showMessageDialog(this, "Error: La nota debe estar en el rango de 0 a 10");
-                    model.setValueAt(inscripcion.getNota(), contador, 2); //cintia : restablezco la nota anterior.
+                List<Inscripcion> inscripciones = ID.obtenerInscripcionesPorAlumno(aS.getIdAlumno());
+
+                int contador = 0;
+                for (Inscripcion inscripcion : inscripciones) {
+                    String notaStr = model.getValueAt(contador, 2).toString(); //cintia:ingreso la nota a string desde la tabla
+                    double nota = Double.parseDouble(notaStr); // cintia: parseo la nota a double
+                    if (nota >= 0 && nota <= 10) { //cintia: controlo q la nota se actualice si esta en el rango
+                        if (nota != inscripcion.getNota()) {
+                            System.out.println("entra al cambio");
+                            ID.actualizarNota(aS.getIdAlumno(), inscripcion.getMateria().getIdMateria(), nota);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Error: La nota debe estar en el rango de 0 a 10");
+                        model.setValueAt(inscripcion.getNota(), contador, 2); //cintia : restablezco la nota anterior.
+                    }
+                    contador++;
                 }
-                
-                
-                contador++;
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error " + e.getMessage());
         }
-       }catch (Exception e){
-           JOptionPane.showMessageDialog(this, "Error "+ e.getMessage());
-       }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
