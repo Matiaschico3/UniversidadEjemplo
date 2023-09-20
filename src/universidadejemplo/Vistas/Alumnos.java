@@ -2,12 +2,13 @@ package universidadejemplo.Vistas;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import universidadejemplo.conexionBaseDatos.alumnoData;
 import universidadejemplo.entidades.Alumno;
 
 public class Alumnos extends javax.swing.JInternalFrame {
-
+    private int idAlumnoSeleccionado = -1;
     alumnoData ad = new alumnoData();
 
     public Alumnos() {
@@ -225,7 +226,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
                 jtNombre.setText(ae.getNombre());
                 jdFecha.setDate(java.sql.Date.valueOf(ae.getFechaN()));
                 jrbEstado.setSelected(ae.isActivo());
-            
+            idAlumnoSeleccionado=ae.getIdAlumno();
             }
         } catch (NumberFormatException e) {
 
@@ -234,6 +235,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        guardar();
         jtDocumento.setText("");
         jtApellido.setText("");
         jtNombre.setText("");
@@ -242,33 +244,12 @@ public class Alumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-
-        try {
-            if (!jtDocumento.getText().isEmpty() && !jtApellido.getText().isEmpty() && !jtNombre.getText().isEmpty() && jdFecha.getDate() != null && jrbEstado.isSelected()==true) { 
-                int dni = Integer.parseInt(jtDocumento.getText());
-                String ap = jtApellido.getText();
-                String nom = jtNombre.getText();
-                LocalDate fechaNacimiento = jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                boolean est = jrbEstado.isSelected();
-                Alumno nuevo = new Alumno(dni, ap, nom, fechaNacimiento, est);
-                ad.guardarAlumno(nuevo);
-            }else if (jtDocumento.getText().isEmpty()){  //|| jtApellido.getText().isEmpty() || jtNombre.getText().isEmpty() || jdFecha.getDate() == null 
-                JOptionPane.showMessageDialog(this, "No debe dejar el dni vacio");
-            }else if (jtApellido.getText().isEmpty()){
-                JOptionPane.showMessageDialog(this, "No debe dejar el campo apellido vacio");
-            }else if (jtNombre.getText().isEmpty()){
-                JOptionPane.showMessageDialog(this, "No debe dejar el campo nombre vacio");
-            }else if (jdFecha.getDate() == null){
-                JOptionPane.showMessageDialog(this, "No debe dejar el campo Fecha vacia");
-            }else if (jrbEstado.isSelected() == false){
-               JOptionPane.showMessageDialog(this, "Debe dejar activado el campo estado"); 
-            }
-            
-        } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(this, "No debe dejar campos vacios");
+if (idAlumnoSeleccionado != -1) { // Verifica que se haya seleccionado un alumno
+            modificar(); // Llama al método modificar solo si se ha seleccionado un alumno
+        } else {
+            JOptionPane.showMessageDialog(this, "Debes seleccionar un alumno antes de guardar.");
         }
-
-
+    
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -299,4 +280,50 @@ public class Alumnos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtDocumento;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
+
+    public void guardar(){
+        try {
+            if (!jtDocumento.getText().isEmpty() && !jtApellido.getText().isEmpty() && !jtNombre.getText().isEmpty() && jdFecha.getDate() != null && jrbEstado.isSelected()==true) { 
+                int dni = Integer.parseInt(jtDocumento.getText());
+                String ap = jtApellido.getText();
+                String nom = jtNombre.getText();
+                LocalDate fechaNacimiento = jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                boolean est = jrbEstado.isSelected();
+                Alumno nuevo = new Alumno(dni, ap, nom, fechaNacimiento, est);
+                ad.guardarAlumno(nuevo);
+            }else if (jtDocumento.getText().isEmpty()){  //|| jtApellido.getText().isEmpty() || jtNombre.getText().isEmpty() || jdFecha.getDate() == null 
+                JOptionPane.showMessageDialog(this, "No debe dejar el dni vacio");
+            }else if (jtApellido.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "No debe dejar el campo apellido vacio");
+            }else if (jtNombre.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "No debe dejar el campo nombre vacio");
+            }else if (jdFecha.getDate() == null){
+                JOptionPane.showMessageDialog(this, "No debe dejar el campo Fecha vacia");
+            }else if (jrbEstado.isSelected() == false){
+               JOptionPane.showMessageDialog(this, "Debe dejar activado el campo estado"); 
+            }
+            
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "No debe dejar campos vacios");
+        }
+    }
+    
+    public void modificar(){
+         
+         try {
+                
+                int dni = Integer.parseInt(jtDocumento.getText());
+                String ap = jtApellido.getText();
+                String nom = jtNombre.getText();
+                LocalDate fechaNacimiento = jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                boolean est = jrbEstado.isSelected();
+                            Alumno nuevom = new Alumno(idAlumnoSeleccionado, dni, ap, nom, fechaNacimiento, est);
+                             ad.modificarAlumno(nuevom);
+             
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Error al modificar"+e.getMessage());
+        }
+    }
 }
+    
+
