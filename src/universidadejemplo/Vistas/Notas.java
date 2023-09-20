@@ -163,8 +163,10 @@ public class Notas extends javax.swing.JInternalFrame {
         Alumno alumnoSeleccionado = (Alumno) jComboBox1.getSelectedItem(); // Obtener el alumno seleccionado
         if (alumnoSeleccionado != null) {
             List<Inscripcion> inscripciones = a1.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno()); // Suponiendo que existe un método para obtener inscripciones de un alumno
-            ArrayList<Inscripcion> inscripcionesModificadas = new ArrayList<>();
+            List<Inscripcion> inscripcionesModificadas = new List<Inscripcion>();
             int contador = 0;
+
+            ArrayList<String> not = new ArrayList<>();
 
             for (Inscripcion inscripcion : inscripciones) {
 
@@ -172,33 +174,31 @@ public class Notas extends javax.swing.JInternalFrame {
 
                 } else {
 
-                    Object miObjeto = jTable1.getValueAt(contador, 2); // Por ejemplo, un Integer
-                    double miDouble = 0.0;
-
-                    if (miObjeto instanceof Number) {
-                        miDouble = ((Number) miObjeto).doubleValue();
-                        System.out.println("Objeto convertido a double: " + miDouble);
-                    } else {
-                        System.out.println("El objeto no es convertible a double");
-                    }
-
-                    Inscripcion modificar = new Inscripcion(alumnoSeleccionado, inscripcion.getMateria(), miDouble);
+//                    not.add(inscripcion.getMateria().getNombre() + " = " + jTable1.getValueAt(contador, 2));
+                    double nota = (double) jTable1.getValueAt(contador, 2);
+                    Inscripcion modificar = new Inscripcion(alumnoSeleccionado, inscripcion.getMateria(), nota);
                     inscripcionesModificadas.add(modificar);
                 }
                 contador++;
             }
-            int respuesta = JOptionPane.showConfirmDialog(this, inscripcionesModificadas, "Modificaciones", JOptionPane.YES_NO_OPTION);
+            int respuesta = JOptionPane.showConfirmDialog(this, not, "Modificaciones", JOptionPane.YES_NO_OPTION);
 
             if (respuesta == JOptionPane.YES_OPTION) {
-
-                for (Inscripcion inscripMOD : inscripcionesModificadas) {
-
-                    JOptionPane.showMessageDialog(this, inscripcionesModificadas);
-                }
+//                for (Inscripcion inscripcion : inscripciones) {
+//
+//                    if (jTable1.getValueAt(contador, 2).equals(inscripcion.getNota())) {
+//
+//                    } else {
+//
+//                        not.add(inscripcion.getMateria().getNombre() + " = " + jTable1.getValueAt(contador, 2));
+//                         a1.actualizarNota(alumnoSeleccionado.getIdAlumno(), inscripcion.getMateria().getIdMateria(),nota);
+//                    }
+//                    contador++;
+//                }
+//
+//            }
 
             }
-
-        }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
