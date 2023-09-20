@@ -193,8 +193,7 @@ public class inscripcionData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al obtener las materias"+ ex.getMessage());
         }
-        
-        
+ 
       return materias;
     }
 
@@ -208,9 +207,7 @@ public class inscripcionData {
             ps.setInt(2, idMateria);
             
             int filas= ps.executeUpdate();
-            
-             
-            
+
             //cartel para ver si fue hecho exitosamente la inscripcion
             
             if(filas>0){
@@ -228,7 +225,7 @@ public class inscripcionData {
         
         String sql="UPDATE inscripcion SET nota=? WHERE idAlumno=? AND idMateria=? ";
         try {
-            PreparedStatement ps=con.prepareStatement(sql);
+            PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             ps.setDouble(1, nota);
             ps.setInt(2, idAlumno);
             ps.setInt(3, idMateria);
@@ -244,7 +241,7 @@ public class inscripcionData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al conectarse a tabla Inscripcion");
+            JOptionPane.showMessageDialog(null, "Error al conectarse a tabla Inscripcion"+ex.getMessage());
         }
         
     }
@@ -272,10 +269,9 @@ public class inscripcionData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al cargar tabla alumno");
         }
-        
-        
-      
+
        return alu; }
+    
     
    public List<Materia> obtenerMateriasCursadas2(int idAlumno) {
         List <Materia>materias= new ArrayList<Materia>();
@@ -308,7 +304,5 @@ public class inscripcionData {
         
       return materias;  
     }
-    
-    
-    
+ 
 }

@@ -249,7 +249,6 @@ if (idAlumnoSeleccionado != -1) { // Verifica que se haya seleccionado un alumno
         } else {
             JOptionPane.showMessageDialog(this, "Debes seleccionar un alumno antes de guardar.");
         }
-    
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -309,9 +308,7 @@ if (idAlumnoSeleccionado != -1) { // Verifica que se haya seleccionado un alumno
     }
     
     public void modificar(){
-         
          try {
-                
                 int dni = Integer.parseInt(jtDocumento.getText());
                 String ap = jtApellido.getText();
                 String nom = jtNombre.getText();
