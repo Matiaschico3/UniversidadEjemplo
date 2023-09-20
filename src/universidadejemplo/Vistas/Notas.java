@@ -199,6 +199,33 @@ inscripcionData ID = new inscripcionData();
 //        }
 //    }
 
+//cintia:
+ //recorremos la lista
+        inscripcionData a1 = new inscripcionData();
+        Alumno aS = (Alumno) jComboBox1.getSelectedItem(); // Obtener el alumno seleccionado
+   
+       try{
+            if (aS != null) {
+            List<Inscripcion> inscripciones = a1.obtenerInscripcionesPorAlumno(aS.getIdAlumno());
+           
+            int contador = 0;
+            for (Inscripcion inscripcion : inscripciones) {
+               
+                if (!model.getValueAt(contador, 2).equals(inscripcion.getNota())) {
+                    System.out.println("llego aca?");
+                    a1.actualizarNota(aS.getIdAlumno(), inscripcion.getMateria().getIdMateria(), Double.parseDouble(model.getValueAt(contador, 2).toString()));
+                   
+                }else {
+                    System.out.println("no se modifico nada");
+                } 
+                contador++;
+            }
+        }
+       }catch (Exception e){
+           JOptionPane.showMessageDialog(this, "Error "+ e.getMessage());
+       }
+
+
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
