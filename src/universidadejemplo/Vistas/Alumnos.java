@@ -249,6 +249,7 @@ if (idAlumnoSeleccionado != -1) { // Verifica que se haya seleccionado un alumno
         } else {
             JOptionPane.showMessageDialog(this, "Debes seleccionar un alumno antes de guardar.");
         }
+    
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -308,14 +309,16 @@ if (idAlumnoSeleccionado != -1) { // Verifica que se haya seleccionado un alumno
     }
     
     public void modificar(){
+         
          try {
+                
                 int dni = Integer.parseInt(jtDocumento.getText());
                 String ap = jtApellido.getText();
                 String nom = jtNombre.getText();
                 LocalDate fechaNacimiento = jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 boolean est = jrbEstado.isSelected();
-                            Alumno nuevo = new Alumno(idAlumnoSeleccionado, dni, ap, nom, fechaNacimiento, est);
-                             ad.modificarAlumno(nuevo);
+                            Alumno nuevom = new Alumno(idAlumnoSeleccionado, dni, ap, nom, fechaNacimiento, est);
+                             ad.modificarAlumno(nuevom);
              
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Error al modificar"+e.getMessage());
