@@ -8,7 +8,7 @@ import universidadejemplo.entidades.Alumno;
 import universidadejemplo.entidades.Materia;
 
 public class Materias extends javax.swing.JInternalFrame {
-
+    int matS = -1; 
     materiaData md = new materiaData();
 
     public Materias() {
@@ -202,6 +202,7 @@ public class Materias extends javax.swing.JInternalFrame {
                 jtNombre.setText(m.getNombre());
                 jtAnio.setText(Integer.toString(m.getAnioMateria()));
                 jrbEstado.setSelected(m.isActivo());
+                matS=m.getIdMateria();
                 habilitarBotones();
             }
         } catch (NumberFormatException e) {
@@ -218,9 +219,9 @@ public class Materias extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
       //revisar (FALTA HACER EL METODO MODIFICAR PARA MATERIA).
-        int matS = -1; 
+        
         if (matS != -1) { // Verifica que se haya seleccionado un alumno
-            //ACA LLAMARIA AL METODO // Llama al método modificar solo si se ha seleccionado un alumno
+           modificar();// Llama al método modificar solo si se ha seleccionado un alumno
         } else {
             JOptionPane.showMessageDialog(this, "Debes seleccionar un alumno antes de guardar.");
         }
@@ -292,6 +293,23 @@ public class Materias extends javax.swing.JInternalFrame {
         }else{
             jbEliminar.setEnabled(false);
             jbNuevo.setEnabled(false);
+        }
+    }
+     
+      public void modificar(){
+         materiaData MD=new materiaData();
+         try {
+                
+                int idMateria = Integer.parseInt(jtCodigo.getText());
+               String nom = jtNombre.getText();
+                int año=Integer.parseInt(jtAnio.getText());
+                boolean est = jrbEstado.isSelected();
+                            
+                            Materia nuevaM=new Materia(idMateria,nom,año,est);
+                             MD.modificarMateria(nuevaM);
+             
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "No se puede dejar espacios vacios");
         }
     }
 }

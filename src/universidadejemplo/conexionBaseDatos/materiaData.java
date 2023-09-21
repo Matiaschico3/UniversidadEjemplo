@@ -80,7 +80,7 @@ public class materiaData {
 
     public void modificarMateria(Materia materia) {
         
-        String sql="UPDATE materia SET nombre=?, año=?, activa=? WHERE idAlumno=?";
+        String sql="UPDATE materia SET nombre=?, año=?, activa=? WHERE idMateria=?";
         try {
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setString(1, materia.getNombre());
@@ -90,7 +90,7 @@ public class materiaData {
            int exito= ps.executeUpdate();
            
            if(exito==1){//para avisar de que funciono correctamente.
-               JOptionPane.showMessageDialog(null, "Alumno modificado exitosamente");
+               JOptionPane.showMessageDialog(null, "Materia modificada exitosamente");
            }
             ps.close();
             
