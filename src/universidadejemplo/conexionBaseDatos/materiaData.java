@@ -103,7 +103,7 @@ public class materiaData {
 
     public void eliminarMateria(int idMateria) {
         //borrado logico
-        String sql=" UPDATE materia SET activa=0 WHERE idAlumno= ?";
+        String sql="UPDATE materia SET activa=0 WHERE idMateria= ?";
         
         try {
             PreparedStatement ps=con.prepareStatement(sql);
@@ -112,7 +112,7 @@ public class materiaData {
             int exito=ps.executeUpdate();
             
             if(exito==1){
-                JOptionPane.showMessageDialog(null, "Alumno guardado exitosamente");
+                JOptionPane.showMessageDialog(null, "Materia guardada exitosamente");
             }
             ps.close();
             
