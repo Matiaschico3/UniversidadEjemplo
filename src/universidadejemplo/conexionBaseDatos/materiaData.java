@@ -123,10 +123,12 @@ public class materiaData {
         
     }
 
-    public List<Materia> listarMaterias() {
-         String sql="SELECT nombre, año FROM materia WHERE activa=1 ";
+       public List<Materia> listarMaterias() {
+         String sql = "SELECT idMateria, nombre, año FROM materia WHERE activa=1";         
+         ArrayList<Materia> materias=new ArrayList();
          
-        ArrayList<Materia> materias=new ArrayList();
+        
+       
         
         try {
             PreparedStatement ps=con.prepareStatement(sql);
@@ -147,7 +149,7 @@ public class materiaData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error al acceder a la tabla Materia");
+            JOptionPane.showMessageDialog(null,"Error al acceder a la tabla Materia ");
         }
        return materias;
     }
