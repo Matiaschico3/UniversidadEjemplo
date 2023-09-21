@@ -112,7 +112,7 @@ public class materiaData {
             int exito=ps.executeUpdate();
             
             if(exito==1){
-                JOptionPane.showMessageDialog(null, "Materia guardada exitosamente");
+                JOptionPane.showMessageDialog(null, "Materia Borrada exitosamente");
             }
             ps.close();
             
