@@ -1,7 +1,10 @@
 package universidadejemplo.Vistas;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import javax.swing.JOptionPane;
 import universidadejemplo.conexionBaseDatos.materiaData;
+import universidadejemplo.entidades.Alumno;
 import universidadejemplo.entidades.Materia;
 
 public class Materias extends javax.swing.JInternalFrame {
@@ -214,7 +217,25 @@ public class Materias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        try {
+      //revisar (FALTA HACER EL METODO MODIFICAR PARA MATERIA).
+        int matS = -1; 
+        if (matS != -1) { // Verifica que se haya seleccionado un alumno
+            //ACA LLAMARIA AL METODO // Llama al método modificar solo si se ha seleccionado un alumno
+        } else {
+            JOptionPane.showMessageDialog(this, "Debes seleccionar un alumno antes de guardar.");
+        }
+    
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        int respuesta = JOptionPane.showConfirmDialog(this, "Estás seguro que quieres salir?", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
+        if (respuesta == JOptionPane.YES_OPTION) {
+            this.dispose();//cierro la ventana
+    }//GEN-LAST:event_jbSalirActionPerformed
+    }
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+       try {
             if (!jtNombre.getText().isEmpty() && !jtAnio.getText().isEmpty() && jrbEstado.isSelected() == true) {
 
                 String nom = jtNombre.getText();
@@ -235,20 +256,6 @@ public class Materias extends javax.swing.JInternalFrame {
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "No debe dejar campos vacios");
         }
-    }//GEN-LAST:event_jbGuardarActionPerformed
-
-    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-        int respuesta = JOptionPane.showConfirmDialog(this, "Estás seguro que quieres salir?", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
-        if (respuesta == JOptionPane.YES_OPTION) {
-            this.dispose();//cierro la ventana
-    }//GEN-LAST:event_jbSalirActionPerformed
-    }
-
-    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        jtCodigo.setText("");
-        jtNombre.setText("");
-        jtAnio.setText("");
-        jrbEstado.setSelected(true);
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyReleased
