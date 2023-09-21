@@ -11,7 +11,7 @@ import universidadejemplo.entidades.Inscripcion;
 import universidadejemplo.entidades.Materia;
 
 public class Notas extends javax.swing.JInternalFrame {
-
+inscripcionData ID = new inscripcionData();
     DefaultTableModel model = new DefaultTableModel() {
 
         public boolean isCellEditable(int f, int c) {
@@ -159,45 +159,30 @@ public class Notas extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         //recorremos la lista
-        inscripcionData a1 = new inscripcionData();
-        Alumno alumnoSeleccionado = (Alumno) jComboBox1.getSelectedItem(); // Obtener el alumno seleccionado
-        if (alumnoSeleccionado != null) {
-            List<Inscripcion> inscripciones = a1.obtenerInscripcionesPorAlumno(alumnoSeleccionado.getIdAlumno()); // Suponiendo que existe un método para obtener inscripciones de un alumno
-            ArrayList<Inscripcion> inscripcionesModificadas = new ArrayList<>();
-            int contador = 0;
+        Alumno aS = (Alumno) jComboBox1.getSelectedItem(); // Obtener el alumno seleccionado
+        try {
+            if (aS != null) {
+                List<Inscripcion> inscripciones = ID.obtenerInscripcionesPorAlumno(aS.getIdAlumno());
 
-            for (Inscripcion inscripcion : inscripciones) {
-
-                if (jTable1.getValueAt(contador, 2).equals(inscripcion.getNota())) {
-
-                } else {
-
-                    Object miObjeto = jTable1.getValueAt(contador, 2); // Por ejemplo, un Integer
-                    double miDouble = 0.0;
-
-                    if (miObjeto instanceof Number) {
-                        miDouble = ((Number) miObjeto).doubleValue();
-                        System.out.println("Objeto convertido a double: " + miDouble);
+                int contador = 0;
+                for (Inscripcion inscripcion : inscripciones) {
+                    String notaStr = model.getValueAt(contador, 2).toString(); //cintia:ingreso la nota a string desde la tabla
+                    double nota = Double.parseDouble(notaStr); // cintia: parseo la nota a double
+                    if (nota >= 0 && nota <= 10) { //cintia: controlo q la nota se actualice si esta en el rango
+                        if (nota != inscripcion.getNota()) {
+                           
+                            ID.actualizarNota(aS.getIdAlumno(), inscripcion.getMateria().getIdMateria(), nota);
+                        }
                     } else {
-                        System.out.println("El objeto no es convertible a double");
+                        JOptionPane.showMessageDialog(this, "Error: La nota debe estar en el rango de 0 a 10");
+                        model.setValueAt(inscripcion.getNota(), contador, 2); //cintia : restablezco la nota anterior.
                     }
-
-                    Inscripcion modificar = new Inscripcion(alumnoSeleccionado, inscripcion.getMateria(), miDouble);
-                    inscripcionesModificadas.add(modificar);
+                    contador++;
                 }
-                contador++;
             }
-            int respuesta = JOptionPane.showConfirmDialog(this, inscripcionesModificadas, "Modificaciones", JOptionPane.YES_NO_OPTION);
-
-            if (respuesta == JOptionPane.YES_OPTION) {
-
-                for (Inscripcion inscripMOD : inscripcionesModificadas) {
-
-                    JOptionPane.showMessageDialog(this, inscripcionesModificadas);
-                }
-
-            }
-
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Solo se aceptan números " + e.getMessage());
+          
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
