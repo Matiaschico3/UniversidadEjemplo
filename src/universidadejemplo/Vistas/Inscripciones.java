@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import universidadejemplo.conexionBaseDatos.alumnoData;
 import universidadejemplo.conexionBaseDatos.inscripcionData;
-import universidadejemplo.conexionBaseDatos.materiaData;
 import universidadejemplo.entidades.Alumno;
 import universidadejemplo.entidades.Inscripcion;
 import universidadejemplo.entidades.Materia;
