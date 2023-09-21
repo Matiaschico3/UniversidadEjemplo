@@ -2,7 +2,6 @@ package universidadejemplo.Vistas;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import universidadejemplo.conexionBaseDatos.alumnoData;
 import universidadejemplo.entidades.Alumno;
