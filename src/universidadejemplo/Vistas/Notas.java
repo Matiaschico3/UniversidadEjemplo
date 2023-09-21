@@ -172,7 +172,7 @@ public class Notas extends javax.swing.JInternalFrame {
                     double nota = Double.parseDouble(notaStr); // cintia: parseo la nota a double
                     if (nota >= 0 && nota <= 10) { //cintia: controlo q la nota se actualice si esta en el rango
                         if (nota != inscripcion.getNota()) {
-                            System.out.println("entra al cambio");
+                           
                             ID.actualizarNota(aS.getIdAlumno(), inscripcion.getMateria().getIdMateria(), nota);
                         }
                     } else {
@@ -182,8 +182,9 @@ public class Notas extends javax.swing.JInternalFrame {
                     contador++;
                 }
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error " + e.getMessage());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Solo se aceptan números " + e.getMessage());
+          
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
