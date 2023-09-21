@@ -212,6 +212,12 @@ public class Alumnos extends javax.swing.JInternalFrame {
 
         int dni = Integer.parseInt(jtDocumento.getText());
         ad.eliminarAlumno(dni);
+        //cintia : agrego limpieza de campos 
+        jtDocumento.setText("");
+        jtApellido.setText("");
+        jtNombre.setText("");
+        jdFecha.setDate(null);
+        jrbEstado.setSelected(true);
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
@@ -245,6 +251,12 @@ public class Alumnos extends javax.swing.JInternalFrame {
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
 if (idAlumnoSeleccionado != -1) { // Verifica que se haya seleccionado un alumno
             modificar(); // Llama al método modificar solo si se ha seleccionado un alumno
+            //Cintia: Agrego limpieza de campos
+             jtDocumento.setText("");
+        jtApellido.setText("");
+        jtNombre.setText("");
+        jdFecha.setDate(null);
+        jrbEstado.setSelected(true);
         } else {
             JOptionPane.showMessageDialog(this, "Debes seleccionar un alumno antes de guardar.");
         }

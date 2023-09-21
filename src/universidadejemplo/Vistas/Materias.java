@@ -89,6 +89,11 @@ public class Materias extends javax.swing.JInternalFrame {
         });
 
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -215,6 +220,10 @@ public class Materias extends javax.swing.JInternalFrame {
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         int idMateria = Integer.parseInt(jtCodigo.getText());
         md.eliminarMateria(idMateria);
+         //Cintia: Limpio campos
+                jtCodigo.setText("");
+                jtNombre.setText("");
+                jtAnio.setText("");
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
@@ -222,6 +231,10 @@ public class Materias extends javax.swing.JInternalFrame {
         
         if (matS != -1) { // Verifica que se haya seleccionado un alumno
            modificar();// Llama al método modificar solo si se ha seleccionado un alumno
+            //Cintia: Limpio campos
+                jtCodigo.setText("");
+                jtNombre.setText("");
+                jtAnio.setText("");
         } else {
             JOptionPane.showMessageDialog(this, "Debes seleccionar un alumno antes de guardar.");
         }
@@ -244,14 +257,17 @@ public class Materias extends javax.swing.JInternalFrame {
                 int anio = Integer.parseInt(jtAnio.getText());
                 Materia nuevo = new Materia(nom, anio, est);
                 md.guardarMateria(nuevo);
-//            }else if (jtCodigo.getText().isEmpty()){  //|| jtApellido.getText().isEmpty() || jtNombre.getText().isEmpty() || jdFecha.getDate() == null 
-//                JOptionPane.showMessageDialog(this, "No debe dejar el código vacio");
+//             //Cintia: Limpio campos
+                jtCodigo.setText("");
+                jtNombre.setText("");
+                jtAnio.setText("");
             } else if (jtNombre.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No debe dejar el campo nombre vacio");
             } else if (jtAnio.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No debe dejar el campo año vacio");
             } else if (jrbEstado.isSelected() == false) {
                 JOptionPane.showMessageDialog(this, "Debe dejar activado el campo estado");
+             
             }
 
         } catch (NullPointerException e) {
