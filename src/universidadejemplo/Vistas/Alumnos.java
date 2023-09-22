@@ -38,6 +38,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
         jbEliminar = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
+        jlEstDescrip = new javax.swing.JLabel();
 
         setClosable(true);
 
@@ -45,29 +46,23 @@ public class Alumnos extends javax.swing.JInternalFrame {
         jPanel1.setName(""); // NOI18N
 
         jlTitulo.setFont(new java.awt.Font("Garamond", 1, 24)); // NOI18N
-        jlTitulo.setForeground(new java.awt.Color(0, 0, 0));
         jlTitulo.setText("Alumno");
 
         jlDoc.setBackground(new java.awt.Color(255, 255, 255));
         jlDoc.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
-        jlDoc.setForeground(new java.awt.Color(0, 0, 0));
         jlDoc.setText("Documento :");
 
         jlAp.setBackground(new java.awt.Color(255, 255, 255));
         jlAp.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
-        jlAp.setForeground(new java.awt.Color(0, 0, 0));
         jlAp.setText("Apellido :");
 
         jlNom.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
-        jlNom.setForeground(new java.awt.Color(0, 0, 0));
         jlNom.setText("Nombre :");
 
         jlFecha.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
-        jlFecha.setForeground(new java.awt.Color(0, 0, 0));
         jlFecha.setText("Fecha :");
 
         jlEst.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
-        jlEst.setForeground(new java.awt.Color(0, 0, 0));
         jlEst.setText("Estado");
 
         jbBuscar.setForeground(new java.awt.Color(255, 255, 255));
@@ -79,6 +74,11 @@ public class Alumnos extends javax.swing.JInternalFrame {
         });
 
         jrbEstado.setSelected(true);
+        jrbEstado.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jrbEstadoStateChanged(evt);
+            }
+        });
 
         jbNuevo.setText("Nuevo");
         jbNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -107,6 +107,9 @@ public class Alumnos extends javax.swing.JInternalFrame {
                 jbSalirActionPerformed(evt);
             }
         });
+
+        jlEstDescrip.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
+        jlEstDescrip.setText("Activo");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -150,8 +153,11 @@ public class Alumnos extends javax.swing.JInternalFrame {
                                     .addGap(83, 83, 83)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jlTitulo)
-                                        .addComponent(jrbEstado)))))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jrbEstado)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jlEstDescrip))))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,10 +186,14 @@ public class Alumnos extends javax.swing.JInternalFrame {
                     .addComponent(jlFecha)
                     .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlEst)
-                    .addComponent(jrbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jlEst)
+                        .addComponent(jrbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jlEstDescrip)))
+                .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevo)
                     .addComponent(jbEliminar)
@@ -269,8 +279,18 @@ if (idAlumnoSeleccionado != -1) { // Verifica que se haya seleccionado un alumno
         if (respuesta == JOptionPane.YES_OPTION) {
 
             this.dispose();//cierro la ventana
+        }    
     }//GEN-LAST:event_jbSalirActionPerformed
-    }
+
+    private void jrbEstadoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jrbEstadoStateChanged
+        if (jrbEstado.isSelected()==true){
+            jlEstDescrip.setText("Activo");
+        } else {
+            jlEstDescrip.setText("Inactivo");
+        }
+            
+    }//GEN-LAST:event_jrbEstadoStateChanged
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
@@ -283,6 +303,7 @@ if (idAlumnoSeleccionado != -1) { // Verifica que se haya seleccionado un alumno
     private javax.swing.JLabel jlAp;
     private javax.swing.JLabel jlDoc;
     private javax.swing.JLabel jlEst;
+    private javax.swing.JLabel jlEstDescrip;
     private javax.swing.JLabel jlFecha;
     private javax.swing.JLabel jlNom;
     private javax.swing.JLabel jlTitulo;
