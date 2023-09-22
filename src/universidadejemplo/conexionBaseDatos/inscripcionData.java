@@ -49,6 +49,7 @@ public class inscripcionData {
                 System.out.println("Error");
             }
 
+            //Cierro la Conexion
             ps.close();
 
         } catch (SQLException ex) {
@@ -83,6 +84,7 @@ public class inscripcionData {
                 cursadas.add(inscripcion);
             }
 
+            //Cierro la Conexion
             ps.close();
 
         } catch (SQLException ex) {
@@ -116,7 +118,7 @@ public class inscripcionData {
                 inscripcion.setMateria(mat);
                 insc2.add(inscripcion);
             }
-
+            //Cierro la Conexion
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al obtener las inscripciones" + ex.getMessage());
@@ -143,7 +145,7 @@ public class inscripcionData {
                 materias.add(mat);
 
             }
-
+            //Cierro la Conexion
             ps.close();
 
         } catch (SQLException ex) {
@@ -171,7 +173,7 @@ public class inscripcionData {
                 materias.add(mat);
 
             }
-
+            //Cierro la Conexion
             ps.close();
 
         } catch (SQLException ex) {
@@ -196,6 +198,7 @@ public class inscripcionData {
             if (filas > 0) {
                 JOptionPane.showMessageDialog(null, "Inscripcion borrada exitosamente");
             }
+            //Cierro la Conexion
             ps.close();
 
         } catch (SQLException ex) {
@@ -219,6 +222,7 @@ public class inscripcionData {
             if (filas > 0) {
                 JOptionPane.showMessageDialog(null, "Nota Actualizada");
             }
+            //Cierro la Conexion
             ps.close();
 
         } catch (SQLException ex) {
@@ -245,6 +249,7 @@ public class inscripcionData {
                 a1.setActivo(rs.getBoolean("activo"));
                 alu.add(a1);
             }
+            //Cierro la Conexion
             ps.close();
 
         } catch (SQLException ex) {
@@ -273,7 +278,7 @@ public class inscripcionData {
                 ins.setNota(rs.getInt("nota"));
                 materias.add(mat);
             }
-
+            //Cierro la Conexion
             ps.close();
 
         } catch (SQLException ex) {
