@@ -36,6 +36,7 @@ public class alumnoData {
                 alumno.setIdAlumno(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Alumno guardado correctamente");
             }
+             //Cierro la Conexion
             ps.close();
 
         } catch (SQLException ex) {
@@ -58,7 +59,8 @@ public class alumnoData {
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Alumno modificado");
             }
-
+             //Cierro la Conexion
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al modificar la tabla alumno");
         }
@@ -73,6 +75,8 @@ public class alumnoData {
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Alumno eliminado");
             }
+             //Cierro la Conexion
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al eliminar alumno");
         }
@@ -97,6 +101,7 @@ public class alumnoData {
             } else {
                 JOptionPane.showMessageDialog(null, "No existe un alumno con ese ID");
             }
+             //Cierro la Conexion
             ps.close();
 
         } catch (SQLException ex) {
@@ -123,6 +128,7 @@ public class alumnoData {
             } else {
                 JOptionPane.showMessageDialog(null, "No existe un alumno con ese DNI");
             }
+             //Cierro la Conexion
             ps.close();
 
         } catch (SQLException ex) {
@@ -148,6 +154,7 @@ public class alumnoData {
                 alumno.setActivo(true);
                 alumnos.add(alumno);
             }
+             //Cierro la Conexion
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno");
