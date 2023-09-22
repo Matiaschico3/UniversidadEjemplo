@@ -38,6 +38,7 @@ public class materiaData {
                 materia.setIdMateria(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Materia guardada exitosamente");
             }
+            //Cierro la Conexion
             ps.close();
 
         } catch (SQLException ex) {
@@ -66,7 +67,7 @@ public class materiaData {
             } else {
                 JOptionPane.showMessageDialog(null, "No se encuentra esa materia en la base de datos o se encuentra inactiva");
             }
-
+            //Cierro la Conexion
             ps.close();
 
         } catch (SQLException ex) {
@@ -89,6 +90,7 @@ public class materiaData {
             if (exito == 1) {//para avisar de que funciono correctamente.
                 JOptionPane.showMessageDialog(null, "Materia modificada exitosamente");
             }
+            //Cierro la Conexion
             ps.close();
 
         } catch (SQLException ex) {
@@ -110,6 +112,7 @@ public class materiaData {
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Materia Borrada exitosamente");
             }
+            //Cierro la Conexion
             ps.close();
 
         } catch (SQLException ex) {
@@ -133,11 +136,9 @@ public class materiaData {
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnioMateria(rs.getInt("año"));
                 materia.setActivo(true);
-
                 materias.add(materia);
-
             }
-
+            //Cierro la Conexion
             ps.close();
 
         } catch (SQLException ex) {
