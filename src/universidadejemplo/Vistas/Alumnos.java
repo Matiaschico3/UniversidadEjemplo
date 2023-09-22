@@ -97,7 +97,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
             }
         });
 
-        jbGuardar.setText("Guardar");
+        jbGuardar.setText("Modificar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGuardarActionPerformed(evt);
@@ -158,7 +158,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
                                         .addComponent(jlTitulo)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addComponent(jrbEstado)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                             .addComponent(jlEstDescrip))))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -238,7 +238,9 @@ public class Alumnos extends javax.swing.JInternalFrame {
         try {
             int dni = Integer.parseInt(jtDocumento.getText());
             boolean activo = jrbEstado.isSelected();
-
+            System.out.println("alumnoVista");
+            System.out.println("DNI: " + dni);
+            System.out.println("Activo: " + activo);
             Alumno ae = ad.buscarAlumnoPorDni(dni, activo);
             if (ae != null) {
                 jtApellido.setText(ae.getApellido());
@@ -246,9 +248,14 @@ public class Alumnos extends javax.swing.JInternalFrame {
                 jdFecha.setDate(java.sql.Date.valueOf(ae.getFechaN()));
                 jrbEstado.setSelected(ae.isActivo());
                 idAlumnoSeleccionado = ae.getIdAlumno();
+
             } else {
-                if (activo) {
-                    JOptionPane.showMessageDialog(this, "No existe un alumno activo con ese DNI");
+                //Controlo el estado de la respuesta de la consulta y respondo 
+                //segun parametros obtenidos
+                if (activo == true) {
+                    JOptionPane.showMessageDialog(this, "No existe un alumno Activo con ese DNI");
+                } else if(activo == false) {  
+                    JOptionPane.showMessageDialog(this, "No existe un alumno Inactivo con ese DNI");
                 } else {
                     JOptionPane.showMessageDialog(this, "No existe un alumno con ese DNI");
                 }
@@ -352,7 +359,6 @@ public class Alumnos extends javax.swing.JInternalFrame {
     }
 
     public void modificar() {
-
         try {
 
             int dni = Integer.parseInt(jtDocumento.getText());

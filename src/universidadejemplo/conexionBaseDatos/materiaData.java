@@ -47,22 +47,26 @@ public class materiaData {
 
     }
 
-    public Materia buscarMateria(int idMateria) {
+    public Materia buscarMateria(int idMateria, boolean activa) {
 
-        String sql = "SELECT nombre, año FROM materia WHERE idMateria=? AND activa=1 ";
+        String sql = "SELECT idmateria, nombre, año FROM materia WHERE idMateria = ? AND activa = ? ";
         Materia materia = null;
         try {
+            
+            System.out.println("materiaData");
+            System.out.println("DNI: " + idMateria);
+            System.out.println("Activo: " + activa);
+            
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idMateria); //idmateria viene por parametro de funcion
-
+            ps.setBoolean(2, activa);
             ResultSet rs = ps.executeQuery();
-
             if (rs.next()) {
                 materia = new Materia();
-                materia.setIdMateria(idMateria);
+                materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnioMateria(rs.getInt("año"));
-                materia.setActivo(true);
+                materia.setActivo(rs.getBoolean("activa"));
 
             } else {
                 JOptionPane.showMessageDialog(null, "No se encuentra esa materia en la base de datos o se encuentra inactiva");
