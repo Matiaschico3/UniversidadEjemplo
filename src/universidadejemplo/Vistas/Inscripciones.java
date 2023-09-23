@@ -10,11 +10,10 @@ import universidadejemplo.entidades.Alumno;
 import universidadejemplo.entidades.Inscripcion;
 import universidadejemplo.entidades.Materia;
 
-
 public class Inscripciones extends javax.swing.JInternalFrame {
-    
-    DefaultTableModel model = new DefaultTableModel(){
-        public boolean isCellEditable (int f, int c){
+
+    DefaultTableModel model = new DefaultTableModel() {
+        public boolean isCellEditable(int f, int c) {
             return false;
         }
     };
@@ -23,8 +22,8 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         initComponents();
         armarCabecera();
         cargarCombo();
+        desHabilitarBotones();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -207,82 +206,85 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         borrarFilas();
         inscripcionData a1 = new inscripcionData();
         Alumno as = (Alumno) jComboBox1.getSelectedItem();
-        if(jrbInscriptas.isSelected() == true)
-            for(Materia m : a1.obtenerMateriasCursadas(as.getIdAlumno())) 
-       model.addRow(new Object[]{
-           m.getIdMateria(),
-           m.getNombre(),
-           m.getAnioMateria()
-       });
+        if (jrbInscriptas.isSelected() == true) {
+            for (Materia m : a1.obtenerMateriasCursadas(as.getIdAlumno())) {
+                model.addRow(new Object[]{
+                    m.getIdMateria(),
+                    m.getNombre(),
+                    m.getAnioMateria()
+                });
+            }
+        }
+
+        anularInscripcion();
     }//GEN-LAST:event_jrbInscriptasActionPerformed
 
     private void jrbNOinscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbNOinscriptasActionPerformed
         jrbInscriptas.setSelected(false);
         borrarFilas();
         inscripcionData a1 = new inscripcionData();
-        Alumno alu= (Alumno)jComboBox1.getSelectedItem();
-        ArrayList <Materia> mat=(ArrayList)a1.obtenerMateriasNOCursadas(alu.getIdAlumno());
-        if(jrbNOinscriptas.isSelected() == true)
-            for(Materia m : mat){
-       model.addRow(new Object[]{
-           m.getIdMateria(),
-           m.getNombre(),
-           m.getAnioMateria()
-       });
+        Alumno alu = (Alumno) jComboBox1.getSelectedItem();
+        ArrayList<Materia> mat = (ArrayList) a1.obtenerMateriasNOCursadas(alu.getIdAlumno());
+        if (jrbNOinscriptas.isSelected() == true) {
+            for (Materia m : mat) {
+                model.addRow(new Object[]{
+                    m.getIdMateria(),
+                    m.getNombre(),
+                    m.getAnioMateria()
+                });
             }
+        }
+        habilitarInscripcion();
+
     }//GEN-LAST:event_jrbNOinscriptasActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-                                         
+
         int respuesta = JOptionPane.showConfirmDialog(this, "Estás seguro que quieres salir?", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
 
         if (respuesta == JOptionPane.YES_OPTION) {
 
             this.dispose();//cierro la ventana
-    }    
+        }
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-     borrarFilas();
-     jrbInscriptas.setSelected(false);
-     jrbNOinscriptas.setSelected(false);
+        borrarFilas();
+        jrbInscriptas.setSelected(false);
+        jrbNOinscriptas.setSelected(false);
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
-      
+
         try {
-            int fs= jTabla.getSelectedRow();
-            inscripcionData insd=new inscripcionData();
-            
-            Materia mat=new Materia((int)model.getValueAt(fs, 0), (String)model.getValueAt(fs, 1),(int)model.getValueAt(fs, 2),true);
+            int fs = jTabla.getSelectedRow();
+            inscripcionData insd = new inscripcionData();
+
+            Materia mat = new Materia((int) model.getValueAt(fs, 0), (String) model.getValueAt(fs, 1), (int) model.getValueAt(fs, 2), true);
             //Alumno idAlumno=alu.getIdAlumno();
-           // Materia idMateria=(int)model.getValueAt(fs, 0);
-            double nota=0;
-            Inscripcion ins=new Inscripcion((Alumno)jComboBox1.getSelectedItem(),mat,nota);
+            // Materia idMateria=(int)model.getValueAt(fs, 0);
+            double nota = 0;
+            Inscripcion ins = new Inscripcion((Alumno) jComboBox1.getSelectedItem(), mat, nota);
             insd.guardarInscripcion(ins);
-          
-            
-            
-        }catch (ArrayIndexOutOfBoundsException e){
-             JOptionPane.showMessageDialog(this, "no hay nada seleccionado");
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(this, "no hay nada seleccionado");
         }
     }//GEN-LAST:event_jbInscribirActionPerformed
 
     private void jbAnularInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularInscActionPerformed
-       
-         try {
-            int fs= jTabla.getSelectedRow();
-            inscripcionData insd=new inscripcionData();
-            Alumno alu= (Alumno)jComboBox1.getSelectedItem();
-             Materia mat=new Materia((int)model.getValueAt(fs, 0), (String)model.getValueAt(fs, 1),(int)model.getValueAt(fs, 2),true);
-             insd.borrarInscripcionMateriaAlumno(alu.getIdAlumno(), mat.getIdMateria());
-          
-            
-            
-        }catch (ArrayIndexOutOfBoundsException e){
-             JOptionPane.showMessageDialog(this, "no hay nada seleccionado");
+
+        try {
+            int fs = jTabla.getSelectedRow();
+            inscripcionData insd = new inscripcionData();
+            Alumno alu = (Alumno) jComboBox1.getSelectedItem();
+            Materia mat = new Materia((int) model.getValueAt(fs, 0), (String) model.getValueAt(fs, 1), (int) model.getValueAt(fs, 2), true);
+            insd.borrarInscripcionMateriaAlumno(alu.getIdAlumno(), mat.getIdMateria());
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(this, "no hay nada seleccionado");
         }
-        
+
     }//GEN-LAST:event_jbAnularInscActionPerformed
 
 
@@ -303,43 +305,62 @@ public class Inscripciones extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jrbNOinscriptas;
     // End of variables declaration//GEN-END:variables
 
-    public void armarCabecera(){
-     model.addColumn("ID");
-     model.addColumn("Nombre");   
-     model.addColumn("Año"); 
-     jTabla.setModel(model);
+    public void armarCabecera() {
+        model.addColumn("ID");
+        model.addColumn("Nombre");
+        model.addColumn("Año");
+        jTabla.setModel(model);
     }
-    
-    public void borrarFilas(){
-     int f = model.getRowCount()-1;
-     for(;f>=0;f--){
-         model.removeRow(f);
-     }
+
+    public void borrarFilas() {
+        int f = model.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            model.removeRow(f);
+        }
     }
-    
-    public void cargarCombo(){
-    jComboBox1.removeAllItems();
-    alumnoData ad= new alumnoData();
-        ArrayList<Alumno> alumnos= new ArrayList<>();
-        
-        for (Alumno alu :ad.listarAlumnos()) {
+
+    public void cargarCombo() {
+        jComboBox1.removeAllItems();
+        alumnoData ad = new alumnoData();
+        ArrayList<Alumno> alumnos = new ArrayList<>();
+
+        for (Alumno alu : ad.listarAlumnos()) {
             alumnos.add(alu);
             jComboBox1.addItem(alu);
         }
     }
-    
-    public void cargarTabla (){
+
+    public void cargarTabla() {
         borrarFilas();
         inscripcionData a1 = new inscripcionData();
-        if(jrbInscriptas.isSelected() == true)
-            for(Materia m : a1.obtenerMateriasCursadas(jComboBox1.getSelectedIndex()))
-       model.addRow(new Object[]{
-           m.getIdMateria(),
-           m.getNombre(),
-           m.getAnioMateria()
-       });
-        
-     
-}
+        if (jrbInscriptas.isSelected() == true) {
+            for (Materia m : a1.obtenerMateriasCursadas(jComboBox1.getSelectedIndex())) {
+                model.addRow(new Object[]{
+                    m.getIdMateria(),
+                    m.getNombre(),
+                    m.getAnioMateria()
+                });
+            }
+        }
+    }
 
+    public void habilitarInscripcion() {
+
+        jbAnularInsc.setEnabled(false);
+        jbInscribir.setEnabled(true);
+
+    }
+
+    public void anularInscripcion() {
+
+        jbAnularInsc.setEnabled(true);
+        jbInscribir.setEnabled(false);
+
+    }
+
+    public void desHabilitarBotones() {
+        jbAnularInsc.setEnabled(false);
+        jbInscribir.setEnabled(false);
+
+    }
 }

@@ -1,0 +1,43 @@
+22-9-23 19:00hs
+Errores encontrados
+
+Formulario Alumno
+
+Problemas:
+1) hay un metodo habilitar botones, que no cumple funcion sino deshabilitamos los botones antes de buscar un alumno
+2) boton eliminar, si esta todo vacion da error
+3) los botones despues de ejecutar boton nuevo o eliminar, modificar no vuelven a estar deshabilitados
+
+solucion:
+Error 1: dejo solamente el boton Nuevo habilitado
+Error 2: chequeo que antes de eliminar , tenga todos los campos pedidos
+
+Formulario Materia
+
+Problemas:
+
+1) lo mismo del formulario alumno
+
+solucion:
+Error 1: dejo solamente el boton Nuevo habilitado
+
+Formulario inscripciones
+
+problemas
+
+1) los botones simpre estan habilitados
+
+solucion
+
+1) habilito el boton que solamente se necesite cuando el radion button esta selecionado
+
+
+formulario nota
+
+problema :
+
+1) siempre queda el boton guardar activo
+
+solucion
+
+1) estoy intentando que cuando selelecciones la columna 2 me habilite el boton y si cambio de fila lo deshabilite y lo vuelva a habilitar cuando le doy un clic

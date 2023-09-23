@@ -13,8 +13,9 @@ public class Materias extends javax.swing.JInternalFrame {
 
     public Materias() {
         initComponents();
-        jbEliminar.setEnabled(false);
-        jbNuevo.setEnabled(false);
+        desHabilitarBotones();
+       // jbEliminar.setEnabled(false);
+       // jbNuevo.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -34,7 +35,7 @@ public class Materias extends javax.swing.JInternalFrame {
         jtAnio = new javax.swing.JTextField();
         jbNuevo = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
-        jbGuardar = new javax.swing.JButton();
+        jbModificar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jlEstDescrip = new javax.swing.JLabel();
 
@@ -101,10 +102,10 @@ public class Materias extends javax.swing.JInternalFrame {
             }
         });
 
-        jbGuardar.setText("Modificar");
-        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+        jbModificar.setText("Modificar");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbGuardarActionPerformed(evt);
+                jbModificarActionPerformed(evt);
             }
         });
 
@@ -131,7 +132,7 @@ public class Materias extends javax.swing.JInternalFrame {
                             .addComponent(jlAp)
                             .addComponent(jlNom)
                             .addComponent(jlEst))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -141,14 +142,14 @@ public class Materias extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jrbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(jrbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jlEstDescrip, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(109, 109, 109))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jbNuevo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                        .addComponent(jbGuardar)
+                        .addComponent(jbModificar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jbEliminar)
                         .addGap(18, 18, 18)
@@ -187,12 +188,12 @@ public class Materias extends javax.swing.JInternalFrame {
                     .addComponent(jlEst)
                     .addComponent(jrbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlEstDescrip))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevo)
                     .addComponent(jbEliminar)
                     .addComponent(jbSalir)
-                    .addComponent(jbGuardar))
+                    .addComponent(jbModificar))
                 .addGap(24, 24, 24))
         );
 
@@ -213,23 +214,27 @@ public class Materias extends javax.swing.JInternalFrame {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
 
         try {
+          
             int idMateria = Integer.parseInt(jtCodigo.getText());
             boolean activa = jrbEstado.isSelected();
             Materia m = md.buscarMateria(idMateria, activa);
+     
             if (m != null) {
                 jtNombre.setText(m.getNombre());
                 jtAnio.setText(Integer.toString(m.getAnioMateria()));
                 jrbEstado.setSelected(m.isActivo());
                 matS=m.getIdMateria();
+                //Habilito botones si esta todo OK!
                 habilitarBotones();
 
             } else {
+               
                 //Controlo el estado de la respuesta de la consulta y respondo 
                 //segun parametros obtenidos
                 if (activa == true) {
-                    JOptionPane.showMessageDialog(this, "No existe una Materia Activo con ese ID");
+                    JOptionPane.showMessageDialog(this, "No existe una Materia Activa con ese ID");
                 } else if(activa == false) {  
-                    JOptionPane.showMessageDialog(this, "No existe una Materia Inactivo con ese ID");
+                    JOptionPane.showMessageDialog(this, "No existe una Materia Inactiva con ese ID");
                 } else {
                     JOptionPane.showMessageDialog(this, "No existe una Materia con ese ID");
                 }    
@@ -249,22 +254,26 @@ public class Materias extends javax.swing.JInternalFrame {
                 jtCodigo.setText("");
                 jtNombre.setText("");
                 jtAnio.setText("");
+         //Deshabilito botones luego de ejecutar acccion!
+         desHabilitarBotones();
     }//GEN-LAST:event_jbEliminarActionPerformed
 
-    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
     
         
-        if (matS != -1) { // Verifica que se haya seleccionado un alumno
-           modificar();// Llama al método modificar solo si se ha seleccionado un alumno
+        if (matS != -1) { // Verifica que se haya seleccionado una Materia
+           modificar();// Llama al método modificar solo si se ha seleccionado una materia
             //Cintia: Limpio campos
                 jtCodigo.setText("");
                 jtNombre.setText("");
                 jtAnio.setText("");
+                 //Deshabilito botones luego de ejecutar acccion!
+                  desHabilitarBotones();
         } else {
-            JOptionPane.showMessageDialog(this, "Debes seleccionar un alumno antes de guardar.");
+            JOptionPane.showMessageDialog(this, "Debes seleccionar una materia antes de guardar.");
         }
     
-    }//GEN-LAST:event_jbGuardarActionPerformed
+    }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(this, "Estás seguro que quieres salir?", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
@@ -322,7 +331,7 @@ public class Materias extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
-    private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
     private javax.swing.JLabel jlAp;
@@ -337,14 +346,17 @@ public class Materias extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
 
-     public void habilitarBotones(){
-        if(!jtAnio.getText().isEmpty() || !jtNombre.getText().isEmpty()){
+    public void habilitarBotones() {
+       
             jbEliminar.setEnabled(true);
-            jbNuevo.setEnabled(true);
-        }else{
+            jbModificar.setEnabled(true);
+        
+    }
+     
+     public void desHabilitarBotones(){
             jbEliminar.setEnabled(false);
-            jbNuevo.setEnabled(false);
-        }
+            jbModificar.setEnabled(false);
+       
     }
      
       public void modificar(){

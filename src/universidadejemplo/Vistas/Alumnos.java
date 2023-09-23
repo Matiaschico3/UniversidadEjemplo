@@ -13,6 +13,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
 
     public Alumnos() {
         initComponents();
+        desHabilitarBotones();
     }
 
     /**
@@ -39,7 +40,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
         jtNombre = new javax.swing.JTextField();
         jbNuevo = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
-        jbGuardar = new javax.swing.JButton();
+        jbModificar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jlEstDescrip = new javax.swing.JLabel();
 
@@ -97,10 +98,10 @@ public class Alumnos extends javax.swing.JInternalFrame {
             }
         });
 
-        jbGuardar.setText("Modificar");
-        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+        jbModificar.setText("Modificar");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbGuardarActionPerformed(evt);
+                jbModificarActionPerformed(evt);
             }
         });
 
@@ -128,7 +129,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
                             .addGap(12, 12, 12)
                             .addComponent(jbNuevo)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jbGuardar)
+                            .addComponent(jbModificar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jbEliminar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -200,7 +201,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevo)
                     .addComponent(jbEliminar)
-                    .addComponent(jbGuardar)
+                    .addComponent(jbModificar)
                     .addComponent(jbSalir))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -231,6 +232,8 @@ public class Alumnos extends javax.swing.JInternalFrame {
         jtNombre.setText("");
         jdFecha.setDate(null);
         jrbEstado.setSelected(true);
+        //Deshabilito botones luego de ejecutar acccion!
+        desHabilitarBotones();
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
@@ -238,9 +241,6 @@ public class Alumnos extends javax.swing.JInternalFrame {
         try {
             int dni = Integer.parseInt(jtDocumento.getText());
             boolean activo = jrbEstado.isSelected();
-            System.out.println("alumnoVista");
-            System.out.println("DNI: " + dni);
-            System.out.println("Activo: " + activo);
             Alumno ae = ad.buscarAlumnoPorDni(dni, activo);
             if (ae != null) {
                 jtApellido.setText(ae.getApellido());
@@ -248,13 +248,14 @@ public class Alumnos extends javax.swing.JInternalFrame {
                 jdFecha.setDate(java.sql.Date.valueOf(ae.getFechaN()));
                 jrbEstado.setSelected(ae.isActivo());
                 idAlumnoSeleccionado = ae.getIdAlumno();
-
+                //habilito botones luego de ejecutar acccion!
+                habilitarBotones();
             } else {
                 //Controlo el estado de la respuesta de la consulta y respondo 
                 //segun parametros obtenidos
                 if (activo == true) {
                     JOptionPane.showMessageDialog(this, "No existe un alumno Activo con ese DNI");
-                } else if(activo == false) {  
+                } else if (activo == false) {
                     JOptionPane.showMessageDialog(this, "No existe un alumno Inactivo con ese DNI");
                 } else {
                     JOptionPane.showMessageDialog(this, "No existe un alumno con ese DNI");
@@ -276,7 +277,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
         jrbEstado.setSelected(true);
     }//GEN-LAST:event_jbNuevoActionPerformed
 
-    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
         if (idAlumnoSeleccionado != -1) { // Verifica que se haya seleccionado un alumno
             modificar(); // Llama al método modificar solo si se ha seleccionado un alumno
             //Cintia: Agrego limpieza de campos
@@ -285,11 +286,13 @@ public class Alumnos extends javax.swing.JInternalFrame {
             jtNombre.setText("");
             jdFecha.setDate(null);
             jrbEstado.setSelected(true);
+            //Deshabilito botones luego de ejecutar acccion!
+            desHabilitarBotones();
         } else {
             JOptionPane.showMessageDialog(this, "Debes seleccionar un alumno antes de guardar.");
         }
 
-    }//GEN-LAST:event_jbGuardarActionPerformed
+    }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         int respuesta = JOptionPane.showConfirmDialog(this, "Estás seguro que quieres salir?", "Cerrar Ventana", JOptionPane.YES_NO_OPTION);
@@ -314,7 +317,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
-    private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
     private com.toedter.calendar.JDateChooser jdFecha;
@@ -373,4 +376,18 @@ public class Alumnos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Error al modificar" + e.getMessage());
         }
     }
+
+    public void habilitarBotones() {
+
+        jbEliminar.setEnabled(true);
+        jbModificar.setEnabled(true);
+
+    }
+
+    public void desHabilitarBotones() {
+        jbEliminar.setEnabled(false);
+        jbModificar.setEnabled(false);
+
+    }
+
 }

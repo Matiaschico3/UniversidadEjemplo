@@ -3,6 +3,9 @@ package universidadejemplo.Vistas;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import universidadejemplo.conexionBaseDatos.alumnoData;
 import universidadejemplo.conexionBaseDatos.inscripcionData;
@@ -11,23 +14,24 @@ import universidadejemplo.entidades.Inscripcion;
 import universidadejemplo.entidades.Materia;
 
 public class Notas extends javax.swing.JInternalFrame {
-inscripcionData ID = new inscripcionData();
+    //Declaro variables 
+    
+    inscripcionData ID = new inscripcionData();
+    
     DefaultTableModel model = new DefaultTableModel() {
 
         public boolean isCellEditable(int f, int c) {
-            if (c == 2) {
-                return true;
-            }
-            return false;
+            return c == 2;
         }
     };
-
+    
     public Notas() {
         initComponents();
         armarCabecera();
         cargarCombo();
-
-    }
+       desHabilitarBotones();
+              
+       }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -61,7 +65,6 @@ inscripcionData ID = new inscripcionData();
         });
 
         jlTitulo.setFont(new java.awt.Font("Garamond", 1, 24)); // NOI18N
-        jlTitulo.setForeground(new java.awt.Color(0, 0, 0));
         jlTitulo.setText("Carga de Notas");
 
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
@@ -72,11 +75,8 @@ inscripcionData ID = new inscripcionData();
 
         jlDoc.setBackground(new java.awt.Color(255, 255, 255));
         jlDoc.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
-        jlDoc.setForeground(new java.awt.Color(0, 0, 0));
         jlDoc.setText("Seleccione un alumno");
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 255));
-        jTable1.setForeground(new java.awt.Color(0, 0, 0));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -94,6 +94,11 @@ inscripcionData ID = new inscripcionData();
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -170,7 +175,7 @@ inscripcionData ID = new inscripcionData();
                     double nota = Double.parseDouble(notaStr); // cintia: parseo la nota a double
                     if (nota >= 0 && nota <= 10) { //cintia: controlo q la nota se actualice si esta en el rango
                         if (nota != inscripcion.getNota()) {
-                           
+
                             ID.actualizarNota(aS.getIdAlumno(), inscripcion.getMateria().getIdMateria(), nota);
                         }
                     } else {
@@ -182,7 +187,7 @@ inscripcionData ID = new inscripcionData();
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Solo se aceptan números " + e.getMessage());
-          
+
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
@@ -200,6 +205,10 @@ inscripcionData ID = new inscripcionData();
             this.dispose();//cierro la ventana
         }
     }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    
+    }//GEN-LAST:event_jTable1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -241,6 +250,7 @@ inscripcionData ID = new inscripcionData();
     }
 
     public void cargarTabla() {
+        
         borrarFilas();
         inscripcionData a1 = new inscripcionData();
         Alumno alumnoSeleccionado = (Alumno) jComboBox1.getSelectedItem(); // Obtener el alumno seleccionado
@@ -260,4 +270,17 @@ inscripcionData ID = new inscripcionData();
 
     }
 
+    public void habilitarBotones() {
+
+        jbGuardar.setEnabled(true);
+
+    }
+
+    public void desHabilitarBotones() {
+
+        jbGuardar.setEnabled(false);
+
+    }    
+    
+    
 }
