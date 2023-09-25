@@ -21,8 +21,6 @@ public class Materias extends javax.swing.JInternalFrame {
         this.setContentPane(fondo);
         initComponents();
         desHabilitarBotones();
-        // jbEliminar.setEnabled(false);
-        // jbNuevo.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -359,10 +357,12 @@ public class Materias extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public void habilitarBotones() {
-
+        if(!jtCodigo.getText().isEmpty() || !jtNombre.getText().isEmpty() || !jtAnio.getText().isEmpty()){
         jbEliminar.setEnabled(true);
         jbModificar.setEnabled(true);
-
+        }else{
+            desHabilitarBotones();
+        }
     }
 
     public void desHabilitarBotones() {
