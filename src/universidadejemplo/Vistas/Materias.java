@@ -260,7 +260,13 @@ public class Materias extends javax.swing.JInternalFrame {
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         int idMateria = Integer.parseInt(jtCodigo.getText());
-        md.eliminarMateria(idMateria);
+        boolean exito =md.eliminarMateria(idMateria);
+        if (exito){
+            JOptionPane.showMessageDialog(this, "Materia Borrada exitosamente");
+        }else{
+            JOptionPane.showMessageDialog(this, "Error al acceder a la tabla Materia");
+        }
+       
         //Cintia: Limpio campos
         jtCodigo.setText("");
         jtNombre.setText("");
@@ -300,7 +306,13 @@ public class Materias extends javax.swing.JInternalFrame {
                 boolean est = jrbEstado.isSelected();
                 int anio = Integer.parseInt(jtAnio.getText());
                 Materia nuevo = new Materia(nom, anio, est);
-                md.guardarMateria(nuevo);
+                //md.guardarMateria(nuevo);
+                boolean exito =md.guardarMateria(nuevo);
+                if(exito){
+                    JOptionPane.showMessageDialog(this, "Materia guardada exitosamente");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
+                }
 //             //Cintia: Limpio campos
                 jtCodigo.setText("");
                 jtNombre.setText("");
@@ -379,7 +391,12 @@ public class Materias extends javax.swing.JInternalFrame {
             int año = Integer.parseInt(jtAnio.getText());
             boolean est = jrbEstado.isSelected();
             Materia nuevaM = new Materia(idMateria, nom, año, est);
-            md.modificarMateria(nuevaM);
+           boolean exito= md.modificarMateria(nuevaM);
+           if (exito){
+               JOptionPane.showMessageDialog(this, "Materia modificada exitosamente");
+           }else {
+               JOptionPane.showMessageDialog(this, "Error al acceder a la tabla Materia");
+           }
 
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "No se puede dejar espacios vacios");
