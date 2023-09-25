@@ -38,21 +38,27 @@ public class UniversidadULP extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Universidad de La Punta");
 
+        JPanel.setPreferredSize(new java.awt.Dimension(1280, 1024));
+
         javax.swing.GroupLayout JPanelLayout = new javax.swing.GroupLayout(JPanel);
         JPanel.setLayout(JPanelLayout);
         JPanelLayout.setHorizontalGroup(
             JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 711, Short.MAX_VALUE)
+            .addGap(0, 1280, Short.MAX_VALUE)
         );
         JPanelLayout.setVerticalGroup(
             JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 466, Short.MAX_VALUE)
+            .addGap(0, 804, Short.MAX_VALUE)
         );
 
         jMenuBar1.setBorder(null);
+        jMenuBar1.setOpaque(false);
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(400, 40));
 
         jMenu1.setText("Alumnos");
+        jMenu1.setFont(new java.awt.Font("Garamond", 0, 24)); // NOI18N
 
+        formA.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
         formA.setText("Formulario de Alumno");
         formA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,7 +70,9 @@ public class UniversidadULP extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Materias");
+        jMenu2.setFont(new java.awt.Font("Garamond", 0, 24)); // NOI18N
 
+        fm.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
         fm.setText("Formulario de materias");
         fm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,7 +84,9 @@ public class UniversidadULP extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Administracion");
+        jMenu3.setFont(new java.awt.Font("Garamond", 0, 24)); // NOI18N
 
+        fi.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
         fi.setText("Formulario de inscripcion");
         fi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +95,7 @@ public class UniversidadULP extends javax.swing.JFrame {
         });
         jMenu3.add(fi);
 
+        mn.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
         mn.setText("Manipulacion de notas");
         mn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,7 +107,9 @@ public class UniversidadULP extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Consultas");
+        jMenu4.setFont(new java.awt.Font("Garamond", 0, 24)); // NOI18N
 
+        porMateria.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
         porMateria.setText("Alumnos por materia");
         porMateria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,6 +121,7 @@ public class UniversidadULP extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         salirMenu1.setText("Salir");
+        salirMenu1.setFont(new java.awt.Font("Garamond", 0, 24)); // NOI18N
         salirMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 salirMenu1MouseClicked(evt);
@@ -121,11 +135,15 @@ public class UniversidadULP extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(JPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(JPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 804, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
