@@ -1,8 +1,11 @@
 
 package universidadejemplo;
 
+import java.awt.Font;
 import java.time.LocalDate;
 import java.time.Month;
+import javax.swing.UIManager;
+import javax.swing.plaf.FontUIResource;
 import universidadejemplo.Vistas.UniversidadULP;
 import universidadejemplo.conexionBaseDatos.alumnoData;
 import universidadejemplo.conexionBaseDatos.inscripcionData;
@@ -16,6 +19,12 @@ import universidadejemplo.entidades.Materia;
 public class UniversidadEjemplo {
 
     public static void main(String[] args) {
+        
+        // Define la fuente global
+        Font globalFont = new Font("Arial", Font.PLAIN, 14); // Cambia "Arial" al tipo de fuente que desees
+
+        // Configura la fuente global para toda la aplicación
+        setUIFont(new FontUIResource(globalFont));
         
         UniversidadULP m = new UniversidadULP();
         m.setVisible(true);
@@ -117,11 +126,19 @@ public class UniversidadEjemplo {
      // for (Materia mat : ID.obtenerMateriasNOCursadas(1)) {
 //       //     System.out.println(mat.toString());
 //        }
-       
-       
-     
-
    
     }
+    // Método para establecer la fuente global
+    public static void setUIFont(FontUIResource fontUIResource) {
+        java.util.Enumeration keys = UIManager.getDefaults().keys();
+        while (keys.hasMoreElements()) {
+            Object key = keys.nextElement();
+            Object value = UIManager.get(key);
+            if (value instanceof FontUIResource) {
+                UIManager.put(key, fontUIResource);
+            }
+        }
+    }
+    
 }
  
