@@ -25,7 +25,7 @@ public class inscripcionData {
         con = Conexion.getConexion(); // no olvidar!!
     }
 
-    //funciones
+    //guardar inscripciones de manera individual
     public void guardarInscripcion(Inscripcion ins) {  // recibe constructor de inscripcion
 
         String sql = "INSERT INTO inscripcion(nota, idAlumno, idMateria) VALUES (?,?,?)";
@@ -57,6 +57,32 @@ public class inscripcionData {
         }
 
     }
+    //por listas le paso una lista de inscripciones
+    public void guardarInscripciones(List<Inscripcion> inscripciones) {
+    String sql = "INSERT INTO inscripcion(nota, idAlumno, idMateria) VALUES (?,?,?)";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        for (Inscripcion ins : inscripciones) {
+            ps.setDouble(1, ins.getNota());
+            ps.setInt(2, ins.getAlumno().getIdAlumno());
+            ps.setInt(3, ins.getMateria().getIdMateria());
+            ps.executeUpdate();
+        }
+
+        //cartel para ver si fueron hechas exitosamente las inscripciones
+        JOptionPane.showMessageDialog(null, "Inscripciones realizadas exitosamente");
+
+        //Cierro la Conexion
+        ps.close();
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscripcion: " + ex.getMessage());
+    }
+}
+    
+    
 
     public List<Inscripcion> obtenerInscripciones() {
         String sql = "SELECT * FROM inscripcion";
@@ -194,10 +220,10 @@ public class inscripcionData {
 
             int filas = ps.executeUpdate();
 
-            //cartel para ver si fue hecho exitosamente la inscripcion
-            if (filas > 0) {
-                JOptionPane.showMessageDialog(null, "Inscripcion borrada exitosamente");
-            }
+//            //cartel para ver si fue hecho exitosamente la inscripcion
+//            if (filas > 0) {
+//                JOptionPane.showMessageDialog(null, "Inscripcion borrada exitosamente");
+//            }
             //Cierro la Conexion
             ps.close();
             
@@ -220,10 +246,10 @@ public class inscripcionData {
 
             int filas = ps.executeUpdate();
 
-            //cartel para ver si fue hecho exitosamente la inscripcion
-            if (filas > 0) {
-                JOptionPane.showMessageDialog(null, "Nota Actualizada Exitosamente");
-            }
+//            //cartel para ver si fue hecho exitosamente la inscripcion
+//            if (filas > 0) {
+//                JOptionPane.showMessageDialog(null, "Nota Actualizada Exitosamente");
+//            }
             //Cierro la Conexion
             ps.close();
 
