@@ -220,7 +220,7 @@ public class inscripcionData {
 
             //cartel para ver si fue hecho exitosamente la inscripcion
             if (filas > 0) {
-                JOptionPane.showMessageDialog(null, "Nota Actualizada");
+                JOptionPane.showMessageDialog(null, "Nota Actualizada Exitosamente");
             }
             //Cierro la Conexion
             ps.close();
