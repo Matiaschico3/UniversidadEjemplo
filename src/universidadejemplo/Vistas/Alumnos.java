@@ -78,6 +78,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
         jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Buscar.png"))); // NOI18N
         jbBuscar.setBorder(null);
         jbBuscar.setBorderPainted(false);
+        jbBuscar.setOpaque(false);
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
@@ -91,6 +92,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
         });
 
         jrbEstado.setSelected(true);
+        jrbEstado.setOpaque(false);
         jrbEstado.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jrbEstadoStateChanged(evt);
