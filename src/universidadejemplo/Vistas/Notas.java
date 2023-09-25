@@ -33,7 +33,7 @@ public class Notas extends javax.swing.JInternalFrame {
         initComponents();
         armarCabecera();
         cargarCombo();
-        desHabilitarBotones();
+       
 
     }
 
