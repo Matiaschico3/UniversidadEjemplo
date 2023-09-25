@@ -255,7 +255,13 @@ public class Alumnos extends javax.swing.JInternalFrame {
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
 
         int dni = Integer.parseInt(jtDocumento.getText());
-        ad.eliminarAlumno(dni);
+        boolean exito=ad.eliminarAlumno(dni);
+        if(exito){
+            JOptionPane.showMessageDialog(this, "Alumno eliminado");
+        }else{
+            JOptionPane.showMessageDialog(this, "Error al eliminar alumno");
+        }
+                
         //cintia : agrego limpieza de campos 
         jtDocumento.setText("");
         jtApellido.setText("");
@@ -413,7 +419,12 @@ public class Alumnos extends javax.swing.JInternalFrame {
             LocalDate fechaNacimiento = jdFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             boolean est = jrbEstado.isSelected();
             Alumno nuevom = new Alumno(idAlumnoSeleccionado, dni, ap, nom, fechaNacimiento, est);
-            ad.modificarAlumno(nuevom);
+            boolean exito=ad.modificarAlumno(nuevom);
+            if (exito){
+                JOptionPane.showMessageDialog(this, "Alumno modificado con Exito");
+            }else{
+                JOptionPane.showMessageDialog(this, "Error al modificar la tabla alumno ");
+            }
 
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Error al modificar" + e.getMessage());
