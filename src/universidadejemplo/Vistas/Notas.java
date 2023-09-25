@@ -81,6 +81,7 @@ public class Notas extends javax.swing.JInternalFrame {
         jlDoc.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
         jlDoc.setText("Seleccione un alumno");
 
+        jTable1.setFont(new java.awt.Font("Garamond", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},

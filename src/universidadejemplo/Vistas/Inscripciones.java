@@ -105,6 +105,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
             }
         });
 
+        jTabla.setFont(new java.awt.Font("Garamond", 0, 14)); // NOI18N
         jTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
