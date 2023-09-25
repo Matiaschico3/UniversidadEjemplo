@@ -35,7 +35,7 @@ public static Connection getConexion(){
     }
     try{
     //CONEXION A LA BASE DE DATOS
-         con = DriverManager.getConnection("jdbc:mariadb://localhost/universidadulpg","root",""); //cambie el nombre de la tabla a la que creamos para este grupo
+         con = DriverManager.getConnection("jdbc:mariadb://localhost/universidadulpgrupo13","root",""); //cambie el nombre de la tabla a la que creamos para este grupo
     }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error de conexion con la base de datos"+ex.getMessage());    
       
