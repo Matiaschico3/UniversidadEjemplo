@@ -167,31 +167,46 @@ public class Notas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        //recorremos la lista
-        Alumno aS = (Alumno) jComboBox1.getSelectedItem(); // Obtener el alumno seleccionado
-        try {
-            if (aS != null) {
-                List<Inscripcion> inscripciones = ID.obtenerInscripcionesPorAlumno(aS.getIdAlumno());
+       //Version final
+        //Creamos aS con el ID
+        Alumno aS = (Alumno) jComboBox1.getSelectedItem();
+        //Verifico que ID no sea nulo, que no se halla cargado el combo
+        if (aS != null) {
+            //Genero una lista de inscripciones con el ID del alumno
+            List<Inscripcion> inscripciones = ID.obtenerInscripcionesPorAlumno(aS.getIdAlumno());
 
-                int contador = 0;
-                for (Inscripcion inscripcion : inscripciones) {
-                    String notaStr = model.getValueAt(contador, 2).toString(); //cintia:ingreso la nota a string desde la tabla
-                    double nota = Double.parseDouble(notaStr); // cintia: parseo la nota a double
-                    if (nota >= 0 && nota <= 10) { //cintia: controlo q la nota se actualice si esta en el rango
-                        if (nota != inscripcion.getNota()) {
+            int nroFila = 0; // Variable para controlar la fila
 
-                            ID.actualizarNota(aS.getIdAlumno(), inscripcion.getMateria().getIdMateria(), nota);
+            for (Inscripcion inscripcion : inscripciones) {
+                //cambiamos la nota de String a double
+                String notaStr = model.getValueAt(nroFila, 2).toString();
+                double nota = Double.parseDouble(notaStr);
+                // Verificamos que nota este en el rango de 0-10
+                if (nota >= 0 && nota <= 10) {
+                    if (nota != inscripcion.getNota()) {
+                        double notaAnterior = inscripcion.getNota(); // Guardo nota anterior
+                        inscripcion.setNota(nota);
+                        // Genero un String con los datos guardados y nuevos
+                        String mensaje = "Cambios para " + inscripcion.getMateria().getNombre() + ":\n";
+                        mensaje += "Nota anterior: " + notaAnterior + "\n";
+                        mensaje += "Nueva nota: " + nota;
+
+                        int respuesta = JOptionPane.showConfirmDialog(this, mensaje + "\n\n¿Estás seguro que deseas guardar los cambios?", "Confirmar Guardar", JOptionPane.YES_NO_OPTION);
+
+                        if (respuesta == JOptionPane.YES_OPTION) {
+                            ID.actualizarNota(aS.getIdAlumno(), inscripcion.getMateria().getIdMateria(), nota); // Guardo el cambio
+                        } else {
+                            model.setValueAt(notaAnterior, nroFila, 2); // Restablecer la nota anterior.
+                            model.fireTableDataChanged(); // Refresco la tabla
+                            ///JOptionPane.showMessageDialog(this, "Cambios no guardados.");
                         }
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Error: La nota debe estar en el rango de 0 a 10");
-                        model.setValueAt(inscripcion.getNota(), contador, 2); //cintia : restablezco la nota anterior.
                     }
-                    contador++;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Error: La nota debe estar en el rango de 0 a 10");
+                    model.setValueAt(inscripcion.getNota(), nroFila, 2); // Restablecer la nota anterior.
                 }
+                nroFila++;
             }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Solo se aceptan números " + e.getMessage());
-
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
