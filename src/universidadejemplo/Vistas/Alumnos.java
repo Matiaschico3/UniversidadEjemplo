@@ -78,18 +78,34 @@ public class Alumnos extends javax.swing.JInternalFrame {
         jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Buscar.png"))); // NOI18N
         jbBuscar.setBorder(null);
         jbBuscar.setBorderPainted(false);
-        jbBuscar.setOpaque(false);
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
             }
         });
 
+        jtDocumento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtDocumentoKeyReleased(evt);
+            }
+        });
+
         jrbEstado.setSelected(true);
-        jrbEstado.setOpaque(false);
         jrbEstado.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jrbEstadoStateChanged(evt);
+            }
+        });
+
+        jtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtApellidoKeyReleased(evt);
+            }
+        });
+
+        jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtNombreKeyReleased(evt);
             }
         });
 
@@ -282,11 +298,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         guardar();
-        jtDocumento.setText("");
-        jtApellido.setText("");
-        jtNombre.setText("");
-        jdFecha.setDate(null);
-        jrbEstado.setSelected(true);
+       
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
@@ -324,6 +336,24 @@ public class Alumnos extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jrbEstadoStateChanged
 
+    private void jtApellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtApellidoKeyReleased
+         if (!jtDocumento.getText().isEmpty() && !jtApellido.getText().isEmpty() && !jtNombre.getText().isEmpty()) {
+                habilitarBotones();
+         }
+    }//GEN-LAST:event_jtApellidoKeyReleased
+
+    private void jtDocumentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDocumentoKeyReleased
+        if (!jtDocumento.getText().isEmpty() && !jtApellido.getText().isEmpty() && !jtNombre.getText().isEmpty()) {
+                habilitarBotones();
+        }
+    }//GEN-LAST:event_jtDocumentoKeyReleased
+
+    private void jtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyReleased
+          if (!jtDocumento.getText().isEmpty() && !jtApellido.getText().isEmpty() && !jtNombre.getText().isEmpty()) {
+                habilitarBotones();
+         }
+    }//GEN-LAST:event_jtNombreKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
@@ -349,6 +379,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
     public void guardar() {
         try {
             if (!jtDocumento.getText().isEmpty() && !jtApellido.getText().isEmpty() && !jtNombre.getText().isEmpty() && jdFecha.getDate() != null && jrbEstado.isSelected() == true) {
+                habilitarBotones();
                 int dni = Integer.parseInt(jtDocumento.getText());
                 String ap = jtApellido.getText();
                 String nom = jtNombre.getText();
@@ -356,16 +387,14 @@ public class Alumnos extends javax.swing.JInternalFrame {
                 boolean est = jrbEstado.isSelected();
                 Alumno nuevo = new Alumno(dni, ap, nom, fechaNacimiento, est);
                 ad.guardarAlumno(nuevo);
-            } else if (jtDocumento.getText().isEmpty()) {  //|| jtApellido.getText().isEmpty() || jtNombre.getText().isEmpty() || jdFecha.getDate() == null 
-                JOptionPane.showMessageDialog(this, "No debe dejar el dni vacio");
-            } else if (jtApellido.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No debe dejar el campo apellido vacio");
-            } else if (jtNombre.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No debe dejar el campo nombre vacio");
-            } else if (jdFecha.getDate() == null) {
-                JOptionPane.showMessageDialog(this, "No debe dejar el campo Fecha vacia");
-            } else if (jrbEstado.isSelected() == false) {
-                JOptionPane.showMessageDialog(this, "Debe dejar activado el campo estado");
+                jtDocumento.setText("");
+                jtApellido.setText("");
+                jtNombre.setText("");
+                jdFecha.setDate(null);
+                jrbEstado.setSelected(true);
+                desHabilitarBotones();
+            } else {
+                 JOptionPane.showMessageDialog(this, "No debe dejar campos vacios");
             }
 
         } catch (NullPointerException e) {
@@ -393,13 +422,13 @@ public class Alumnos extends javax.swing.JInternalFrame {
 
         jbEliminar.setEnabled(true);
         jbModificar.setEnabled(true);
-
+        jbNuevo.setEnabled(true);
     }
 
     public void desHabilitarBotones() {
         jbEliminar.setEnabled(false);
         jbModificar.setEnabled(false);
-
+        jbNuevo.setEnabled(false);
     }
 
     class FondoPanel extends JPanel {
