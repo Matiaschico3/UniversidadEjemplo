@@ -248,7 +248,6 @@ public class UniversidadULP extends javax.swing.JFrame {
             g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
             super.paint(g);
-//         setLocationRelativeTo(null);
         }
 
     }

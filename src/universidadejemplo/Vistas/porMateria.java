@@ -1,9 +1,13 @@
 
 package universidadejemplo.Vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import universidadejemplo.conexionBaseDatos.inscripcionData;
 import universidadejemplo.conexionBaseDatos.materiaData;
@@ -17,9 +21,12 @@ public class porMateria extends javax.swing.JInternalFrame {
     
     //Utilidades para Tabla
     DefaultTableModel model = new DefaultTableModel();
+    
+    FondoPanel fondo = new FondoPanel();
 
   
     public porMateria() {
+        this.setContentPane(fondo);
         initComponents();
         armarCabecera();
         cargarCombo();
@@ -32,7 +39,7 @@ public class porMateria extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
+        jPanel3 = new FondoPanel();
         jbSalir = new javax.swing.JButton();
         jlTitulo = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -214,6 +221,19 @@ public class porMateria extends javax.swing.JInternalFrame {
                     alu.getNombre()
                 });
             }
+        }
+
+    }
+        class FondoPanel extends JPanel {
+
+        private Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+            imagen = new ImageIcon(getClass().getResource("/images/fondochico.png")).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
         }
 
     }

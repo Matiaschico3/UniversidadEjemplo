@@ -42,7 +42,7 @@
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel()"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new FondoPanel()"/>
       </AuxValues>
 
       <Layout>
@@ -172,6 +172,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="jrbInscriptas">
+          <Properties>
+            <Property name="opaque" type="boolean" value="false"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbInscriptasActionPerformed"/>
           </Events>
@@ -201,6 +204,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="jrbNOinscriptas">
+          <Properties>
+            <Property name="opaque" type="boolean" value="false"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbNOinscriptasActionPerformed"/>
           </Events>

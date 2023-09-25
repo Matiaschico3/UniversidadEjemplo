@@ -1,28 +1,35 @@
 package universidadejemplo.Vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import universidadejemplo.conexionBaseDatos.materiaData;
 import universidadejemplo.entidades.Alumno;
 import universidadejemplo.entidades.Materia;
 
 public class Materias extends javax.swing.JInternalFrame {
-    int matS = -1; 
+
+    FondoPanel fondo = new FondoPanel();
+    int matS = -1;
     materiaData md = new materiaData();
 
     public Materias() {
+        this.setContentPane(fondo);
         initComponents();
         desHabilitarBotones();
-       // jbEliminar.setEnabled(false);
-       // jbNuevo.setEnabled(false);
+        // jbEliminar.setEnabled(false);
+        // jbNuevo.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new FondoPanel();
         jlTitulo = new javax.swing.JLabel();
         jlCod = new javax.swing.JLabel();
         jlAp = new javax.swing.JLabel();
@@ -61,15 +68,21 @@ public class Materias extends javax.swing.JInternalFrame {
         jlEst.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
         jlEst.setText("Estado");
 
-        jbBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        jbBuscar.setForeground(new java.awt.Color(0, 0, 0));
         jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Buscar.png"))); // NOI18N
+        jbBuscar.setBorder(null);
+        jbBuscar.setBorderPainted(false);
+        jbBuscar.setOpaque(false);
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
             }
         });
 
+        jrbEstado.setForeground(new java.awt.Color(0, 0, 0));
         jrbEstado.setSelected(true);
+        jrbEstado.setBorder(null);
+        jrbEstado.setOpaque(false);
         jrbEstado.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jrbEstadoStateChanged(evt);
@@ -139,13 +152,14 @@ public class Materias extends javax.swing.JInternalFrame {
                                     .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jrbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jrbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jlEstDescrip, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(109, 109, 109))))
+                                .addGap(115, 115, 115))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jbNuevo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
@@ -154,8 +168,7 @@ public class Materias extends javax.swing.JInternalFrame {
                         .addComponent(jbEliminar)
                         .addGap(18, 18, 18)
                         .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)))
-                .addContainerGap())
+                        .addGap(18, 18, 18))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jlTitulo)
@@ -164,22 +177,22 @@ public class Materias extends javax.swing.JInternalFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jlTitulo)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jlTitulo)
-                        .addGap(18, 18, 18)
+                        .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlCod)
                             .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(jbBuscar)))
-                .addGap(27, 27, 27)
+                        .addGap(16, 16, 16)
+                        .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlAp))
-                .addGap(30, 30, 30)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlNom))
@@ -188,7 +201,7 @@ public class Materias extends javax.swing.JInternalFrame {
                     .addComponent(jlEst)
                     .addComponent(jrbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlEstDescrip))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevo)
                     .addComponent(jbEliminar)
@@ -214,31 +227,31 @@ public class Materias extends javax.swing.JInternalFrame {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
 
         try {
-          
+
             int idMateria = Integer.parseInt(jtCodigo.getText());
             boolean activa = jrbEstado.isSelected();
             Materia m = md.buscarMateria(idMateria, activa);
-     
+
             if (m != null) {
                 jtNombre.setText(m.getNombre());
                 jtAnio.setText(Integer.toString(m.getAnioMateria()));
                 jrbEstado.setSelected(m.isActivo());
-                matS=m.getIdMateria();
+                matS = m.getIdMateria();
                 //Habilito botones si esta todo OK!
                 habilitarBotones();
 
             } else {
-               
+
                 //Controlo el estado de la respuesta de la consulta y respondo 
                 //segun parametros obtenidos
                 if (activa == true) {
                     JOptionPane.showMessageDialog(this, "No existe una Materia Activa con ese ID");
-                } else if(activa == false) {  
+                } else if (activa == false) {
                     JOptionPane.showMessageDialog(this, "No existe una Materia Inactiva con ese ID");
                 } else {
                     JOptionPane.showMessageDialog(this, "No existe una Materia con ese ID");
-                }    
-                
+                }
+
             }
         } catch (NumberFormatException e) {
 
@@ -250,29 +263,28 @@ public class Materias extends javax.swing.JInternalFrame {
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         int idMateria = Integer.parseInt(jtCodigo.getText());
         md.eliminarMateria(idMateria);
-         //Cintia: Limpio campos
-                jtCodigo.setText("");
-                jtNombre.setText("");
-                jtAnio.setText("");
-         //Deshabilito botones luego de ejecutar acccion!
-         desHabilitarBotones();
+        //Cintia: Limpio campos
+        jtCodigo.setText("");
+        jtNombre.setText("");
+        jtAnio.setText("");
+        //Deshabilito botones luego de ejecutar acccion!
+        desHabilitarBotones();
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
-    
-        
+
         if (matS != -1) { // Verifica que se haya seleccionado una Materia
-           modificar();// Llama al método modificar solo si se ha seleccionado una materia
+            modificar();// Llama al método modificar solo si se ha seleccionado una materia
             //Cintia: Limpio campos
-                jtCodigo.setText("");
-                jtNombre.setText("");
-                jtAnio.setText("");
-                 //Deshabilito botones luego de ejecutar acccion!
-                  desHabilitarBotones();
+            jtCodigo.setText("");
+            jtNombre.setText("");
+            jtAnio.setText("");
+            //Deshabilito botones luego de ejecutar acccion!
+            desHabilitarBotones();
         } else {
             JOptionPane.showMessageDialog(this, "Debes seleccionar una materia antes de guardar.");
         }
-    
+
     }//GEN-LAST:event_jbModificarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -283,7 +295,7 @@ public class Materias extends javax.swing.JInternalFrame {
     }
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-       try {
+        try {
             if (!jtNombre.getText().isEmpty() && !jtAnio.getText().isEmpty() && jrbEstado.isSelected() == true) {
 
                 String nom = jtNombre.getText();
@@ -301,7 +313,7 @@ public class Materias extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "No debe dejar el campo año vacio");
             } else if (jrbEstado.isSelected() == false) {
                 JOptionPane.showMessageDialog(this, "Debe dejar activado el campo estado");
-             
+
             }
 
         } catch (NullPointerException e) {
@@ -314,11 +326,11 @@ public class Materias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtNombreKeyReleased
 
     private void jtAnioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAnioKeyReleased
-       habilitarBotones();
+        habilitarBotones();
     }//GEN-LAST:event_jtAnioKeyReleased
 
     private void jrbEstadoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jrbEstadoStateChanged
-       //Verifico el estado de radioButton y modifico segun el estado la etiqueta mostrando su valor
+        //Verifico el estado de radioButton y modifico segun el estado la etiqueta mostrando su valor
         if (jrbEstado.isSelected() == true) {
             jlEstDescrip.setText("Activo");
         } else {
@@ -347,30 +359,44 @@ public class Materias extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public void habilitarBotones() {
-       
-            jbEliminar.setEnabled(true);
-            jbModificar.setEnabled(true);
-        
+
+        jbEliminar.setEnabled(true);
+        jbModificar.setEnabled(true);
+
     }
-     
-     public void desHabilitarBotones(){
-            jbEliminar.setEnabled(false);
-            jbModificar.setEnabled(false);
-       
+
+    public void desHabilitarBotones() {
+        jbEliminar.setEnabled(false);
+        jbModificar.setEnabled(false);
+
     }
-     
-      public void modificar(){
-         try {
-                
-                int idMateria = Integer.parseInt(jtCodigo.getText());
-               String nom = jtNombre.getText();
-                int año=Integer.parseInt(jtAnio.getText());
-                boolean est = jrbEstado.isSelected();                            
-                            Materia nuevaM=new Materia(idMateria,nom,año,est);
-                             md.modificarMateria(nuevaM);
-             
+
+    public void modificar() {
+        try {
+
+            int idMateria = Integer.parseInt(jtCodigo.getText());
+            String nom = jtNombre.getText();
+            int año = Integer.parseInt(jtAnio.getText());
+            boolean est = jrbEstado.isSelected();
+            Materia nuevaM = new Materia(idMateria, nom, año, est);
+            md.modificarMateria(nuevaM);
+
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "No se puede dejar espacios vacios");
         }
+    }
+
+    class FondoPanel extends JPanel {
+
+        private Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+            imagen = new ImageIcon(getClass().getResource("/images/fondochico.png")).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
+
     }
 }

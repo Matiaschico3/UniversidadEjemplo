@@ -1,8 +1,12 @@
 package universidadejemplo.Vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import universidadejemplo.conexionBaseDatos.alumnoData;
 import universidadejemplo.conexionBaseDatos.inscripcionData;
@@ -11,30 +15,33 @@ import universidadejemplo.entidades.Inscripcion;
 import universidadejemplo.entidades.Materia;
 
 public class Notas extends javax.swing.JInternalFrame {
+
     //Declaro variables 
+    FondoPanel fondo = new FondoPanel();
 
     inscripcionData ID = new inscripcionData();
-    
+
     DefaultTableModel model = new DefaultTableModel() {
 
         public boolean isCellEditable(int f, int c) {
             return c == 2;
         }
     };
-    
+
     public Notas() {
+        this.setContentPane(fondo);
         initComponents();
         armarCabecera();
         cargarCombo();
-       desHabilitarBotones();
-              
-       }
+        desHabilitarBotones();
+
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
+        jPanel3 = new FondoPanel();
         jbGuardar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jlTitulo = new javax.swing.JLabel();
@@ -247,7 +254,7 @@ public class Notas extends javax.swing.JInternalFrame {
     }
 
     public void cargarTabla() {
-        
+
         borrarFilas();
         inscripcionData a1 = new inscripcionData();
         Alumno alumnoSeleccionado = (Alumno) jComboBox1.getSelectedItem(); // Obtener el alumno seleccionado
@@ -277,7 +284,20 @@ public class Notas extends javax.swing.JInternalFrame {
 
         jbGuardar.setEnabled(false);
 
-    }    
-    
-    
+    }
+
+    class FondoPanel extends JPanel {
+
+        private Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+            imagen = new ImageIcon(getClass().getResource("/images/fondochico.png")).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
+
+    }
+
 }

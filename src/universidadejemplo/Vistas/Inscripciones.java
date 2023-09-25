@@ -1,8 +1,11 @@
-
 package universidadejemplo.Vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import universidadejemplo.conexionBaseDatos.alumnoData;
 import universidadejemplo.conexionBaseDatos.inscripcionData;
@@ -12,6 +15,7 @@ import universidadejemplo.entidades.Materia;
 
 public class Inscripciones extends javax.swing.JInternalFrame {
 
+    FondoPanel fondo = new FondoPanel();
     DefaultTableModel model = new DefaultTableModel() {
         public boolean isCellEditable(int f, int c) {
             return false;
@@ -19,6 +23,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
     };
 
     public Inscripciones() {
+        this.setContentPane(fondo);
         initComponents();
         armarCabecera();
         cargarCombo();
@@ -29,7 +34,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new FondoPanel();
         jlTitulo = new javax.swing.JLabel();
         jlDoc = new javax.swing.JLabel();
         jlNom = new javax.swing.JLabel();
@@ -65,6 +70,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         jlEst.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
         jlEst.setText("Materia inscriptas");
 
+        jrbInscriptas.setOpaque(false);
         jrbInscriptas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbInscriptasActionPerformed(evt);
@@ -92,6 +98,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
             }
         });
 
+        jrbNOinscriptas.setOpaque(false);
         jrbNOinscriptas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jrbNOinscriptasActionPerformed(evt);
@@ -361,6 +368,20 @@ public class Inscripciones extends javax.swing.JInternalFrame {
     public void desHabilitarBotones() {
         jbAnularInsc.setEnabled(false);
         jbInscribir.setEnabled(false);
+
+    }
+
+    class FondoPanel extends JPanel {
+
+        private Image imagen;
+
+        @Override
+        public void paint(Graphics g) {
+            imagen = new ImageIcon(getClass().getResource("/images/fondochico.png")).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            setOpaque(false);
+            super.paint(g);
+        }
 
     }
 }
