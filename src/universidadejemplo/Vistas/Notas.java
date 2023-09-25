@@ -188,6 +188,7 @@ public class Notas extends javax.swing.JInternalFrame {
                         inscripcion.setNota(nota);
                         // Genero un String con los datos guardados y nuevos
                         String mensaje = "Cambios para " + inscripcion.getMateria().getNombre() + ":\n";
+                        mensaje += "Nro de registro "+ (nroFila+1) + "\n";
                         mensaje += "Nota anterior: " + notaAnterior + "\n";
                         mensaje += "Nueva nota: " + nota;
 
