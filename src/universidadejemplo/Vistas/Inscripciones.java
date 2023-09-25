@@ -287,13 +287,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
             inscripcionData insd = new inscripcionData();
             Alumno alu = (Alumno) jComboBox1.getSelectedItem();
             Materia mat = new Materia((int) model.getValueAt(fs, 0), (String) model.getValueAt(fs, 1), (int) model.getValueAt(fs, 2), true);
-            boolean exito=insd.borrarInscripcionMateriaAlumno(alu.getIdAlumno(), mat.getIdMateria());
-            if(exito){
-                JOptionPane.showMessageDialog(this, "Inscripcion borrada exitosamente");
-            }else{
-                JOptionPane.showMessageDialog(this, "Error al conectarse a tabla Inscripcion");
-            }
-
+            insd.borrarInscripcionMateriaAlumno(alu.getIdAlumno(), mat.getIdMateria());
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(this, "no hay nada seleccionado");
         }

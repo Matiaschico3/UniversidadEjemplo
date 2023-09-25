@@ -48,7 +48,7 @@ public class alumnoData {
 
     }
 
-    public boolean modificarAlumno(Alumno alumno) {
+    public void modificarAlumno(Alumno alumno) {
         
         String sql = "UPDATE alumno SET dni = ?, apellido = ?, nombre = ?, fechaNacimiento = ?, activo = ? WHERE idAlumno = ?";
         try {
@@ -60,34 +60,34 @@ public class alumnoData {
             ps.setBoolean(5, alumno.isActivo());
             ps.setInt(6, alumno.getIdAlumno());
             int exito = ps.executeUpdate();
-            /*if (exito == 1) {
+            if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Alumno modificado con Exito");
-            }*/
+            }
              //Cierro la Conexion
             ps.close();
-            return true;
+            
         } catch (SQLException ex) {
-           // JOptionPane.showMessageDialog(null, "Error al modificar la tabla alumno "+ex);
-           return false;
+           JOptionPane.showMessageDialog(null, "Error al modificar la tabla alumno "+ex);
+           
         }
     }
 
-    public boolean eliminarAlumno(int dni) {
+    public void eliminarAlumno(int dni) {
         String sql = "UPDATE alumno SET activo = 0 WHERE dni = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, dni);
             int exito = ps.executeUpdate();
-            /*if (exito == 1) {
+            if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Alumno eliminado");
-            }*/
+            }
              //Cierro la Conexion
             ps.close();
-            return true;
+           
             
         } catch (SQLException ex) {
-            //JOptionPane.showMessageDialog(null, "Error al eliminar alumno");
-            return false;
+            JOptionPane.showMessageDialog(null, "Error al eliminar alumno");
+            
         }
 
     }

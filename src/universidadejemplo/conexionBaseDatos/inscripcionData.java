@@ -183,7 +183,7 @@ public class inscripcionData {
         return materias;
     }
 
-    public boolean borrarInscripcionMateriaAlumno(int idAlumno, int idMateria) {
+    public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria) {
         //borrado fisico
 
         String sql = "DELETE FROM inscripcion WHERE idAlumno=? AND idMateria=? ";
@@ -195,16 +195,16 @@ public class inscripcionData {
             int filas = ps.executeUpdate();
 
             //cartel para ver si fue hecho exitosamente la inscripcion
-           /* if (filas > 0) {
+            if (filas > 0) {
                 JOptionPane.showMessageDialog(null, "Inscripcion borrada exitosamente");
-            }*/
+            }
             //Cierro la Conexion
             ps.close();
-            return true;
+            
 
         } catch (SQLException ex) {
-            //JOptionPane.showMessageDialog(null, "Error al conectarse a tabla Inscripcion");
-            return false;
+            JOptionPane.showMessageDialog(null, "Error al conectarse a tabla Inscripcion");
+            
         }
 
     }

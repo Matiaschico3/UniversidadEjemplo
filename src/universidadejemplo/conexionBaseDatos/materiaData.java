@@ -22,7 +22,7 @@ public class materiaData {
     }
 
     //metodos
-    public boolean guardarMateria(Materia materia) {
+    public void guardarMateria(Materia materia) {
 
         String sql = "INSERT INTO materia (nombre, año, activa) VALUES (?,?,?)";
         try {
@@ -36,15 +36,15 @@ public class materiaData {
 
             if (rs.next()) {
                 materia.setIdMateria(rs.getInt(1));
-                //JOptionPane.showMessageDialog(null, "Materia guardada exitosamente");
+                JOptionPane.showMessageDialog(null, "Materia guardada exitosamente");
             }
             //Cierro la Conexion
             ps.close();
-            return true;
+           
 
         } catch (SQLException ex) {
-           // JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
-           return false;
+           JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
+           
         }
 
     }
@@ -78,7 +78,7 @@ public class materiaData {
         return materia;
     }
 
-    public boolean modificarMateria(Materia materia) {
+    public void modificarMateria(Materia materia) {
 
         String sql = "UPDATE materia SET nombre=?, año=?, activa=? WHERE idMateria=?";
         try {
@@ -89,21 +89,21 @@ public class materiaData {
             ps.setInt(4, materia.getIdMateria());// viene del where
             int exito = ps.executeUpdate();
 
-           /* if (exito == 1) {//para avisar de que funciono correctamente.
-                
-            }*/
+           if (exito == 1) {//para avisar de que funciono correctamente.
+                JOptionPane.showMessageDialog(null, "Materia modificada exitosamente");
+            }
             //Cierro la Conexion
             ps.close();
-            return true;
+            
 
         } catch (SQLException ex) {
-            //JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
-            return false;
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
+            
         }
 
     }
 
-    public boolean eliminarMateria(int idMateria) {
+    public void eliminarMateria(int idMateria) {
         //borrado logico
         String sql = "UPDATE materia SET activa=0 WHERE idMateria= ?";
 
@@ -113,16 +113,13 @@ public class materiaData {
 
             int exito = ps.executeUpdate();
 
-          /*  if (exito == 1) {
-                
-            }*/
+           if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Materia eliminada exitosamente");
+            }
             //Cierro la Conexion
             ps.close();
-            return true;
-
         } catch (SQLException ex) {
-            //JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
-            return false;
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
         }
 
     }
