@@ -3,9 +3,6 @@ package universidadejemplo.Vistas;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import universidadejemplo.conexionBaseDatos.alumnoData;
 import universidadejemplo.conexionBaseDatos.inscripcionData;
@@ -15,7 +12,7 @@ import universidadejemplo.entidades.Materia;
 
 public class Notas extends javax.swing.JInternalFrame {
     //Declaro variables 
-    
+
     inscripcionData ID = new inscripcionData();
     
     DefaultTableModel model = new DefaultTableModel() {
@@ -207,7 +204,7 @@ public class Notas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-    
+
     }//GEN-LAST:event_jTable1MouseClicked
 
 
