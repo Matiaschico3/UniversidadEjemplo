@@ -330,11 +330,19 @@ public class Materias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyReleased
+       if(!jtNombre.getText().isEmpty() && !jtAnio.getText().isEmpty() && !jtCodigo.getText().isEmpty()){
         habilitarBotones();
+       }else{
+             desHabilitarBotones();
+        }
     }//GEN-LAST:event_jtNombreKeyReleased
 
     private void jtAnioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAnioKeyReleased
+       if(!jtNombre.getText().isEmpty() && !jtAnio.getText().isEmpty() && !jtCodigo.getText().isEmpty()){
         habilitarBotones();
+       }else{
+             desHabilitarBotones();
+        }
     }//GEN-LAST:event_jtAnioKeyReleased
 
     private void jrbEstadoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jrbEstadoStateChanged
