@@ -99,9 +99,6 @@ public class Materias extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtNombreKeyReleased(evt);
             }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtNombreKeyTyped(evt);
-            }
         });
 
         jtAnio.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -249,7 +246,7 @@ public class Materias extends javax.swing.JInternalFrame {
                 jrbEstado.setSelected(m.isActivo());
                 matS = m.getIdMateria();
                 //Habilito botones si esta todo OK!
-                habilitarBotones();
+                habilitarBusquedaBotones();
 
             } else {
 
@@ -318,6 +315,7 @@ public class Materias extends javax.swing.JInternalFrame {
                 jtCodigo.setText("");
                 jtNombre.setText("");
                 jtAnio.setText("");
+                desHabilitarBotones();
             } else if (jtNombre.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No debe dejar el campo nombre vacio");
             } else if (jtAnio.getText().isEmpty()) {
@@ -368,17 +366,6 @@ public class Materias extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jtCodigoKeyTyped
 
-    private void jtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyTyped
-              //Solo dejo introducir letras
-        char key = evt.getKeyChar();
-
-        boolean esLetra = Character.isLetter(key);
-
-        if (!esLetra) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_jtNombreKeyTyped
-
     private void jtAnioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAnioKeyTyped
               //Solo dejo introducir numeros 
         int key = evt.getKeyChar();
@@ -419,9 +406,15 @@ public class Materias extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public void habilitarBotones() {
+       // jbEliminar.setEnabled(true);
+       // jbModificar.setEnabled(true);
+        jbNuevo.setEnabled(true);
+        
+    }
+    public void habilitarBusquedaBotones() {
         jbEliminar.setEnabled(true);
         jbModificar.setEnabled(true);
-        jbNuevo.setEnabled(true);
+        jbNuevo.setEnabled(false);
         
     }
 
