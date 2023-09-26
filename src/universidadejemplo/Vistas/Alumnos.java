@@ -290,7 +290,8 @@ public class Alumnos extends javax.swing.JInternalFrame {
                 jrbEstado.setSelected(ae.isActivo());
                 idAlumnoSeleccionado = ae.getIdAlumno();
                 //habilito botones luego de ejecutar acccion!
-                habilitarBotones();
+                habilitarBusquedaBotones();
+                
             } else {
                 //Controlo el estado de la respuesta de la consulta y respondo 
                 //segun parametros obtenidos
@@ -431,7 +432,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
     public void guardar() {
         try {
             if (!jtDocumento.getText().isEmpty() && !jtApellido.getText().isEmpty() && !jtNombre.getText().isEmpty() && jdFecha.getDate() != null && jrbEstado.isSelected() == true) {
-                habilitarBotones();
+               // habilitarBotones();
                 int dni = Integer.parseInt(jtDocumento.getText());
                 String ap = jtApellido.getText();
                 String nom = jtNombre.getText();
@@ -468,12 +469,17 @@ public class Alumnos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Error al modificar" + e.getMessage());
         }
     }
+       public void habilitarBotones() {
 
-    public void habilitarBotones() {
+       // jbEliminar.setEnabled(true);
+        //jbModificar.setEnabled(true);
+        jbNuevo.setEnabled(true);
+    }
+    public void habilitarBusquedaBotones() {
 
         jbEliminar.setEnabled(true);
         jbModificar.setEnabled(true);
-        jbNuevo.setEnabled(true);
+        jbNuevo.setEnabled(false);
     }
 
     public void desHabilitarBotones() {
