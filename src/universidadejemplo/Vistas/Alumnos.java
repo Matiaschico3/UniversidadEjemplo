@@ -264,7 +264,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-
+        
         int dni = Integer.parseInt(jtDocumento.getText());
         ad.eliminarAlumno(dni);
         //cintia : agrego limpieza de campos 
@@ -352,18 +352,24 @@ public class Alumnos extends javax.swing.JInternalFrame {
     private void jtApellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtApellidoKeyReleased
         if (!jtDocumento.getText().isEmpty() && !jtApellido.getText().isEmpty() && !jtNombre.getText().isEmpty()) {
             habilitarBotones();
+        }else{
+             desHabilitarBotones();
         }
     }//GEN-LAST:event_jtApellidoKeyReleased
 
     private void jtDocumentoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDocumentoKeyReleased
         if (!jtDocumento.getText().isEmpty() && !jtApellido.getText().isEmpty() && !jtNombre.getText().isEmpty()) {
             habilitarBotones();
+        }else{
+             desHabilitarBotones();
         }
     }//GEN-LAST:event_jtDocumentoKeyReleased
 
     private void jtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyReleased
         if (!jtDocumento.getText().isEmpty() && !jtApellido.getText().isEmpty() && !jtNombre.getText().isEmpty()) {
             habilitarBotones();
+        }else{
+             desHabilitarBotones();
         }
     }//GEN-LAST:event_jtNombreKeyReleased
 
