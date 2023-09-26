@@ -70,7 +70,6 @@ public class Materias extends javax.swing.JInternalFrame {
         jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Buscar.png"))); // NOI18N
         jbBuscar.setBorder(null);
         jbBuscar.setBorderPainted(false);
-        jbBuscar.setOpaque(false);
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
@@ -78,6 +77,9 @@ public class Materias extends javax.swing.JInternalFrame {
         });
 
         jtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtCodigoKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtCodigoKeyTyped(evt);
             }
@@ -85,7 +87,6 @@ public class Materias extends javax.swing.JInternalFrame {
 
         jrbEstado.setSelected(true);
         jrbEstado.setBorder(null);
-        jrbEstado.setOpaque(false);
         jrbEstado.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jrbEstadoStateChanged(evt);
@@ -387,6 +388,14 @@ public class Materias extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jtAnioKeyTyped
 
+    private void jtCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCodigoKeyReleased
+        if(!jtNombre.getText().isEmpty() && !jtAnio.getText().isEmpty()){
+        habilitarBotones();
+       }else{
+             desHabilitarBotones();
+        }
+    }//GEN-LAST:event_jtCodigoKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
@@ -408,17 +417,16 @@ public class Materias extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public void habilitarBotones() {
-        if(!jtCodigo.getText().isEmpty() || !jtNombre.getText().isEmpty() || !jtAnio.getText().isEmpty()){
         jbEliminar.setEnabled(true);
         jbModificar.setEnabled(true);
-        }else{
-            desHabilitarBotones();
-        }
+        jbNuevo.setEnabled(true);
+        
     }
 
     public void desHabilitarBotones() {
         jbEliminar.setEnabled(false);
         jbModificar.setEnabled(false);
+        jbNuevo.setEnabled(false);
 
     }
 
