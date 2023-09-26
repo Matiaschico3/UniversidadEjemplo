@@ -91,6 +91,9 @@ public class Alumnos extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtDocumentoKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtDocumentoKeyTyped(evt);
+            }
         });
 
         jrbEstado.setSelected(true);
@@ -105,11 +108,17 @@ public class Alumnos extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtApellidoKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtApellidoKeyTyped(evt);
+            }
         });
 
         jtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtNombreKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtNombreKeyTyped(evt);
             }
         });
 
@@ -357,6 +366,39 @@ public class Alumnos extends javax.swing.JInternalFrame {
             habilitarBotones();
         }
     }//GEN-LAST:event_jtNombreKeyReleased
+
+    private void jtDocumentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDocumentoKeyTyped
+        //Solo dejo introducir numeros 
+        int key = evt.getKeyChar();
+
+        boolean numero = key >= 48 && key <= 57;
+
+        if (!numero) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtDocumentoKeyTyped
+
+    private void jtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtApellidoKeyTyped
+        //Solo dejo introducir letras
+        char key = evt.getKeyChar();
+
+        boolean esLetra = Character.isLetter(key);
+
+        if (!esLetra) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtApellidoKeyTyped
+
+    private void jtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyTyped
+        //Solo dejo introducir letras
+        char key = evt.getKeyChar();
+
+        boolean esLetra = Character.isLetter(key);
+
+        if (!esLetra) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtNombreKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
