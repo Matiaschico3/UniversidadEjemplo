@@ -1,18 +1,21 @@
 package universidadejemplo.Vistas;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.util.List;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import universidadejemplo.conexionBaseDatos.materiaData;
-import universidadejemplo.entidades.Alumno;
 import universidadejemplo.entidades.Materia;
 
 public class Materias extends javax.swing.JInternalFrame {
 
+    //declaro variables varias
     FondoPanel fondo = new FondoPanel();
     int matS = -1;
     materiaData md = new materiaData();
@@ -20,7 +23,10 @@ public class Materias extends javax.swing.JInternalFrame {
     public Materias() {
         this.setContentPane(fondo);
         initComponents();
+        cargarCombo();
         desHabilitarBotones();
+    
+
     }
 
     @SuppressWarnings("unchecked")
@@ -34,7 +40,6 @@ public class Materias extends javax.swing.JInternalFrame {
         jlNom = new javax.swing.JLabel();
         jlEst = new javax.swing.JLabel();
         jbBuscar = new javax.swing.JButton();
-        jtCodigo = new javax.swing.JTextField();
         jrbEstado = new javax.swing.JRadioButton();
         jtNombre = new javax.swing.JTextField();
         jtAnio = new javax.swing.JTextField();
@@ -43,6 +48,7 @@ public class Materias extends javax.swing.JInternalFrame {
         jbModificar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jlEstDescrip = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setClosable(true);
 
@@ -54,7 +60,7 @@ public class Materias extends javax.swing.JInternalFrame {
 
         jlCod.setBackground(new java.awt.Color(255, 255, 255));
         jlCod.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
-        jlCod.setText("Código :");
+        jlCod.setText("Busqueda de Materia");
 
         jlAp.setBackground(new java.awt.Color(255, 255, 255));
         jlAp.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
@@ -74,15 +80,6 @@ public class Materias extends javax.swing.JInternalFrame {
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
-            }
-        });
-
-        jtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jtCodigoKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtCodigoKeyTyped(evt);
             }
         });
 
@@ -139,7 +136,7 @@ public class Materias extends javax.swing.JInternalFrame {
         });
 
         jlEstDescrip.setFont(new java.awt.Font("Garamond", 1, 18)); // NOI18N
-        jlEstDescrip.setText("Activo");
+        jlEstDescrip.setText("Activa");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -149,54 +146,60 @@ public class Materias extends javax.swing.JInternalFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbNuevo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbModificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbEliminar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlCod)
                             .addComponent(jlAp)
                             .addComponent(jlNom)
                             .addComponent(jlEst))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jrbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jlEstDescrip, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(97, 97, 97))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(jrbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jlEstDescrip, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(267, 267, 267))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(143, 143, 143)))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jbNuevo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                        .addComponent(jbModificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbEliminar)
                         .addGap(18, 18, 18)
-                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(303, 303, 303)
                 .addComponent(jlTitulo)
-                .addGap(151, 151, 151))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(25, 25, 25)
                 .addComponent(jlTitulo)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jlCod)
-                            .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(24, 24, 24)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jlCod)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlAp))
@@ -209,7 +212,7 @@ public class Materias extends javax.swing.JInternalFrame {
                     .addComponent(jlEst)
                     .addComponent(jrbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlEstDescrip))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevo)
                     .addComponent(jbEliminar)
@@ -222,11 +225,15 @@ public class Materias extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -236,9 +243,11 @@ public class Materias extends javax.swing.JInternalFrame {
 
         try {
 
-            int idMateria = Integer.parseInt(jtCodigo.getText());
+            //int idMateria = Integer.parseInt(jtCodigo.getText());
+            //
+            Materia materiaSeleccionada = (Materia) jComboBox1.getSelectedItem();
             boolean activa = jrbEstado.isSelected();
-            Materia m = md.buscarMateria(idMateria, activa);
+            Materia m = md.buscarMateria(materiaSeleccionada.getIdMateria(), activa);
 
             if (m != null) {
                 jtNombre.setText(m.getNombre());
@@ -269,10 +278,10 @@ public class Materias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        int idMateria = Integer.parseInt(jtCodigo.getText());
-        md.eliminarMateria(idMateria);
-        //Cintia: Limpio campos
-        jtCodigo.setText("");
+
+        Materia materiaSeleccionada = (Materia) jComboBox1.getSelectedItem();
+        md.eliminarMateria(materiaSeleccionada.getIdMateria());
+        cargarCombo();
         jtNombre.setText("");
         jtAnio.setText("");
         //Deshabilito botones luego de ejecutar acccion!
@@ -283,12 +292,12 @@ public class Materias extends javax.swing.JInternalFrame {
 
         if (matS != -1) { // Verifica que se haya seleccionado una Materia
             modificar();// Llama al método modificar solo si se ha seleccionado una materia
-            //Cintia: Limpio campos
-            jtCodigo.setText("");
+            //Cintia: Limpio campos     
             jtNombre.setText("");
             jtAnio.setText("");
             //Deshabilito botones luego de ejecutar acccion!
             desHabilitarBotones();
+            cargarCombo();
         } else {
             JOptionPane.showMessageDialog(this, "Debes seleccionar una materia antes de guardar.");
         }
@@ -310,9 +319,8 @@ public class Materias extends javax.swing.JInternalFrame {
                 boolean est = jrbEstado.isSelected();
                 int anio = Integer.parseInt(jtAnio.getText());
                 Materia nuevo = new Materia(nom, anio, est);
-                 md.guardarMateria(nuevo);
-               //Cintia: Limpio campos
-                jtCodigo.setText("");
+                md.guardarMateria(nuevo);
+                //Cintia: Limpio campos
                 jtNombre.setText("");
                 jtAnio.setText("");
                 desHabilitarBotones();
@@ -324,50 +332,39 @@ public class Materias extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Debe dejar activado el campo estado");
 
             }
-
+            cargarCombo();
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "No debe dejar campos vacios");
         }
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyReleased
-       if(!jtNombre.getText().isEmpty() && !jtAnio.getText().isEmpty()){
-        habilitarBotones();
-       }else{
-             desHabilitarBotones();
+        if (!jtNombre.getText().isEmpty() && !jtAnio.getText().isEmpty()) {
+            habilitarBotones();
+        } else {
+            desHabilitarBotones();
         }
     }//GEN-LAST:event_jtNombreKeyReleased
 
     private void jtAnioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAnioKeyReleased
-       if(!jtNombre.getText().isEmpty() && !jtAnio.getText().isEmpty()){
-        habilitarBotones();
-       }else{
-             desHabilitarBotones();
+        if (!jtNombre.getText().isEmpty() && !jtAnio.getText().isEmpty()) {
+            habilitarBotones();
+        } else {
+            desHabilitarBotones();
         }
     }//GEN-LAST:event_jtAnioKeyReleased
 
     private void jrbEstadoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jrbEstadoStateChanged
         //Verifico el estado de radioButton y modifico segun el estado la etiqueta mostrando su valor
         if (jrbEstado.isSelected() == true) {
-            jlEstDescrip.setText("Activo");
+            jlEstDescrip.setText("Activa");
         } else {
-            jlEstDescrip.setText("Inactivo");
+            jlEstDescrip.setText("Inactiva");
         }
     }//GEN-LAST:event_jrbEstadoStateChanged
 
-    private void jtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCodigoKeyTyped
-           //Solo dejo introducir numeros 
-        int key = evt.getKeyChar();
-
-        boolean numero = key >= 48 && key <= 57;
-
-        if (!numero) {
-            evt.consume();
-        }
-    }//GEN-LAST:event_jtCodigoKeyTyped
-
     private void jtAnioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAnioKeyTyped
-              //Solo dejo introducir numeros 
+        //Solo dejo introducir numeros 
         int key = evt.getKeyChar();
 
         boolean numero = key >= 48 && key <= 57;
@@ -377,16 +374,9 @@ public class Materias extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jtAnioKeyTyped
 
-    private void jtCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCodigoKeyReleased
-        if(!jtNombre.getText().isEmpty() && !jtAnio.getText().isEmpty()){
-        habilitarBotones();
-       }else{
-             desHabilitarBotones();
-        }
-    }//GEN-LAST:event_jtCodigoKeyReleased
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<Materia> jComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
@@ -401,21 +391,21 @@ public class Materias extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jlTitulo;
     private javax.swing.JRadioButton jrbEstado;
     private javax.swing.JTextField jtAnio;
-    private javax.swing.JTextField jtCodigo;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
 
     public void habilitarBotones() {
-       // jbEliminar.setEnabled(true);
-       // jbModificar.setEnabled(true);
+        // jbEliminar.setEnabled(true);
+        // jbModificar.setEnabled(true);
         jbNuevo.setEnabled(true);
-        
+
     }
+
     public void habilitarBusquedaBotones() {
         jbEliminar.setEnabled(true);
         jbModificar.setEnabled(true);
         jbNuevo.setEnabled(false);
-        
+
     }
 
     public void desHabilitarBotones() {
@@ -427,18 +417,50 @@ public class Materias extends javax.swing.JInternalFrame {
 
     public void modificar() {
         try {
-
-            int idMateria = Integer.parseInt(jtCodigo.getText());
+            Materia materiaSeleccionada = (Materia) jComboBox1.getSelectedItem();
             String nom = jtNombre.getText();
             int año = Integer.parseInt(jtAnio.getText());
             boolean est = jrbEstado.isSelected();
-            Materia nuevaM = new Materia(idMateria, nom, año, est);
-          md.modificarMateria(nuevaM);
+            Materia nuevaM = new Materia(materiaSeleccionada.getIdMateria(), nom, año, est);
+            md.modificarMateria(nuevaM);
+            cargarCombo();
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "No se puede dejar espacios vacios");
         }
     }
+    
+    private void cargarCombo() {
+        jComboBox1.removeAllItems();
 
+        materiaData mat = new materiaData();
+        List<Materia> materias = mat.listarMaterias();
+
+        jComboBox1.setRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+                if (value instanceof Materia) {
+                    Materia materia = (Materia) value;
+
+                    if (materia.isActivo()== false) {
+                        setForeground(Color.RED); // Cambia el color del texto a rojo si el estado es 0
+                    } else {
+                        setForeground(Color.BLACK); // Restablece el color del texto a negro
+                    }
+                }
+
+                return this;
+            }
+        });
+
+        for (Materia materia : materias) {
+    
+            jComboBox1.addItem(materia);
+        }
+    }
+
+    //Personalizamos componentes
     class FondoPanel extends JPanel {
 
         private Image imagen;
@@ -452,4 +474,5 @@ public class Materias extends javax.swing.JInternalFrame {
         }
 
     }
+
 }
