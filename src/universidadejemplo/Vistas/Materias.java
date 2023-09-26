@@ -67,7 +67,6 @@ public class Materias extends javax.swing.JInternalFrame {
         jlEst.setText("Estado");
 
         jbBuscar.setBackground(new java.awt.Color(255, 153, 102));
-        jbBuscar.setForeground(new java.awt.Color(0, 0, 0));
         jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Buscar.png"))); // NOI18N
         jbBuscar.setBorder(null);
         jbBuscar.setBorderPainted(false);
@@ -78,7 +77,12 @@ public class Materias extends javax.swing.JInternalFrame {
             }
         });
 
-        jrbEstado.setForeground(new java.awt.Color(0, 0, 0));
+        jtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtCodigoKeyTyped(evt);
+            }
+        });
+
         jrbEstado.setSelected(true);
         jrbEstado.setBorder(null);
         jrbEstado.setOpaque(false);
@@ -92,11 +96,17 @@ public class Materias extends javax.swing.JInternalFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtNombreKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtNombreKeyTyped(evt);
+            }
         });
 
         jtAnio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtAnioKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtAnioKeyTyped(evt);
             }
         });
 
@@ -335,6 +345,39 @@ public class Materias extends javax.swing.JInternalFrame {
             jlEstDescrip.setText("Inactivo");
         }
     }//GEN-LAST:event_jrbEstadoStateChanged
+
+    private void jtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCodigoKeyTyped
+           //Solo dejo introducir numeros 
+        int key = evt.getKeyChar();
+
+        boolean numero = key >= 48 && key <= 57;
+
+        if (!numero) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtCodigoKeyTyped
+
+    private void jtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreKeyTyped
+              //Solo dejo introducir letras
+        char key = evt.getKeyChar();
+
+        boolean esLetra = Character.isLetter(key);
+
+        if (!esLetra) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtNombreKeyTyped
+
+    private void jtAnioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAnioKeyTyped
+              //Solo dejo introducir numeros 
+        int key = evt.getKeyChar();
+
+        boolean numero = key >= 48 && key <= 57;
+
+        if (!numero) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtAnioKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
