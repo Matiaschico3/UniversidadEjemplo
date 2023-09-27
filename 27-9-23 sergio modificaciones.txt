@@ -1,0 +1,8 @@
+27-9-23
+
+Alumnos y Materias 
+
+data: tienen un metodo nuevo que lista todas las materias/alumonos y otro que lista solo las materias/alumonos activa/vos
+vista: Los dos actuan igual, carga un JcomboBox con todas las materias/alumnos y los inactivos los pone en rojo. 
+       dependiendo de si esta activo o no, habilita los botones necesarios para realizar las tareas.
+       todos los eventos siempre refrescan el combo para que este siempre actualizado

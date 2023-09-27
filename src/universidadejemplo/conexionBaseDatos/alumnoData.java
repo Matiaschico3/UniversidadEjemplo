@@ -149,7 +149,7 @@ public class alumnoData {
     }
 
     public List<Alumno> listarAlumnos() {
-        String sql = "SELECT idAlumno, dni, apellido, nombre, fechaNacimiento FROM alumno WHERE activo = 1";
+        String sql = "SELECT idAlumno, dni, apellido, nombre, fechaNacimiento, activo FROM alumno";
         ArrayList<Alumno> alumnos = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -162,8 +162,33 @@ public class alumnoData {
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setFechaN(rs.getDate("fechaNacimiento").toLocalDate());
-                alumno.setActivo(true);
+                alumno.setActivo(rs.getBoolean("activo"));
                 alumnos.add(alumno);
+            }
+             //Cierro la Conexion
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno "+ ex);
+
+        }
+        return alumnos;
+    }
+    public List<Alumno> listarAlumnosActivos() {
+        String sql = "SELECT idAlumno, dni, apellido, nombre, fechaNacimiento FROM alumno WHERE activo = 1";
+        ArrayList<Alumno> alumnosAc = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Alumno alumno = new Alumno();
+                alumno.setIdAlumno(rs.getInt("idAlumno"));
+                alumno.setDni(rs.getInt("dni"));
+                alumno.setApellido(rs.getString("apellido"));
+                alumno.setNombre(rs.getString("nombre"));
+                alumno.setFechaN(rs.getDate("fechaNacimiento").toLocalDate());
+                alumno.setActivo(true);
+                alumnosAc.add(alumno);
             }
              //Cierro la Conexion
             ps.close();
@@ -171,6 +196,6 @@ public class alumnoData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla alumno");
 
         }
-        return alumnos;
+        return alumnosAc;
     }
 }

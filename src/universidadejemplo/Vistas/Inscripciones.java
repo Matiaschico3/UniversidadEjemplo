@@ -257,22 +257,6 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         } catch (ArrayIndexOutOfBoundsException e) {
             JOptionPane.showMessageDialog(this, "No hay nada seleccionado");
         }
-
-// este modelo es para pasar solo una inscripcion por vez       
-//        try {
-//            int[] filasSeleccionadas = jTabla.getSelectedRows();
-//            inscripcionData insd = new inscripcionData();
-//            double nota = 0;
-//
-//            for (int fs : filasSeleccionadas) {
-//                Materia mat = new Materia((int) model.getValueAt(fs, 0), (String) model.getValueAt(fs, 1), (int) model.getValueAt(fs, 2), true);
-//                Inscripcion ins = new Inscripcion((Alumno) jComboBox1.getSelectedItem(), mat, nota);
-//                insd.guardarInscripcion(ins);
-//            }
-//            cargarMateriasNoInscriptas();
-//        } catch (ArrayIndexOutOfBoundsException e) {
-//            JOptionPane.showMessageDialog(this, "No hay nada seleccionado");
-//        }
     }//GEN-LAST:event_jbInscribirActionPerformed
 
     private void jbAnularInscActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularInscActionPerformed
@@ -337,7 +321,7 @@ public class Inscripciones extends javax.swing.JInternalFrame {
         alumnoData ad = new alumnoData();
         ArrayList<Alumno> alumnos = new ArrayList<>();
 
-        for (Alumno alu : ad.listarAlumnos()) {
+        for (Alumno alu : ad.listarAlumnosActivos()) {
             alumnos.add(alu);
             jComboBox1.addItem(alu);
         }

@@ -198,7 +198,7 @@ public class porMateria extends javax.swing.JInternalFrame {
         //creo una lista de tipo materia y la llamo materias
         ArrayList<Materia> materias = new ArrayList<>();
 
-        for (Materia materia : mat.listarMaterias()) {
+        for (Materia materia : mat.listarMateriasActivas()) {
             materias.add(materia);
             jComboBox1.addItem(materia);
         }

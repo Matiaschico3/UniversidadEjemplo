@@ -263,7 +263,7 @@ public class Notas extends javax.swing.JInternalFrame {
         alumnoData ad = new alumnoData();
         ArrayList<Alumno> alumnos = new ArrayList<>();
 
-        for (Alumno alu : ad.listarAlumnos()) {
+        for (Alumno alu : ad.listarAlumnosActivos()) {
             alumnos.add(alu);
             jComboBox1.addItem(alu);
         }
